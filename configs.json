@@ -1,0 +1,28 @@
+{
+    "prefix":".",
+    "prefixIsArg": false,
+    "owners": [
+        "514475217779818496"
+    ],
+    "eventsPath": "./events/",
+    "commandsPath": "./commands/",
+    "argumentsSeparator": " ",
+    "colors": {
+        "valid": "#1ED700",
+        "invalid": "#D72100"
+    },
+    "channels": {
+        "logs": [],
+        "status": ["825437050320584747"]
+    },
+    "minPerms": [
+        "VIEW_CHANNEL",
+        "SEND_MESSAGES",
+        "ADD_REACTIONS",
+        "USE_EXTERNAL_EMOJIS"
+    ],
+    "reactions": {
+        "confirm": "✅",
+        "unconfirm": "❎"
+    }
+}
