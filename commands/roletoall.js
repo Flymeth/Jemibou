@@ -61,7 +61,7 @@ module.exports = {
                                     member.roles.remove(role)
                                 }
                             } catch (err) {
-                                console.log(err);
+                                vars.log(err);
                                 errorMembers.push(member)
                             }
                         })

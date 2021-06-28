@@ -21,10 +21,12 @@ module.exports = {
 
         try {
             for(let channel of vars.configs.channels.status) {
-                vars.client.channels.cache.get(channel).send(embed)
+                let c = vars.client.channels.cache.get(channel)
+                if(!c || !c.isText()) continue
+                c.send(embed)
             }
         } catch (err) {
-            console.log(err);
+            vars.log(err);
         }
         
         await vars.log('Bot reloaded', "#F3CA22", "STATUS");

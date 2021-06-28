@@ -25,6 +25,8 @@ module.exports = {
             }
         }
 
+
+        message.guild.members.fetch()
         
         let args = message.content.split(vars.configs.argumentsSeparator)
 
@@ -42,7 +44,7 @@ module.exports = {
         try {
             var commands = fs.readdirSync(vars.configs.commandsPath)
         } catch (err) {
-            console.log(err);
+            vars.log(err);
         }
 
         try {
@@ -91,7 +93,7 @@ module.exports = {
                     try {
                         if(cmd.deleteCommand) await message.channel.messages.delete(message)
                     } catch (error) {
-                        console.log(error);
+                        vars.log(error);
                     }
 
                     for(let perm of cmd.permissions.user) {
@@ -114,7 +116,7 @@ module.exports = {
                 message.reply(cmdName + ' command doesn\'t exit!')
             }
         } catch (err) {
-            console.log(err);
+            vars.log(err);
         }
     }
 }

@@ -16,7 +16,7 @@ module.exports = {
         try {
             var cmds = fs.readdirSync(vars.configs.commandsPath)
         } catch (err) {
-            console.log(err);
+            vars.log(err);
         }
 
         let commands = {}
@@ -32,7 +32,7 @@ module.exports = {
                 cmdByTypes[cmd.type] = []
             }
         } catch (err) {
-            console.log(err);
+            vars.log(err);
         }
 
         // Si ya un args[0] & que cet args[0] est une commande: donner plus d'infos sur celle-ci
@@ -81,7 +81,7 @@ module.exports = {
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Command List:')
         .setColor(this.color || "RANDOM")
-        .setThumbnail('./Assets/help.jpg')
+        .setThumbnail(vars.assets.images.help)
 
         for(let type in cmdByTypes) {
             let cmds = ""

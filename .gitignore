@@ -1,4 +1,4 @@
 node_modules
 console.cmd
 token.json
-logs/saved
+logs/saved/*

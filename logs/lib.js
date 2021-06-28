@@ -2,7 +2,7 @@ const fs = require('fs')
 const { log, channels } = require('../configs.json')
 
 /**
- * 
+ * Log a message on a discord channel, on a log file and on the console
  * @param {String} message Your log message
  * @param {String} color Your embed color
  * @param {String} type The type of your log
@@ -56,7 +56,7 @@ module.exports.log = async (message, color, type, private, vars) => {
         try {
             for(let channel of channels.logs) {
                 let c = vars.client.channels.cache.get(channel)
-                if(!c || !c.isText()) return false
+                if(!c || !c.isText()) continue
                 await c.send(embed)
             }
         } catch (err) {
@@ -70,25 +70,23 @@ module.exports.log = async (message, color, type, private, vars) => {
 
 
 /**
- * 
+ * Save the lasted.log to a <date>.log, then clear lastest.log
  * @returns {Boolean} true if opperation success, false if not
  */
 module.exports.saveLog = () => {
     try {
         var logContent = fs.readFileSync(log.lastestPath, {encoding: "utf-8"})
+        var date = fs.statSync(log.lastestPath).mtime
     } catch (err) {
         console.log(err);
         return false
     }
 
-    if(!logContent) return false
+    if(!logContent || !date) return false
 
-    let date = new Date
     let fileName = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()} - ${date.getHours()}h${date.getMinutes()}m ${date.getSeconds()}s`
 
     let filePath = log.savedPath + fileName + ".log"
-
-    console.log(filePath);
 
     try {
         var existFile = fs.readFileSync(filePath, {encoding: "utf-8"})
