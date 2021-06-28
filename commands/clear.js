@@ -13,12 +13,12 @@ module.exports = {
         user: ["MANAGE_MESSAGES"]
     },
     run: async (e, vars, args) => {
-        if(!args[0] || isNaN(args[0])) return e.reply('Arg. #2 must be a number!')
+        if(!args[0] || isNaN(args[0]) || args[0]<=0 || args[0]>100) return e.reply('Arg. #2 must be a number (>0 and <100)!')
 
         try {
             await e.channel.bulkDelete(args[0])
         } catch (err) {
-            console.log(err);
+            vars.log(err, vars.configs.colors.invalid);
 
             let embed = new vars.discord.MessageEmbed()
             .setTitle('ERROR')

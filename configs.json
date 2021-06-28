@@ -6,14 +6,20 @@
     ],
     "eventsPath": "./events/",
     "commandsPath": "./commands/",
+    "log": {
+        "filePath": "./logs/logs.log",
+        "logDate": true,
+        "active": true,
+        "embedColor": "#7919EA"
+    },
     "argumentsSeparator": " ",
     "colors": {
         "valid": "#1ED700",
         "invalid": "#D72100"
     },
     "channels": {
-        "logs": [],
-        "status": ["825437050320584747"]
+        "logs": ["859046108880830464","859052190903566347"],
+        "status": ["859052169953017886"]
     },
     "minPerms": [
         "VIEW_CHANNEL",

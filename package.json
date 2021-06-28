@@ -1,6 +1,6 @@
 {
   "name": "jemibou",
-  "version": "0.5BETA",
+  "version": "0.5.3",
   "description": "Petit bot discord",
   "main": "main.js",
   "scripts": {

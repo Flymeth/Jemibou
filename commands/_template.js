@@ -4,9 +4,8 @@ module.exports = {
     description: "DESCRIPTION",
     ownersOnly: true,
     active: false,
-    type: "TYPE",
+    type: "dangerous",
     color: "#000",
-    arguments: "<ARGS> [ARGS]",
     deleteCommand: false,
     permissions: {
         bot: [],

@@ -2,10 +2,13 @@ const Discord = require('discord.js')
 const fs = require('fs')
 const configs = require('./configs.json')
 const pkg = require('./package.json')
+const {log} = require('./logs/lib')
 
-const { token } = process.env.token || require('./token.json')
+const {token} = process.env.token || require('./token.json')
 
-const client = new Discord.Client()
+const client = new Discord.Client({
+    // fetchAllMembers: true
+})
 
 client.login(token)
 
@@ -13,8 +16,10 @@ let buildVars = {
     discord: Discord,
     client: client,
     configs: configs,
-    package: pkg
+    package: pkg,
+    log: (message, color, type, prvt) => log(message, color, type, prvt, buildVars)
 }
+
 // events
 
 try {

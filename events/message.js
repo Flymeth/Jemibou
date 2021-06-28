@@ -19,14 +19,15 @@ module.exports = {
                     .setColor(vars.configs.colors.invalid)
                     await message.channel.send(embed)
                 } catch (err) {
-                    console.log(err);
+                    vars.log(err);
                 }
                 return
             }
         }
 
-        let args = message.content.split(vars.configs.argumentsSeparator)
         
+        let args = message.content.split(vars.configs.argumentsSeparator)
+
         let cmdName=""
 
         if(vars.configs.prefixIsArg) {
@@ -97,6 +98,8 @@ module.exports = {
                         let hasPerm = message.channel.members.get(vars.client.user.id).permissions.has(perm)
                         if(!hasPerm) return message.reply(`I haven't the \`${perm}\` permission!`)
                     }
+
+                    vars.log(message.author.tag + ' used command `' + cmd.name + '` with arg(s): `[' + args.join(',') + ']`', cmd.color)
 
                     cmd.run(message, vars, args)
                 }
