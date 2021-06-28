@@ -3,6 +3,9 @@ module.exports = {
     description: "When the bot is connect",
     active: true,
     run: (e, vars) => {
+
+        vars.saveLog()
+
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Turned on!')
         .setColor(vars.configs.colors.valid)
@@ -17,6 +20,6 @@ module.exports = {
         }
 
         vars.client.user.setActivity("connected!", {type: "WATCHING"})
-        vars.log(`connected as ${vars.client.user.tag}! (version ${vars.package.version})`, vars.configs.colors.valid);
+        vars.log(`connected as ${vars.client.user.tag}! (version ${vars.package.version})`, vars.configs.colors.valid, "STATUS");
     }
 }

@@ -28,7 +28,7 @@ module.exports = {
 
                 let cmd = require('.' + vars.configs.commandsPath + command)
                 if(!cmd.active) continue
-                commands[cmd.name] = cmd
+                commands[cmd.name.toLowerCase()] = cmd
                 cmdByTypes[cmd.type] = []
             }
         } catch (err) {
@@ -81,6 +81,8 @@ module.exports = {
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Command List:')
         .setColor(this.color || "RANDOM")
+        .setThumbnail('./Assets/help.jpg')
+
         for(let type in cmdByTypes) {
             let cmds = ""
             for(let cmd of cmdByTypes[type]) {

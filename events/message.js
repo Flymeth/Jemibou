@@ -48,20 +48,25 @@ module.exports = {
         try {
             let finded = false
             for(let command of commands) {
-                if(!command.endsWith('.js')) continue
+                if(!command.endsWith('.js')) {
+                    vars.log("file `" + command + "` isn't a command file!")
+                    continue
+                }
 
                 let runCommand = false
 
                 let cmd = require('.' + vars.configs.commandsPath + command)
                 
-                if(cmd.name === cmdName) {
+                if(!cmd.active) continue
+                
+                if(cmd.name.toLowerCase() === cmdName.toLowerCase()) {
                     runCommand = true
                 }
 
                 if(!cmd.alias) continue
 
                 for(let alias of cmd.alias) {
-                    if(alias === cmdName) {
+                    if(alias.toLowerCase() === cmdName.toLowerCase()) {
                         runCommand = true
                         break
                     }

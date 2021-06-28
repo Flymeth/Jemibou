@@ -25,7 +25,7 @@ module.exports = {
             console.log(err);
         }
         
-        await vars.log('Bot turned to off', vars.configs.colors.invalid);
+        await vars.log('Bot turned to off', vars.configs.colors.invalid, "STATUS");
         await vars.client.destroy()
     }
 }

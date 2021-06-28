@@ -27,9 +27,14 @@ module.exports = {
             console.log(err);
         }
         
-        await vars.log('Bot reloaded', "#F3CA22");
+        await vars.log('Bot reloaded', "#F3CA22", "STATUS");
         await e.react('♻')
         await vars.client.destroy()
-        exe.exec("node main.js")
+        exe.exec("node main.js", (err, e) => {
+            if(err) {
+                vars.log(err, vars.configs.invalid, "ERROR")
+            }
+            vars.log(e, vars.configs.valid)
+        })
     }
 }
