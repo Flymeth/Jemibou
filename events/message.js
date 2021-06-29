@@ -3,7 +3,7 @@ module.exports = {
     name: "ready",
     description: "When the bot is connect",
     active: true,
-    run: async function (message, vars) {
+    run: async (message, vars) => {
         if(
             !message.content.startsWith(vars.configs.prefix)
             || message.channel.type === "dm"
@@ -24,9 +24,6 @@ module.exports = {
                 return
             }
         }
-
-
-        message.guild.members.fetch()
         
         let args = message.content.split(vars.configs.argumentsSeparator)
 
@@ -107,13 +104,18 @@ module.exports = {
                     }
 
                     vars.log(message.author.tag + ' used command `' + cmd.name + '` with arg(s): `[' + args.join(',') + ']`', cmd.color)
-
+                    
+                    await message.guild.members.fetch({force: true, cache: true})
+                    await message.channel.messages.fetch({force: true, cache: true})
                     cmd.run(message, vars, args)
                 }
             }
 
             if(!finded) {
-                message.reply(cmdName + ' command doesn\'t exit!')
+                message.delete()
+                message.reply(cmdName + ' command doesn\'t exit!').then(msg => {
+                    vars.setEndMessage(msg, "😶")
+                })
             }
         } catch (err) {
             vars.log(err);

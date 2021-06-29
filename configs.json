@@ -31,5 +31,6 @@
     "reactions": {
         "confirm": "✅",
         "unconfirm": "❎"
-    }
+    },
+    "doneMessageDeleteTimeout": 10000
 }

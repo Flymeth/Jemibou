@@ -4,6 +4,7 @@ const configs = require('./configs.json')
 const pkg = require('./package.json')
 const {log, saveLog} = require('./logs/lib')
 const assets = require('./assets.json')
+const {doneMsg} = require('./tools/doneMSG')
 
 const {token} = process.env.token || require('./token.json')
 
@@ -18,7 +19,8 @@ const vars = {
     package: pkg,
     assets: assets,
     log: (message, color, type, private) => log(message, color, type, private, vars),
-    saveLog: () => saveLog()
+    saveLog: (ignoreLastest) => saveLog(ignoreLastest),
+    setEndMessage: (message, emote) => doneMsg(message, vars, emote)
 }
 
 // events

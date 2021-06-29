@@ -3,7 +3,6 @@ module.exports = {
     description: "When the bot is connect",
     active: true,
     run: (e, vars) => {
-
         vars.saveLog()
 
         let embed = new vars.discord.MessageEmbed()

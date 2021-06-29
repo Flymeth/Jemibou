@@ -19,18 +19,18 @@ module.exports.log = async (message, color, type, private, vars) => {
         return false
     }
 
-    let newLog = message
+    let newLog = '"' + message + '"' 
     let typeLog = newLog
 
     if(type) {
-        typeLog = "(" + type + ") " + newLog
+        typeLog = '"' + type.toUpperCase() + "\" - " + newLog
     }
 
     if(log.logDate) {
         let date = new Date()
-        let dateMsg = `[${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} (${date.getHours()}:${date.getMinutes()}'' ${date.getSeconds()}.${date.getMilliseconds()})]`
+        let dateMsg = `"${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()},${date.getMilliseconds()}"`
         
-        newLog = dateMsg + "=> " + typeLog
+        newLog = dateMsg + " - " + typeLog
     }
 
     try {
@@ -71,9 +71,10 @@ module.exports.log = async (message, color, type, private, vars) => {
 
 /**
  * Save the lasted.log to a <date>.log, then clear lastest.log
+ * @param {Boolean} ignoreLastest If true, it willn't delete the lastest.log file content
  * @returns {Boolean} true if opperation success, false if not
  */
-module.exports.saveLog = () => {
+module.exports.saveLog = (ignoreLastest) => {
     try {
         var logContent = fs.readFileSync(log.lastestPath, {encoding: "utf-8"})
         var date = fs.statSync(log.lastestPath).mtime
@@ -89,23 +90,19 @@ module.exports.saveLog = () => {
     let filePath = log.savedPath + fileName + ".log"
 
     try {
-        var existFile = fs.readFileSync(filePath, {encoding: "utf-8"})
-    } catch (err) {}
-
-    if(existFile) logContent = existFile + "\n" + logContent
-
-    try {
         fs.writeFileSync(filePath, logContent, {encoding: "utf-8"})
     } catch (err) {
         console.log(err);
         return false
     }
 
-    try {
-        fs.writeFileSync(log.lastestPath, "", {encoding: "utf-8"})
-    } catch (err) {
-        console.log(err);
-        return false
+    if(!ignoreLastest) {
+        try {
+            fs.writeFileSync(log.lastestPath, "", {encoding: "utf-8"})
+        } catch (err) {
+            console.log(err);
+            return false
+        }
     }
 
     console.log("log saved");

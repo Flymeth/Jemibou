@@ -1,3 +1,4 @@
+const {doneMsg} = require('../tools/doneMSG')
 module.exports = {
     name: "roletoall",
     alias: ["rta"],
@@ -45,6 +46,7 @@ module.exports = {
                 vars.client.on('messageReactionAdd', (reaction, user) => {
                     if(
                         user.id !== e.author.id
+                        || user.bot
                         || reaction.message.id !== msg.id
                     ) return
                     
@@ -88,10 +90,7 @@ module.exports = {
                         .setColor(vars.configs.colors.valid)
 
                         e.channel.send(embed).then(msg => {
-                            msg.react('💪')
-                            setTimeout(() => {
-                                msg.delete()
-                            }, 5000);
+                            vars.setEndMessage(msg, "💪")
                         })
                     }
                 })

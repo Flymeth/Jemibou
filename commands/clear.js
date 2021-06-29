@@ -15,8 +15,11 @@ module.exports = {
     run: async (e, vars, args) => {
         if(!args[0] || isNaN(args[0]) || args[0]<=0 || args[0]>100) return e.reply('Arg. #2 must be a number (>0 and <100)!')
 
+        if(!e.channel.messages.cache.size) return e.reply('there isn\'t any messages to delete...')
+
+        let messagesDeleted;
         try {
-            await e.channel.bulkDelete(args[0])
+            await e.channel.bulkDelete(args[0]).then(m => messagesDeleted = m.size)
         } catch (err) {
             vars.log(err, vars.configs.colors.invalid);
 
@@ -31,11 +34,8 @@ module.exports = {
             return e.reply(embed)
         }
 
-        e.reply(`I've deleted ${args[0]} message(s)!`).then(msg => {
-            msg.react("💥")
-            setTimeout(() => {
-                msg.delete()
-            }, 5000);
+        e.reply(`I've deleted ${messagesDeleted} message(s)!`).then(msg => {
+            vars.setEndMessage(msg, "💥")
         })
     }
 }

@@ -11,9 +11,10 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: (e, vars, args) => {
+    run: async (e, vars, args) => {
         let randomNumber = Math.floor(Math.random() * e.guild.memberCount)
         let members = []
+
         e.guild.members.cache.map(m => {
             members.push(m)
         })

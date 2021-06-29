@@ -1,10 +1,12 @@
 let exe = require('child_process')
+
+// need more support (has a lot of errors)
 module.exports = {
     name: "reload",
     alias: ["restart"],
     description: "reload bot's commands",
     ownersOnly: true,
-    active: true,
+    active: false,
     type: "dangerous",
     color: "#000",
     arguments: "<ARGS> [ARGS]",

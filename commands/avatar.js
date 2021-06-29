@@ -1,6 +1,6 @@
 module.exports = {
     name: "avatar",
-    alias: ["picture"],
+    alias: ["picture", "pic"],
     description: "Get the profile avatar of a user",
     ownersOnly: false,
     active: true,
