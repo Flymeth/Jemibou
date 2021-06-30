@@ -5,7 +5,7 @@ module.exports = {
     description: "Get help",
     ownersOnly: false,
     active: true,
-    type: "usefull",
+    type: "informations",
     color: "RANDOM",
     arguments: "<command name>",
     permissions: {

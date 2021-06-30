@@ -34,7 +34,7 @@ module.exports = {
             return e.reply(embed)
         }
 
-        e.reply(`I've deleted ${messagesDeleted} message(s)!`).then(msg => {
+        e.reply(`I've deleted ${messagesDeleted || args[0]} message(s)!`).then(msg => {
             vars.setEndMessage(msg, "💥")
         })
     }

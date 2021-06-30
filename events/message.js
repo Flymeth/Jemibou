@@ -1,16 +1,23 @@
 const fs = require('fs')
 const {getSettings} = require('../commands/settings')
 module.exports = {
-    name: "ready",
-    description: "When the bot is connect",
+    name: "message",
+    description: "When the bot receive a message",
     active: true,
     run: async (message, vars) => {
-        let settings = await getSettings(message.guild.id, vars)
         if(
-            !message.content.startsWith(settings.prefix)
-            || message.channel.type === "dm"
+            message.channel.type === "dm"
             || message.author.bot
         ) return
+
+        let settings = await getSettings(message.guild.id, vars)
+        
+        if(!message.content.startsWith(settings.prefix)) {
+            if(message.content.replace('!','') === `<@${vars.client.user.id}>`) {
+                message.reply("My prefix on this server is `" + settings.prefix + "`!")
+            }
+            return
+        }
 
         for(let perm of vars.configs.minPerms) {
             if(!message.channel.members.get(vars.client.user.id).permissions.has(perm)) {

@@ -14,7 +14,10 @@ module.exports = {
         user: []
     },
     run: (e, vars, args, settings) => {
-        if(!args[0]) {
+
+        let type = args.shift()
+
+        if(!type) {
             try {
                 var commands = fs.readdirSync("./commands/settings/")
             } catch (err) {
@@ -35,7 +38,7 @@ module.exports = {
         }
 
         try {
-            var command = require('./settings/' + args[0])
+            var command = require('./settings/' + type)
         } catch (err) {
             vars.log(err, "ERROR")
             e.reply("This command doesn't exist...")
@@ -43,7 +46,7 @@ module.exports = {
         }
 
         try {
-            command.run(e, vars, args)
+            command.run(e, vars, args, settings)
         } catch (err) {
             vars.log(err, "ERROR")
             e.reply("An error has come...")
@@ -135,7 +138,6 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
 
             if(param) param = param.toLowerCase()
             if(split) split = split.toLowerCase().split('\\"').join(Infinity).split('"')
-
             
             if(param && split) {
                 let values = []
@@ -145,9 +147,14 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
                 }
 
                 param = param.split(' ').join('')
-                
+
                 for(let setting in settings.list) {
-                    if(!settings.list[setting].modifiable || !values[0]) continue
+                    if(!settings.list[setting].modifiable || !values[0] || !values[0].split(' ').join('')) continue
+                    
+                    while(values[0].startsWith(" ")) {
+                        values[0] = values[0].replace(' ','')
+                    }
+
                     if(param === setting.toLowerCase()) {
                         findedSettings[param] = values[0]
                     }

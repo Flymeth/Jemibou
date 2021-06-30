@@ -26,11 +26,15 @@ module.exports = {
         
         if(role) {
             if(role.position >= e.channel.members.get(vars.client.user.id).roles.highest.position) {
-                return e.reply('The role is above me!')
+                return e.reply('The role is above me!').then(msg => doneMsg(msg, vars, "👀"))
             }
 
             if(role.position >= e.channel.members.get(e.author.id).roles.highest.position && e.author.id !== e.guild.ownerID) {
-                return e.reply('The role is above you!')
+                return e.reply('The role is above you!').then(msg => doneMsg(msg, vars, "👀"))
+            }
+
+            if(role.managed) {
+                return e.reply("This role is managed by a bot!").then(msg => doneMsg(msg, vars, "👀"))
             }
 
             e.delete()
