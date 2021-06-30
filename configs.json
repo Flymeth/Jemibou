@@ -1,6 +1,4 @@
 {
-    "prefix":".",
-    "prefixIsArg": false,
     "owners": [
         "514475217779818496"
     ],
@@ -32,5 +30,15 @@
         "confirm": "✅",
         "unconfirm": "❎"
     },
-    "doneMessageDeleteTimeout": 10000
+    "doneMessageDeleteTimeout": 10000,
+    "settings": {
+        "path":"./commands/settings/_settings.json",
+        "list": {
+            "prefix": {
+                "value": ".",
+                "desc": "Change the prefix of the bot",
+                "modifiable": true
+            }
+        }
+    }
 }

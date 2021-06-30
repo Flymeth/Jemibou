@@ -1,11 +1,13 @@
 const fs = require('fs')
+const {getSettings} = require('../commands/settings')
 module.exports = {
     name: "ready",
     description: "When the bot is connect",
     active: true,
     run: async (message, vars) => {
+        let settings = await getSettings(message.guild.id, vars)
         if(
-            !message.content.startsWith(vars.configs.prefix)
+            !message.content.startsWith(settings.prefix)
             || message.channel.type === "dm"
             || message.author.bot
         ) return
@@ -25,16 +27,9 @@ module.exports = {
             }
         }
         
-        let args = message.content.split(vars.configs.argumentsSeparator)
-
+        let args = message.content.replace(settings.prefix, '').split(vars.configs.argumentsSeparator)
         let cmdName=""
-
-        if(vars.configs.prefixIsArg) {
-            args.shift()
-            cmdName = args.shift()
-        }else {
-            cmdName = (args.shift()).replace(vars.configs.prefix, '')
-        }
+        cmdName = (args.shift()).split(' ').join('')
 
         if(!cmdName) return
 
@@ -47,10 +42,7 @@ module.exports = {
         try {
             let finded = false
             for(let command of commands) {
-                if(!command.endsWith('.js')) {
-                    vars.log("file `" + command + "` isn't a command file!")
-                    continue
-                }
+                if(!command.endsWith('.js')) continue
 
                 let runCommand = false
 

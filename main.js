@@ -16,6 +16,7 @@ const vars = {
     discord: Discord,
     client: client,
     configs: configs,
+    settings: configs.settings.list,
     package: pkg,
     assets: assets,
     log: (message, color, type, private) => log(message, color, type, private, vars),
