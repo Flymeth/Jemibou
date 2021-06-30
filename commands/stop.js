@@ -10,7 +10,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: async (e, vars, args) => {
+    run: async (e, vars, args, settings) => {
         await e.react('💤')
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Turned off!')

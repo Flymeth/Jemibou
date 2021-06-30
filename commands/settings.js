@@ -13,7 +13,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: (e, vars, args) => {
+    run: (e, vars, args, settings) => {
         if(!args[0]) {
             try {
                 var commands = fs.readdirSync("./commands/settings/")
@@ -147,7 +147,7 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
                 param = param.split(' ').join('')
                 
                 for(let setting in settings.list) {
-                    if(!settings.list[setting].modifiable) continue
+                    if(!settings.list[setting].modifiable || !values[0]) continue
                     if(param === setting.toLowerCase()) {
                         findedSettings[param] = values[0]
                     }

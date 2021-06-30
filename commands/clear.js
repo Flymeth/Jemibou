@@ -12,7 +12,7 @@ module.exports = {
         bot: ["MANAGE_MESSAGES"],
         user: ["MANAGE_MESSAGES"]
     },
-    run: async (e, vars, args) => {
+    run: async (e, vars, args, settings) => {
         if(!args[0] || isNaN(args[0]) || args[0]<=0 || args[0]>100) return e.reply('Arg. #2 must be a number (>0 and <100)!')
 
         if(!e.channel.messages.cache.size) return e.reply('there isn\'t any messages to delete...')

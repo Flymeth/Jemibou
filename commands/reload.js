@@ -15,7 +15,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: async (e, vars, args) => {
+    run: async (e, vars, args, settings) => {
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Reloaded!')
         .setColor("#F3CA22")

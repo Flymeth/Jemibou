@@ -99,7 +99,7 @@ module.exports = {
                     
                     await message.guild.members.fetch({force: true, cache: true})
                     await message.channel.messages.fetch({force: true, cache: true})
-                    cmd.run(message, vars, args)
+                    cmd.run(message, vars, args, settings)
                 }
             }
 

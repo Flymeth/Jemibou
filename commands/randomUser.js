@@ -11,7 +11,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: async (e, vars, args) => {
+    run: async (e, vars, args, settings) => {
         let randomNumber = Math.floor(Math.random() * e.guild.memberCount)
         let members = []
 
@@ -21,8 +21,8 @@ module.exports = {
         let chooseone = members[randomNumber]
 
         let embed = new vars.discord.MessageEmbed()
-        .setTitle("And the chooseone is...")
-        .setDescription("<@" + chooseone + '> !')
+        if(args.join(' ')) embed.setDescription(args.join(' '))
+        embed.addField("And the choosenone is...","<@" + chooseone + '> !')
         .setColor(e.guild.members.cache.get(chooseone.id).roles.highest.color || "RANDOM")
 
         e.channel.send(embed)

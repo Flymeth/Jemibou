@@ -11,7 +11,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: (e, vars, args) => {
+    run: (e, vars, arg, settingss) => {
         // code
         let saved = vars.saveLog(true)
 

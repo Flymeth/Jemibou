@@ -12,7 +12,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: (e, vars, args) => {
+    run: (e, vars, args, settings) => {
         let userAvatar = e.author
         if(args[0]) {
             userAvatar = e.mentions.users.first()

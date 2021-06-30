@@ -11,7 +11,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: (e, vars, args) => {
+    run: (e, vars, args, settings) => {
         // code
     }
 }

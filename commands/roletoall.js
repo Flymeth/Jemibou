@@ -13,7 +13,7 @@ module.exports = {
         bot: ["MANAGE_ROLES"],
         user: ["MANAGE_ROLES", "MANAGE_GUILD"]
     },
-    run:  (e, vars, args) => {
+    run:  (e, vars, args, settings) => {
 
         // type (add or remove)
         let type = args.shift()

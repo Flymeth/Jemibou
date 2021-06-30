@@ -12,7 +12,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: (e, vars, args) => {
+    run: (e, vars, args, settings) => {
         try {
             var cmds = fs.readdirSync(vars.configs.commandsPath)
         } catch (err) {
@@ -50,13 +50,13 @@ module.exports = {
 
             if(infos) {
                 let embed = new vars.discord.MessageEmbed()
-                .setTitle(infos.name)
+                .setTitle(settings.prefix + infos.name)
                 .setDescription(infos.description)
                 .setColor(infos.color)
                 if(infos.alias) {
                     let alias = ""
                     for(let a of infos.alias) {
-                        alias+='- ' + a +'\n'
+                        alias+=settings.prefix + a +'\n'
                     }
                     embed.addField('Alias', alias)
                 }
@@ -86,7 +86,7 @@ module.exports = {
         for(let type in cmdByTypes) {
             let cmds = ""
             for(let cmd of cmdByTypes[type]) {
-                cmds+='- ' + cmd + "\n"
+                cmds+=settings.prefix + cmd + "\n"
             }
             embed.addField(type, cmds, true)
         }
