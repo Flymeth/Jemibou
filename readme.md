@@ -19,7 +19,7 @@ A cool discord bot for moderation!
 > ### banned words system:
 > > With settings `bannedWords`, each time the bot detect a word that is inside this setting, it'll delete the message then will warn the user (of course if the word is in an url, it willn't warn the user).
 
-<button onclick="document.location.href='https://top.gg/bot/859139199172083713'">VOTE</button>
+[VOTE FOR THE BOT](https://top.gg/bot/859139199172083713)
 
 # Flymeth
 Hi! I'm Flymeth, a little developper of 16yo. I love programmation & html code.
