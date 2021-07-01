@@ -1,6 +1,6 @@
 module.exports = {
     name: "saveLog",
-    alias: [""],
+    alias: [],
     description: "Save current log in the saved folder",
     ownersOnly: true,
     active: true,

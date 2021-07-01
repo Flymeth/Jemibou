@@ -16,6 +16,7 @@ module.exports = {
     },
     run: (e, vars, args, settings) => {
         informations.version = vars.package.version
+        informations.ping = vars.client.ws.ping + 'ms'
 
         for(let owner of vars.configs.owners) {
             if(!informations.author) informations.author = ""
@@ -26,6 +27,7 @@ module.exports = {
         let embed = new vars.discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor("This is my informations:", vars.client.user.avatarURL())
+        .setThumbnail(vars.assets.images.informations)
         for(let info in informations) {
             embed.addField("__" + info + ":__", "```" + informations[info] + "```")
         }

@@ -14,7 +14,6 @@ module.exports = {
         user: []
     },
     run: (e, vars, args, settings) => {
-
         let type = args.shift()
 
         if(!type) {
@@ -25,12 +24,12 @@ module.exports = {
             }
 
             let embed = new vars.discord.MessageEmbed()
-            .setTitle('Settings')
-            .setDescription('Voici la liste des commandes:')
+            .setDescription('Settings\' commands list:')
+            .setThumbnail(vars.assets.images.settings)
             for(let cmd of commands) {
                 if(!cmd.endsWith(".js")) continue
                 let command = require('./settings/' + cmd)
-                embed.addField('settings ' + command.name, command.description)
+                embed.addField(settings.prefix + 'settings ' + command.name, command.description)
             }
             embed.setColor("RANDOM")
 

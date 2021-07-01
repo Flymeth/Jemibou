@@ -2,7 +2,7 @@ const {doneMsg} = require('../tools/doneMSG')
 module.exports = {
     name: "roletoall",
     alias: ["rta"],
-    description: "Add a specific role to everyone on the server",
+    description: "Add/remove a specific role to everyone on the server",
     ownersOnly: false,
     active: true,
     type: "moderation",
@@ -21,16 +21,16 @@ module.exports = {
         type=type.toLowerCase()
         
         // role mention
-        if(!args[0]) return e.reply('ARG. 2 must be a role mention or a role id!')
+        if(!args[0]) return e.reply('ARG. 2 must be a role mention or a role id or a role name!')
         let role = e.mentions.roles.first() || e.guild.roles.cache.get(args[0]) || e.guild.roles.cache.find(r => r.name.toLowerCase() === args.join(vars.configs.argumentsSeparator).toLowerCase())
         
         if(role) {
             if(role.position >= e.channel.members.get(vars.client.user.id).roles.highest.position) {
-                return e.reply('The role is above me!').then(msg => doneMsg(msg, vars, "👀"))
+                return e.reply('This role is above me!').then(msg => doneMsg(msg, vars, "👀"))
             }
 
             if(role.position >= e.channel.members.get(e.author.id).roles.highest.position && e.author.id !== e.guild.ownerID) {
-                return e.reply('The role is above you!').then(msg => doneMsg(msg, vars, "👀"))
+                return e.reply('This role is above you!').then(msg => doneMsg(msg, vars, "👀"))
             }
 
             if(role.managed) {
@@ -39,7 +39,7 @@ module.exports = {
 
             e.delete()
             let embed = new vars.discord.MessageEmbed()
-            .setTitle('Warning!')
+            .setTitle('Confirmation...')
             .setDescription(`I'll ${type} the role ${role} to every people (bellow me) in the server. Do you confirm ?`)
             .setColor(role.color || "RANDOM")
 
@@ -83,7 +83,7 @@ module.exports = {
 
                         let embed = new vars.discord.MessageEmbed()
                         .setTitle('Oups...')
-                        .setDescription('Some users has blocked me:\n' + msg)
+                        .setDescription('Some users is above me:\n' + msg)
                         .setColor(vars.configs.colors.invalid)
 
                         e.channel.send(embed)
@@ -100,7 +100,7 @@ module.exports = {
                 })
             })
         }else {
-            e.reply('Unknow role!')
+            e.reply('This role doesn\'t exist!')
         }
     }
 }

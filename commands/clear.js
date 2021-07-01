@@ -1,7 +1,7 @@
 module.exports = {
     name: "clear",
     alias: ["clean", "erase"],
-    description: "Clear messages in the channel",
+    description: "Clear some messages in the current channel",
     ownersOnly: false,
     active: true,
     type: "moderation",
@@ -13,7 +13,7 @@ module.exports = {
         user: ["MANAGE_MESSAGES"]
     },
     run: async (e, vars, args, settings) => {
-        if(!args[0] || isNaN(args[0]) || args[0]<=0 || args[0]>100) return e.reply('Arg. #2 must be a number (>0 and <100)!')
+        if(!args[0] || isNaN(args[0]) || args[0]<=0 || args[0]>100) return e.reply('Please indicate a valid number (>0 and <100)!')
 
         if(!e.channel.messages.cache.size) return e.reply('there isn\'t any messages to delete...')
 
@@ -29,7 +29,7 @@ module.exports = {
             .setDescription('An error has occured. The reasons can be:')
             .addField('To many messages', 'Discord limits the messages suppretion at max 100 per weeks')
             .addField('Messages too old', 'Discord blocks the message suppretion that are under 14 days old')
-            .addField('Other', 'The error can be the fault of the developper. If is that, he has been triggered!')
+            .addField('Other', 'The error can be cause of the developper. If is that, he has been triggered!')
 
             return e.reply(embed)
         }

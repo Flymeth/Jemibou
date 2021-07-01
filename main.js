@@ -35,14 +35,14 @@ for(let event of events) {
     if(!event.endsWith('.js')) continue
     let eventName = event.replace('.js','')
 
-    client.on(eventName, (eventElement) => {
+    client.on(eventName, async (eventElement) => {
         try {
             let evt = require(configs.eventsPath + event)
             if(evt.active) {
                 evt.run(eventElement, vars)
             }
         } catch (e) {
-            console.log(e);
+            vars.log(e);
         }
     })
 }

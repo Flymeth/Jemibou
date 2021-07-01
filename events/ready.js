@@ -1,8 +1,9 @@
+let {next} = require('../tools/status')
 module.exports = {
     name: "ready",
     description: "When the bot is connect",
     active: true,
-    run: (e, vars) => {
+    run: async (e, vars) => {
         vars.saveLog()
 
         let embed = new vars.discord.MessageEmbed()
@@ -19,8 +20,14 @@ module.exports = {
         } catch (err) {
             vars.log(err);
         }
-
-        vars.client.user.setActivity("connected!", {type: "WATCHING"})
+        
         vars.log(`connected as ${vars.client.user.tag}! (version ${vars.package.version})`, vars.configs.colors.valid, "STATUS");
+
+        vars.statusInterval = setInterval(async () => {
+            let settedStatus = await next(vars)
+            if(!settedStatus) {
+                vars.log(`error to set status!`, vars.configs.colors.invalid, "ERROR")
+            }
+        }, vars.configs.statusInterval);
     }
 }

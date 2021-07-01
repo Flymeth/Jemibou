@@ -17,6 +17,8 @@ module.exports = {
         .setColor(vars.configs.colors.invalid)
         .setTimestamp()
 
+        clearInterval(vars.statusInterval)
+
         try {
             for(let channel of vars.configs.channels.status) {
                 let c = vars.client.channels.cache.get(channel)

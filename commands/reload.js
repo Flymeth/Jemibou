@@ -9,7 +9,6 @@ module.exports = {
     active: false,
     type: "dangerous",
     color: "#000",
-    arguments: "<ARGS> [ARGS]",
     deleteCommand: false,
     permissions: {
         bot: [],

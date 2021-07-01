@@ -36,9 +36,10 @@
         "list": {
             "prefix": {
                 "value": ".",
-                "desc": "Change the prefix of the bot",
+                "desc": "Change the bot's prefix in your server",
                 "modifiable": true
             }
         }
-    }
+    },
+    "statusInterval": 20000
 }

@@ -1,12 +1,12 @@
 const {getSettings} = require('../settings')
 module.exports = {
     name: "list",
-    description: "Avoir la liste des settings disponible",
+    description: "Settings' list",
     run: async (e, vars, args) => {
         let settings = vars.settings
 
         let embed = new vars.discord.MessageEmbed()
-        .setTitle('Voici la liste des settings disponible:')
+        .setTitle('Settings list:')
         .setColor('RANDOM')
         for(let set in settings) {
             let setting = settings[set]

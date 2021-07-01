@@ -2,12 +2,12 @@ const fs = require('fs')
 module.exports = {
     name: "help",
     alias: ["h"],
-    description: "Get help",
+    description: "Get help about the bot commands",
     ownersOnly: false,
     active: true,
     type: "informations",
     color: "RANDOM",
-    arguments: "<command name>",
+    arguments: "[command name]",
     permissions: {
         bot: [],
         user: []
@@ -53,7 +53,7 @@ module.exports = {
                 .setTitle(settings.prefix + infos.name)
                 .setDescription(infos.description)
                 .setColor(infos.color)
-                if(infos.alias) {
+                if(infos.alias.lenght>0) {
                     let alias = ""
                     for(let a of infos.alias) {
                         alias+=settings.prefix + a +'\n'
@@ -82,7 +82,7 @@ module.exports = {
         .setTitle('Command List:')
         .setColor(this.color || "RANDOM")
         .setThumbnail(vars.assets.images.help)
-
+        .setFooter('To get more detail on a command, use ' + settings.prefix + 'help <command>')
         for(let type in cmdByTypes) {
             let cmds = ""
             for(let cmd of cmdByTypes[type]) {

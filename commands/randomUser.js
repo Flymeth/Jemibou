@@ -7,6 +7,7 @@ module.exports = {
     type: "usefull",
     color: "#FA22B8",
     deleteCommand: true,
+    arguments: "[message]",
     permissions: {
         bot: [],
         user: []

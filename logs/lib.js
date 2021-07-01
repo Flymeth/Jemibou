@@ -50,7 +50,7 @@ module.exports.log = async (message, color, type, private, vars) => {
         const embed = new vars.discord.MessageEmbed()
     
         .setDescription(typeLog)
-        .setColor(color || log.embedColor || "RANDOM")
+        .setColor(color || log.embedColor || log.embedColor || "RANDOM")
         .setTimestamp()
     
         try {

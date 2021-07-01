@@ -1,9 +1,8 @@
 const {setSettings} = require('../settings')
 module.exports = {
     name: "set",
-    description: "Definir un nouveau salon pour les settings",
+    description: "Set a new settings' channel (if there isn't argument, it'll set the settings' channel on the current text channel)",
     run: (e, vars, args) => {
-
         if(!args[0]){
             var channel = e.channel
         }else {

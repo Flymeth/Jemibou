@@ -22,7 +22,7 @@ module.exports = {
                 if(userAvatar) {
                     userAvatar = userAvatar.user
                 }else {
-                    return e.reply("Who is this user ?")
+                    return e.reply("I can't get this user...")
                 }
             }
         }
@@ -30,7 +30,7 @@ module.exports = {
         if(!userAvatar.avatar) return e.reply('This user doesn\'t have avatar picture!')
 
         let embed = new vars.discord.MessageEmbed()
-        .setDescription(`This is the avatar of <@${userAvatar.id}>`)
+        .setDescription(`This is the avatar of <@${userAvatar.id}>:`)
         .setImage(userAvatar.avatarURL({dynamic: true, size: 4096}))
         .setColor(e.guild.members.cache.get(userAvatar.id).roles.highest.color || "RANDOM")
 
