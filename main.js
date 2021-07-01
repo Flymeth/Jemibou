@@ -6,7 +6,7 @@ const {log, saveLog} = require('./logs/lib')
 const assets = require('./assets.json')
 const {doneMsg} = require('./tools/doneMSG')
 
-const {token} = process.env.TOKEN || require('./token.json')
+const token = process.env.TOKEN || require('./token.json').token
 
 const client = new Discord.Client({})
 
