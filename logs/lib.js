@@ -10,7 +10,7 @@ const { log, channels } = require('../configs.json')
  * @returns {Boolean} true if opperation success, false if not
  */
 module.exports.log = async (message, color, type, private, vars) => {
-    if(!log.active || !message) return false
+    if(!message) return false
     
     try {
         var file = fs.readFileSync(log.lastestPath, {encoding: "utf-8"})
@@ -36,6 +36,8 @@ module.exports.log = async (message, color, type, private, vars) => {
     try {
         console.log(newLog);
     } catch (err) {}
+
+    if(!log.active) return true
     
     let logThis = file ? file + "\n" + newLog : newLog
     

@@ -10,7 +10,13 @@ module.exports = {
             || message.author.bot
         ) return
 
-        let settings = await getSettings(message.guild.id, vars)
+        let settings = await getSettings(message.guild.id, vars, true)
+
+        let args = message.content.replace(settings.prefix, '').split(vars.configs.argumentsSeparator)
+
+        if(settings.bannedWords.length>0 && message.channel.id !== settings.channelID) {
+            require('../tools/bannedWords').run(message, vars, args, settings.bannedWords)
+        }
         
         if(!message.content.startsWith(settings.prefix)) {
             if(message.content.replace('!','') === `<@${vars.client.user.id}>`) {
@@ -34,7 +40,6 @@ module.exports = {
             }
         }
         
-        let args = message.content.replace(settings.prefix, '').split(vars.configs.argumentsSeparator)
         let cmdName=""
         cmdName = (args.shift()).split(' ').join('')
 

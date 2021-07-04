@@ -10,7 +10,7 @@ module.exports = {
     color: "#F78484",
     deleteCommand: true,
     permissions: {
-        bot: [],
+        bot: ["MANAGE_CHANNELS"],
         user: []
     },
     run: (e, vars, args, settings) => {
@@ -42,6 +42,16 @@ module.exports = {
             vars.log(err, "ERROR")
             e.reply("This command doesn't exist...")
             return
+        }
+
+        if(command.needPerm) {
+            let perms = ["MANAGE_GUILD"]
+
+            for(let perm of perms) {
+                if(!e.member.hasPermission(perm) && e.author.id !== e.guild.ownerID) {
+                    return e.reply("You need to have the `" + perm + "` permission!")
+                }
+            }
         }
 
         try {
@@ -150,12 +160,18 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
                 for(let setting in settings.list) {
                     if(!settings.list[setting].modifiable || !values[0] || !values[0].split(' ').join('')) continue
                     
-                    while(values[0].startsWith(" ")) {
-                        values[0] = values[0].replace(' ','')
+                    for(let v in values) {
+                        while(values[v].startsWith(" ")) {
+                            values[v] = values[v].replace(' ','')
+                        }
                     }
 
-                    if(param === setting.toLowerCase()) {
-                        findedSettings[param] = values[0]
+                    if(param.toLowerCase() === setting.toLowerCase()) {
+                        if(typeof findedSettings[setting] === "object") {
+                            findedSettings[setting] = values
+                        }else {
+                            findedSettings[setting] = values[0]
+                        }
                     }
                 }
             }

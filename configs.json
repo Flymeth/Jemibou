@@ -8,7 +8,7 @@
         "lastestPath": "./logs/lastest.log",
         "savedPath": "./logs/saved/",
         "logDate": true,
-        "active": true,
+        "active": false,
         "embedColor": "#7919EA"
     },
     "argumentsSeparator": " ",
@@ -37,6 +37,11 @@
             "prefix": {
                 "value": ".",
                 "desc": "Change the bot's prefix in your server",
+                "modifiable": true
+            },
+            "bannedWords": {
+                "value": [],
+                "desc": "Set words has banned in the server.",
                 "modifiable": true
             }
         }

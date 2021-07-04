@@ -28,7 +28,7 @@ const vars = {
 try {
     var events = fs.readdirSync(configs.eventsPath)
 } catch (e) {
-    console.log(e);
+    vars.log(e);
 }
 
 for(let event of events) {

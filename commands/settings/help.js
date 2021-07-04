@@ -1,6 +1,7 @@
 module.exports = {
     name: "help",
     description: "Understand how the bot's settings works",
+    needPerm: false,
     run: async (e, vars, args, settings) => {
         let embed = new vars.discord.MessageEmbed()
         .setTitle('How it works ?')
