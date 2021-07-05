@@ -5,6 +5,7 @@ const pkg = require('./package.json')
 const {log, saveLog} = require('./logs/lib')
 const assets = require('./assets.json')
 const {doneMsg} = require('./tools/doneMSG')
+const server = require('./web/server')
 
 const token = process.env.TOKEN || require('./token.json').token
 
@@ -46,3 +47,6 @@ for(let event of events) {
         }
     })
 }
+
+// SERVER
+server.run()

@@ -8,7 +8,7 @@
         "lastestPath": "./logs/lastest.log",
         "savedPath": "./logs/saved/",
         "logDate": true,
-        "active": false,
+        "active": true,
         "embedColor": "#7919EA"
     },
     "argumentsSeparator": " ",

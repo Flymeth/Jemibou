@@ -1,6 +1,3 @@
-let informations = {
-
-}
 module.exports = {
     name: "infos",
     alias: ["informations", "ping"],
@@ -15,13 +12,16 @@ module.exports = {
         user: []
     },
     run: (e, vars, args, settings) => {
-        informations.version = vars.package.version
-        informations.ping = vars.client.ws.ping + 'ms'
+        let informations = {
+            version: vars.package.version,
+            ping: vars.client.ws.ping + 'ms',
+            "invite link": `https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot`
+        }
 
         for(let owner of vars.configs.owners) {
             if(!informations.author) informations.author = ""
             if(informations.author) informations.author += " & "
-            informations.author += "@" + vars.client.users.cache.get(owner).tag
+            informations.author += vars.client.users.cache.get(owner).tag
         }
 
         let embed = new vars.discord.MessageEmbed()
@@ -29,7 +29,7 @@ module.exports = {
         .setAuthor("This is my informations:", vars.client.user.avatarURL())
         .setThumbnail(vars.assets.images.informations)
         for(let info in informations) {
-            embed.addField("__" + info + ":__", "```" + informations[info] + "```")
+            embed.addField("__" + info + ":__", "> " + informations[info])
         }
 
         e.channel.send(embed)
