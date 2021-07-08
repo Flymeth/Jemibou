@@ -1,7 +1,7 @@
 {
     "secures_options": {
-        "cert": "./web/keys/certificate.crt",
-        "prvtKey": "./web/keys/privateKey.key"
+        "cert": "./web/keys/cert.pem",
+        "prvtKey": "./web/keys/private.pem"
     },
     "port": 80,
     "404File": null,

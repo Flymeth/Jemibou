@@ -1,4 +1,4 @@
-const http = require('https')
+const http = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 
@@ -70,8 +70,8 @@ let url404 = `
 
 function setupServer() {
     const secureOptions = {
-        key: fs.readFileSync(serverProps.secures_options.prvtKey),
-        cert: fs.readFileSync(serverProps.secures_options.cert)
+        key: fs.readFileSync(serverProps.secures_options.prvtKey).toString(),
+        cert: fs.readFileSync(serverProps.secures_options.cert).toString()
     }
 
     let srv = http.createServer(secureOptions, (req,res) => {
@@ -86,7 +86,7 @@ function setupServer() {
         if(!extention) {
             url[url.length-1] = url[url.length-1] + '.' + serverProps.defaultExtention.replace('.','')
         }
-
+        
         fs.readFile(serverProps.defaultPath + url.join('/'), (err, data) => {
             if(err) {
                 res.writeHead(404)
@@ -112,5 +112,4 @@ function setupServer() {
         console.info('go to: %clocalhost:'+srv.address().port, 'color: cyan;')
     })
 }
-
-module.exports = () => setupServer()
+module.exports.run = () => setupServer()

@@ -5,7 +5,7 @@ const pkg = require('./package.json')
 const {log, saveLog} = require('./logs/lib')
 const assets = require('./assets.json')
 const {doneMsg} = require('./tools/doneMSG')
-const setupServer = require('./web/server')
+const {run} = require('./web/server')
 
 const token = process.env.TOKEN || require('./token.json').token
 
@@ -49,4 +49,4 @@ for(let event of events) {
 }
 
 // SERVER
-setupServer()
+run()
