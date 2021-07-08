@@ -82,11 +82,15 @@ module.exports = {
         return false
     }
     
-    try {
-        var guildsSettings = JSON.parse(file)
-    } catch (err) {
-        vars.log(err)
-        return false
+    if(file) {
+        try {
+            var guildsSettings = JSON.parse(file)
+        } catch (err) {
+            vars.log(err)
+            return false
+        }
+    }else {
+        var guildsSettings = {}
     }
 
     guildsSettings[channel.guild.id] = channel.id

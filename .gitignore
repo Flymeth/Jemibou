@@ -2,3 +2,4 @@ node_modules
 console.cmd
 token.json
 logs/saved/*
+commands/settings/_settings.json
