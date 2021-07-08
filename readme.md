@@ -2,7 +2,7 @@
 A cool discord bot for moderation!
 
 > - prefix: `.` (changeable)
-> - version: `1.0.0`
+> - version: `1.2.0`
 
 ## some commands
 > - randomUser (get a guild random member)

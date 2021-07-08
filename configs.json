@@ -9,7 +9,8 @@
         "savedPath": "./logs/saved/",
         "logDate": true,
         "active": true,
-        "embedColor": "#7919EA"
+        "embedColor": "#7919EA",
+        "changelogPath": "./changelog.md"
     },
     "argumentsSeparator": " ",
     "colors": {
@@ -33,7 +34,31 @@
     "doneMessageDeleteTimeout": 10000,
     "settings": {
         "path":"./commands/settings/_settings.json",
+        "variables": {
+            "start": "{{",
+            "end": "}}",
+            "list": {
+                "user": "user mention",
+                "user.username": "user username",
+                "user.tag": "user username with his tag",
+                "members.all": "number of users + bots in the server",
+                "members.bots": "number of bots in the server",
+                "members.users" : "number of users in the server",
+                "avatar": "link of the user avatar"
+            }
+        },
         "list": {
+            "variablesStart": {
+                "value":"{{",
+                "desc": "prefix of a variable",
+                "modifiable": false
+            },
+            "variablesEnd": {
+                "value":"}}",
+                "desc": "suffix of a variable",
+                "modifiable": false
+            },
+
             "prefix": {
                 "value": ".",
                 "desc": "Change the bot's prefix in your server",
@@ -43,6 +68,28 @@
                 "value": [],
                 "desc": "Set words has banned in the server.",
                 "modifiable": true
+            },
+            "joinMessageChannel": {
+                "value": "",
+                "desc": "Set the channel where join message will be send",
+                "modifiable": true
+            },
+            "joinMessage": {
+                "value": "Welcome to {{user}}! 🎉",
+                "desc": "Value of the join message",
+                "modifiable": true,
+                "variables": true
+            },
+            "leaveMessageChannel": {
+                "value": "",
+                "desc": "Set the channel where leave message will be send",
+                "modifiable": true
+            },
+            "leaveMessage": {
+                "value": "Goodbye to {{user.tag}}! 😔",
+                "desc": "Value of the leave message",
+                "modifiable": true,
+                "variables": true
             }
         }
     },

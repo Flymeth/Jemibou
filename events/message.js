@@ -116,10 +116,7 @@ module.exports = {
             }
 
             if(!finded) {
-                message.delete()
-                message.reply(cmdName + ' command doesn\'t exit!').then(msg => {
-                    vars.setEndMessage(msg, "😶")
-                })
+                return
             }
         } catch (err) {
             vars.log(err);

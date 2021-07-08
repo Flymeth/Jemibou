@@ -15,7 +15,7 @@ module.exports = {
         let informations = {
             version: vars.package.version,
             ping: vars.client.ws.ping + 'ms',
-            "invite link": `https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot`
+            "invite link": `[click here to get me in your server](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot)`
         }
 
         for(let owner of vars.configs.owners) {

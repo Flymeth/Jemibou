@@ -3,5 +3,8 @@
         "cert": "./web/keys/certificate.crt",
         "prvtKey": "./web/keys/privateKey.key"
     },
-    "port": 443
+    "port": 80,
+    "404File": null,
+    "defaultExtention": "html",
+    "defaultPath": "./web/pages/"
 }

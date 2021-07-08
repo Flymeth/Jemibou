@@ -107,7 +107,6 @@ module.exports = {
  * @returns {Object} return the settings objects
  */
 module.exports.getSettings = async (guildId, vars, getChannelId) => {
-
     let findedSettings = {}
     for(let setting in settings.list) {
         findedSettings[setting] = settings.list[setting].value
@@ -139,14 +138,13 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
     await channel.messages.fetch({force: true, cache: true})
 
     let messages = channel.messages.cache
-
     messages.forEach(message => {
         if(message && message.content) {
-            let param = message.content.split('=')[0]
-            let split = message.content.split('=')[1]
-
+            let args = message.content.split('=')
+            let param = args.shift()
+            let split = args.join('=')
             if(param) param = param.toLowerCase()
-            if(split) split = split.toLowerCase().split('\\"').join(Infinity).split('"')
+            if(split) split = split.split('\\"').join(Infinity).split('"')
             
             if(param && split) {
                 let values = []
