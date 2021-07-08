@@ -112,4 +112,4 @@ function setupServer() {
         console.info('go to: %clocalhost:'+srv.address().port, 'color: cyan;')
     })
 }
-module.exports.run = () => setupServer()
+module.exports = () => setupServer()
