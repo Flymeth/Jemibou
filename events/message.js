@@ -26,7 +26,7 @@ module.exports = {
         }
 
         for(let perm of vars.configs.minPerms) {
-            if(!message.channel.members.get(vars.client.user.id).permissions.has(perm)) {
+            if(!message.guild.me.permissions.has(perm)) {
                 try {
                     let embed = new vars.discord.MessageEmbed()
                     .setTitle('ERROR')

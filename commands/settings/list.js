@@ -13,11 +13,11 @@ module.exports = {
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Settings list:')
         .setColor('RANDOM')
+
+        let settingValue = await getSettings(e.guild.id, vars)
         for(let set in settings) {
             let setting = settings[set]
             if(!setting.modifiable) continue
-            let settingValue = await getSettings(e.guild.id, vars)
-
             let actually = settingValue[set] || setting.value
             if(!actually || actually.length === 0) actually = "unset"
 

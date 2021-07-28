@@ -15,8 +15,7 @@ A cool discord bot for moderation!
 > If you mention the bot, it'll respond with his prefix.
 
 ## inDev commands/system:
-> ### banned words system:
-> > With settings `bannedWords`, each time the bot detect a word that is inside this setting, it'll delete the message then will warn the user (of course if the word is in an url, it willn't warn the user).
+> `props (<server> or <member <member mention>> or <role <role mention>> or <channel <channel mention>>)` => see informations about the server or member or role or channel...
 
 [VOTE FOR THE BOT](https://top.gg/bot/859139199172083713)
 

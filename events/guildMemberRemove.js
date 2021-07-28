@@ -22,7 +22,7 @@ module.exports = {
             "avatar": e.user.avatarURL() ? e.user.avatarURL({format: "png", dynamic: true, size: 1024}) : ""
         }
 
-        let finalyMsg = settings.joinMessage
+        let finalyMsg = settings.leaveMessage
         let variables = vars.configs.settings.variables
         for(let v in variablesContent) {
             finalyMsg = finalyMsg.split(variables.start + v + variables.end).join(variablesContent[v])

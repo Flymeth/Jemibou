@@ -10,7 +10,7 @@ module.exports = {
     color: "#F78484",
     deleteCommand: true,
     permissions: {
-        bot: ["MANAGE_CHANNELS"],
+        bot: [],
         user: []
     },
     run: (e, vars, args, settings) => {
@@ -50,6 +50,14 @@ module.exports = {
             for(let perm of perms) {
                 if(!e.member.hasPermission(perm) && e.author.id !== e.guild.ownerID) {
                     return e.reply("You need to have the `" + perm + "` permission!")
+                }
+            }
+        }
+
+        if(command.permissions) {
+            for(let perm of command.permissions) {
+                if(!e.guild.me.permissions.has(perm)) {
+                    return e.reply(`I need the \`${perm}\` permission for this command!`)
                 }
             }
         }

@@ -32,8 +32,12 @@ module.exports = {
         }
 
         try {
-            let reason = args.join(' ')
             await user.send("You have been kicked by <@" + e.author.id + ">.\nReason:```" + (reason ? reason : undefined) + "```")
+        } catch (err) {
+            e.reply('I can not send message to this user...')
+        }
+        try {
+            let reason = args.join(' ')
             await user.kick(reason)
             e.reply('User kicked!').then(msg => vars.setEndMessage(msg, "🎃"))
         } catch (err) {

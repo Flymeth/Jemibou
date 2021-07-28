@@ -53,7 +53,7 @@ module.exports = {
                 .setTitle(settings.prefix + infos.name)
                 .setDescription(infos.description)
                 .setColor(infos.color)
-                if(infos.alias.lenght>0) {
+                if(infos.alias.length>0) {
                     let alias = ""
                     for(let a of infos.alias) {
                         alias+=settings.prefix + a +'\n'

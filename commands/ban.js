@@ -31,8 +31,12 @@ module.exports = {
         }
 
         try {
-            let reason = args.join(' ')
             await user.send("You have been banned by <@" + e.author.id + ">.\nReason:```" + (reason ? reason : undefined) + "```")
+        } catch (err) {
+            e.reply('I can not send message to this user...')
+        }
+        try {
+            let reason = args.join(' ')
             await e.guild.members.ban(user, {reason: reason})
             e.reply('User banned!').then(msg => vars.setEndMessage(msg, "🎃"))
         } catch (err) {

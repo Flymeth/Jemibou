@@ -19,7 +19,7 @@ module.exports = {
             return vars.log(err)
         }
 
-        let currentVersionCL = cl.toString().split('---').find(txt => txt.includes(vars.package.version))
+        let currentVersionCL = cl.toString().split('---').find(txt => txt.includes("# " + vars.package.version))
 
         if(!currentVersionCL) return e.reply('There is no changelog for this version!')
 

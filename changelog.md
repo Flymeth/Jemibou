@@ -1,3 +1,16 @@
+> # 1.2
+> ## commands:
+> - say
+> - seeperm
+> ## bugs:
+> - leave message send the joinMessage
+> - `settings list` command is too long at reply
+> - `settings` doesn't require extra perm to use it
+> ## inDev command:
+> - `props (<server> or <member <member mention>> or <role <role mention>> or <channel <channel mention>>)` => see informations about the server or member or role or channel...
+
+---
+
 > # 1.1.3
 > ## commands:
 > - changelog
