@@ -1,4 +1,5 @@
 const {doneMsg} = require('../tools/doneMSG')
+const timeOutTime = 500
 module.exports = {
     name: "roletoall",
     alias: ["rta"],
@@ -14,7 +15,6 @@ module.exports = {
         user: ["MANAGE_ROLES", "MANAGE_GUILD"]
     },
     run:  (e, vars, args, settings) => {
-
         // type (add or remove)
         let type = args.shift()
         if(!type || type.toLowerCase() !== "add" && type.toLowerCase() !== "remove") return e.reply('ARG. 1 must be "add" or "remove" !')
@@ -42,6 +42,7 @@ module.exports = {
             .setTitle('Confirmation...')
             .setDescription(`I'll ${type} the role ${role} to every people (bellow me) in the server. Do you confirm ?`)
             .setColor(role.color || "RANDOM")
+            .setFooter('To not spam the discord api, it will take approximatively ' + (timeOutTime / 1000) * e.guild.members.cache.size + 'seconds to give the role to every members.', vars.assets.images.informations)
 
             e.reply(embed).then(async msg => {
                 await msg.react(vars.configs.reactions.confirm)
@@ -61,11 +62,13 @@ module.exports = {
                         var errorMembers = []
                         members.forEach(member => {
                             try {
-                                if(type === "add") {
-                                    member.roles.add(role)
-                                }else {
-                                    member.roles.remove(role)
-                                }
+                                setTimeout(() => {
+                                    if(type === "add") {
+                                        member.roles.add(role)
+                                    }else {
+                                        member.roles.remove(role)
+                                    }
+                                }, 500);
                             } catch (err) {
                                 vars.log(err);
                                 errorMembers.push(member)
@@ -74,7 +77,7 @@ module.exports = {
                     }else {
                         return
                     }
-
+                    
                     if(errorMembers.length > 0) {
                         let msg = ""
                         for(let user of errorMembers) {
