@@ -118,5 +118,4 @@ function setupServer(close) {
 }
 
 module.exports.startSrv = () => setupServer()
->>>>>>> 2e381424cf9b513e8b6ecdbe2e999e3f6b3dbb57
 module.exports.stopSrv = () => setupServer(true)
