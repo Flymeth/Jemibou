@@ -1,5 +1,4 @@
 const fs = require('fs')
-const { versions } = require('process')
 module.exports = {
     name: "changelog",
     alias: ["cl"],

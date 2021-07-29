@@ -46,4 +46,3 @@
 > ## commands:
 > - settings
 > ## features:
-> - banned words system (use `settings list` command)
