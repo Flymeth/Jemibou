@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { log, channels } = require('../configs.json')
+const { log, channels } = require('../_configs.json')
 
 /**
  * Log a message on a discord channel, on a log file and on the console

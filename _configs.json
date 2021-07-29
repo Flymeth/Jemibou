@@ -33,7 +33,7 @@
     },
     "doneMessageDeleteTimeout": 10000,
     "settings": {
-        "path":"./commands/settings/_settings.json",
+        "path":"./_settings.json",
         "variables": {
             "start": "{{",
             "end": "}}",
