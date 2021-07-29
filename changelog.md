@@ -1,4 +1,14 @@
-> # 1.2
+# 1.2.2
+> ## commands:
+> - roletoall: has a cooldown between each user to give the role to
+> - changelog: now can takes an argument: the version number or 'list' to see every version
+> - seeperm: now the command take a 's' (seeperm**s**)
+> ## bugs:
+> - informations' image now working
+
+---
+
+# 1.2
 > ## commands:
 > - say
 > - seeperm
@@ -11,7 +21,7 @@
 
 ---
 
-> # 1.1.3
+# 1.1.3
 > ## commands:
 > - changelog
 > ## bugs:
@@ -23,7 +33,7 @@
 
 ---
 
-> # 1.1.0
+# 1.1.0
 > ## commands:
 > - settings
 > ## features:

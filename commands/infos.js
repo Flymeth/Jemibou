@@ -15,7 +15,8 @@ module.exports = {
         let informations = {
             version: vars.package.version,
             ping: vars.client.ws.ping + 'ms',
-            "invite link": `[click here to get me in your server](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot)`
+            "invite link": `[click here to add me](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot)`,
+            "discord support server": `[click here to join it](https://discord.gg/B6cGv6hyHR)`
         }
 
         for(let owner of vars.configs.owners) {
@@ -25,7 +26,7 @@ module.exports = {
         }
 
         let embed = new vars.discord.MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(this.color || "RANDOM")
         .setAuthor("This is my informations:", vars.client.user.avatarURL())
         .setThumbnail(vars.assets.images.informations)
         for(let info in informations) {

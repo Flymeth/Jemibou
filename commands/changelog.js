@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { versions } = require('process')
 module.exports = {
     name: "changelog",
     alias: ["cl"],
@@ -6,6 +7,7 @@ module.exports = {
     ownersOnly: false,
     active: true,
     type: "informations",
+    arguments: "[version number | \"list\"]",
     color: "#FFD800",
     deleteCommand: false,
     permissions: {
@@ -19,10 +21,31 @@ module.exports = {
             return vars.log(err)
         }
 
-        let currentVersionCL = cl.toString().split('---').find(txt => txt.includes("# " + vars.package.version))
+        let searchVersion = args[0] || vars.package.version
 
-        if(!currentVersionCL) return e.reply('There is no changelog for this version!')
+        const versions = cl.toString().split('---')
 
-        e.channel.send("```md\n" + currentVersionCL.split('> ').join('') + "```")
+        if(searchVersion.toLowerCase() === "list") {
+            let embed = new vars.discord.MessageEmbed()
+            .setTitle('List of the versions:')
+            .setColor(this.color || 'RANDOM')
+            for(let v of versions) {
+                let splited = v.split('\n')
+                while(splited[0] === ' ' || splited[0] === '\r' || splited[0] === '\n') {
+                    splited.shift()
+                }
+                let versionNumber = splited.shift().split('# ').join('')
+                let versionInfos =  '```md\n' + splited.join('\n').split('> ').join('') + '```'
+
+                embed.addField(versionNumber, versionInfos)
+            }
+            e.channel.send(embed)
+        }else {
+            const version = versions.find(txt => txt.startsWith("# " + searchVersion))
+    
+            if(!version) return e.reply('There is no changelog for this version!')
+    
+            e.channel.send("```md\n" + version.split('> ').join('') + "```")
+        }
     }
 }

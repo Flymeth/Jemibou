@@ -1,6 +1,6 @@
 module.exports = {
-    name: "seePerm",
-    alias: ["perm", "permission", "getperm"],
+    name: "seePerms",
+    alias: ["perms", "permissions", "getperms"],
     description: "See the permission of a member on the server. You can also use this command to now my permission by use it without mention a member.",
     ownersOnly: false,
     active: true,
