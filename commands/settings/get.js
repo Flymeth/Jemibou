@@ -2,10 +2,9 @@ const {getSettings} = require('../settings')
 module.exports = {
     name: "get",
     description: "Get the settings' channel (if it exists)",
-    needPerm: true,
-    permissions: {
-        bot: ["MANAGE_CHANNELS"],
-        user: ["MANAGE_SERVER"]
+    needPerms: {
+        bot: [],
+        user: ["MANAGE_GUILD"]
     },
     run: async (e, vars, args) => {
         let settings = await getSettings(e.guild.id, vars, true)

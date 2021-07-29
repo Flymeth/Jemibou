@@ -2,8 +2,10 @@ const {setSettings, getSettings} = require('../settings')
 module.exports = {
     name: "generate",
     description: "generate a new settings\'s channel (if there isn\'t another one)",
-    needPerm: true,
-    permissions: ["MANAGE_CHANNELS"],
+    needPerms: {
+        bot: ["MANAGE_CHANNELS"],
+        user: ["MANAGE_GUILD"]
+    },
     run: async (e, vars, args) => {
         let settings  = await getSettings(e.guild.id, vars, true)
         if(settings.channelID) {

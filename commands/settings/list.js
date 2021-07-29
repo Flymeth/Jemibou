@@ -2,7 +2,7 @@ const {getSettings} = require('../settings')
 module.exports = {
     name: "list",
     description: "Settings' list",
-    needPerm: false,
+    needPerms: false,
     run: async (e, vars, args) => {
         let settings = vars.settings
 
@@ -28,7 +28,7 @@ module.exports = {
             
             if(actually.length > 256) actually = actually.substr(0,240 - (set.length + extra.length)) + ' [...]'
 
-            embed.addField(extra + set + ' (`' + actually + '`)', "```" + setting.desc + "```")
+            embed.addField(extra + '__' + set + '__ `' + setting.desc + '`', "```" + actually + "```")
         }
 
         let notations = '__Notations:__\n'

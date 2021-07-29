@@ -41,7 +41,7 @@ module.exports = {
             }
             e.channel.send(embed)
         }else {
-            const version = versions.find(txt => txt.startsWith("# " + searchVersion))
+            const version = versions.find(txt => txt.includes("# " + searchVersion))
     
             if(!version) return e.reply('There is no changelog for this version!')
     

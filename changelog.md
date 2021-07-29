@@ -1,3 +1,12 @@
+# 1.2.3
+> ## features:
+> - for the settings notations: addition of `guild.name` and `guild.icon` (`avatar` changed to `user.avatar`)
+> ## bugs:
+> - `settings get` command doesn't work
+> - fixed some minor bugs
+
+---
+
 # 1.2.2
 > ## commands:
 > - roletoall: has a cooldown between each user to give the role to

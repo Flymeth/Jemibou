@@ -2,7 +2,7 @@ const {setSettings} = require('../settings')
 module.exports = {
     name: "set",
     description: "Set a new settings' channel (if there isn't argument, it'll set the settings' channel on the current text channel)",
-    needPerm: true,
+    needPerms: true,
     run: (e, vars, args) => {
         if(!args[0]){
             var channel = e.channel

@@ -16,10 +16,12 @@ module.exports = {
             "user": "<@" + e.id + ">",
             "user.username": e.user.username,
             "user.tag": e.user.tag,
+            "user.avatar": e.user.avatarURL() ? e.user.avatarURL({format: "png", dynamic: true, size: 1024}) : "",
             "members.all": e.guild.members.cache.size,
             "members.bots": e.guild.members.cache.filter(m => m.user.bot).size,
             "members.users" : e.guild.members.cache.filter(m => !m.user.bot).size,
-            "avatar": e.user.avatarURL() ? e.user.avatarURL({format: "png", dynamic: true, size: 1024}) : ""
+            "guild.name": e.guild.name,
+            "guild.icon": e.guild.iconURL() ? e.guild.iconURL({format: 'png', dynamic: true, size: 1024}) : ""
         }
 
         let finalyMsg = settings.leaveMessage

@@ -44,12 +44,16 @@ module.exports = {
             return
         }
 
-        if(command.needPerm) {
-            let perms = ["MANAGE_GUILD"]
-
-            for(let perm of perms) {
+        if(command.needPerms) {
+            for(let perm of command.needPerms.user) {
                 if(!e.member.hasPermission(perm) && e.author.id !== e.guild.ownerID) {
                     return e.reply("You need to have the `" + perm + "` permission!")
+                }
+            }
+
+            for(let perm of command.needPerms.bot) {
+                if(!e.guild.me.hasPermission(perm)) {
+                    return e.reply("I need to have the `" + perm + "` permission!")
                 }
             }
         }

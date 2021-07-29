@@ -40,11 +40,13 @@
             "list": {
                 "user": "user mention",
                 "user.username": "user username",
+                "user.avatar": "link of the user avatar",
                 "user.tag": "user username with his tag",
                 "members.all": "number of users + bots in the server",
                 "members.bots": "number of bots in the server",
-                "members.users" : "number of users in the server",
-                "avatar": "link of the user avatar"
+                "members.users": "number of users in the server",
+                "guild.name": "the name of the guild",
+                "guild.icon": "the icon of the guild"
             }
         },
         "list": {
