@@ -68,13 +68,17 @@ let url404 = `
 </html>
 `
 
-function setupServer() {
+function setupServer(close) {
     const secureOptions = {
         key: fs.readFileSync(serverProps.secures_options.prvtKey).toString(),
         cert: fs.readFileSync(serverProps.secures_options.cert).toString()
     }
 
-    let srv = http.createServer(secureOptions, (req,res) => {
+    if(close && srv) {
+        return srv.close()
+    }
+
+    var srv = http.createServer(secureOptions, (req,res) => {
         let url = req.url.split('/')
         url.shift()
 
@@ -112,4 +116,6 @@ function setupServer() {
         console.info('go to: %clocalhost:'+srv.address().port, 'color: cyan;')
     })
 }
-module.exports = () => setupServer()
+
+module.exports.startSrv = () => setupServer()
+module.exports.stopSrv = () => setupServer(true)

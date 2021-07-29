@@ -1,5 +1,5 @@
 const fs = require('fs')
-const {settings} = require('../configs.json')
+const {settings} = require('../_configs.json')
 module.exports = {
     name: "settings",
     alias: ["config", "setting", "configs"],
