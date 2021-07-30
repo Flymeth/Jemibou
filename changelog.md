@@ -1,3 +1,15 @@
+# 1.3.0
+> ## commands:
+> - `infos` command become `bot` command
+> - `infos` is a new command: to get information about the server, a role, or a channel (information about a member is in developement)
+> ## bugs:
+> - `changelog list` command doesn't work
+> - fixed minor bugs
+> ## soon:
+> - A Premium system: join the discord for more informations (use `bot` command)
+
+---
+
 # 1.2.3
 > ## features:
 > - for the settings notations: addition of `guild.name` and `guild.icon` (`avatar` changed to `user.avatar`)

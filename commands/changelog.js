@@ -30,9 +30,10 @@ module.exports = {
             .setColor(this.color || 'RANDOM')
             for(let v of versions) {
                 let splited = v.split('\n')
-                while(splited[0] === ' ' || splited[0] === '\r' || splited[0] === '\n') {
+                while(splited[0] === ' ' || splited[0] === '\r' || splited[0] === '\n' || !splited[0]) {
                     splited.shift()
                 }
+                console.log(splited);
                 let versionNumber = splited.shift().split('# ').join('')
                 let versionInfos =  '```md\n' + splited.join('\n').split('> ').join('') + '```'
 
@@ -40,8 +41,7 @@ module.exports = {
             }
             e.channel.send(embed)
         }else {
-            const version = versions.find(txt => txt.includes("# " + searchVersion))
-    
+            const version = versions.find(txt => txt.includes('# ' + searchVersion))
             if(!version) return e.reply('There is no changelog for this version!')
     
             e.channel.send("```md\n" + version.split('> ').join('') + "```")

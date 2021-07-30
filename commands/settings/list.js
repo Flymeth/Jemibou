@@ -28,7 +28,7 @@ module.exports = {
             
             if(actually.length > 256) actually = actually.substr(0,240 - (set.length + extra.length)) + ' [...]'
 
-            embed.addField(extra + '__' + set + '__ `' + setting.desc + '`', "```" + actually + "```")
+            embed.addField(extra + '__' + set + '__', "*" + setting.desc + "*\n```" + actually + "```")
         }
 
         let notations = '__Notations:__\n'

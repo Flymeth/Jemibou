@@ -68,7 +68,7 @@
             },
             "bannedWords": {
                 "value": [],
-                "desc": "Set words has banned in the server.",
+                "desc": "Set words as banned in the server.",
                 "modifiable": true
             },
             "joinMessageChannel": {
