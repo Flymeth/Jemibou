@@ -1,5 +1,6 @@
 const fs = require('fs')
 const {getSettings} = require('../commands/settings')
+const {check} = require('../tools/checkPremium')
 module.exports = {
     name: "message",
     description: "When the bot receive a message",
@@ -76,17 +77,19 @@ module.exports = {
                 }
 
                 if(runCommand) {
-                    if(cmd.ownersOnly) {
-                        let allow = false
-                        for(let ownerid of vars.configs.owners) {
-                            if(ownerid === message.author.id) {
-                                allow = true
-                            }
+                    let isOwner = false
+                    for(let ownerid of vars.configs.owners) {
+                        if(ownerid === message.author.id) {
+                            isOwner = true
                         }
+                    }
+                    
+                    if(cmd.ownersOnly && !isOwner) return message.reply('you can\'t do that!')
 
-                        if(!allow) {
-                            return message.reply('you can\'t do that!')
-                        }
+                    if(cmd.premium) {
+                        const premium = await check(cmd.premium, vars, message.author)
+                        
+                        if(!premium && !isOwner) return message.reply("This command is only valable for `" + cmd.premium + "` users. More information on my support discord server (`" + settings.prefix + "links` to get the link)")
                     }
 
                     finded = true

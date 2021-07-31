@@ -1,3 +1,6 @@
+const {check} = require('../tools/checkPremium')
+const fs = require('fs')
+const {getSettings} = require('../commands/settings')
 module.exports = {
     name: "infos",
     alias: ["informations", "getinfos"],
@@ -6,21 +9,43 @@ module.exports = {
     active: true,
     type: "usefull",
     color: "#00b0b3",
-    arguments: "<server> | <channel <[channel_mention] | [channel_id] | [channel_name]>> | <role [role_mention] | [role_name] | [role_id]>",
+    arguments: "<server> | <channel <[channel_mention] | [channel_id] | [channel_name]>> | <role <[role_mention] | [role_name] | [role_id]>> | <user <[user_mention] | [user_id] | [user_username] | [user_nickname]>>",
     deleteCommand: false,
     permissions: {
         bot: [],
         user: []
     },
-    run: (e, vars, args, settings) => {
+    run: async(e, vars, args, settings) => {
         let type = args.shift()
-        if(!type) return e.reply('You need to indicate a type (server, channel, role or user)')
+        if(!type) {
+            try {
+                var commands = fs.readdirSync('./commands/infos', {encoding: 'utf-8'})
+            } catch (err) {
+                return vars.log(err, vars.configs.colors.invalid, "ERROR")
+            }
+
+            const settings = await getSettings(e.guild.id, vars)
+
+            let embed = new vars.discord.MessageEmbed()
+            .setDescription('Infos commands list')
+            for(let command of commands) {
+                embed.addField(settings.prefix + 'infos ' + command.replace('.js', ''), `Get information about a ${command.replace('.js', '')}`)
+            }
+            embed.setColor(this.color || "RANDOM")
+
+            return e.channel.send(embed)
+        }
 
         try {
             var command = require('./infos/' + type)
         } catch (err) {
             vars.log(err)
             return e.reply('Invalid command argument!')
+        }
+
+        if(command.premium) {
+            const premium = await check(command.premium, vars, e.author)
+            if(!premium) return e.reply("You need to have the `" + command.premium + "` role on the support server!")
         }
 
         try {

@@ -35,7 +35,7 @@ module.exports.run = (e, vars, args, settings) => {
     
     let embed = new vars.discord.MessageEmbed()
     .setColor(role.color)
-    .setDescription(`This is the informations about ${role.toString()}`)
+    embed.setDescription(`This is the informations about ${role.toString()}`)
 
     for(let info in roleInformations) {
         if(!roleInformations[info]) continue

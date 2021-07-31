@@ -8,6 +8,7 @@ module.exports = {
     color: "#000",
     arguments: "<args> [args]",
     deleteCommand: false,
+    premium: "[vip, vip+, alpha, omega]",
     permissions: {
         bot: [],
         user: []

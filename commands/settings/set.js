@@ -3,7 +3,8 @@ const {setSettings} = require('../settings')
 module.exports = {
     name: "set",
     description: "Set a new settings' channel (if there isn't argument, it'll set the settings' channel on the current text channel)",
-    needPerms: true,
+    needPerms: false,
+    premium: "vip+",
     run: (e, vars, args) => {
         if(!args[0]){
             var channel = e.channel
@@ -16,7 +17,7 @@ module.exports = {
         let set = setSettings(channel, vars)
 
         if(set) {
-            e.reply(`Settings channel set to <#${channel.id}>!`)
+            e.reply(`Settings channel set to <#${channel.id}>!`).then(msg => vars.setEndMessage(msg, "💜"))
         }else {
             return e.reply('ERROR').then(msg => vars.setEndMessage(msg, "😒"))
         }

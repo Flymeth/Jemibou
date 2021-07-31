@@ -2,6 +2,7 @@
     "owners": [
         "514475217779818496"
     ],
+    "supportGuildID": "862643884459163658",
     "eventsPath": "./events/",
     "commandsPath": "./commands/",
     "log": {
@@ -20,6 +21,24 @@
     "channels": {
         "logs": ["859046108880830464","859052190903566347"],
         "status": ["859052169953017886"]
+    },
+    "roles": {
+        "vip": {
+            "position": 0,
+            "id": "866494939349123112"
+        },
+        "vip+": {
+            "position": 1,
+            "id": "866495203614785547"
+        },
+        "alpha": {
+            "position": 2,
+            "id": "866495411854508043"
+        },
+        "omega": {
+            "position": 3,
+            "id": "866495585409433612"
+        }
     },
     "minPerms": [
         "VIEW_CHANNEL",

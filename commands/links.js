@@ -1,6 +1,6 @@
 module.exports = {
     name: "bot",
-    alias: ["links", "ping"],
+    alias: ["bot", "ping"],
     description: "Get the bot's information",
     ownersOnly: false,
     active: true,
@@ -17,7 +17,8 @@ module.exports = {
             ping: vars.client.ws.ping + 'ms',
             "invite link": `[click here to add me](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot)`,
             "discord support server": `[click here to join it](https://discord.gg/B6cGv6hyHR)`,
-            "top.gg page": `[click here to view ${vars.client.user.username}'s top.gg page](https://top.gg/bot/${vars.client.user.id})`
+            "top.gg page": `[click here to view ${vars.client.user.username}'s top.gg page](https://top.gg/bot/${vars.client.user.id})`,
+            "github repo": "https://github.com/Flymeth/jemibou"
         }
 
         for(let owner of vars.configs.owners) {

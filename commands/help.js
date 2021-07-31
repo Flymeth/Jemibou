@@ -63,6 +63,9 @@ module.exports = {
                 if(infos.arguments) {
                     embed.addField('Arguments', infos.arguments)
                 }
+                if(infos.premium) {
+                    embed.addField('Need rank', infos.premium)
+                }
                 embed.addField('Owners only ?', infos.ownersOnly)
                 e.reply(embed)
                 return

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const {settings} = require('../_configs.json')
+const {check} = require('../tools/checkPremium')
 module.exports = {
     name: "settings",
     alias: ["config", "setting", "configs"],
@@ -13,7 +14,7 @@ module.exports = {
         bot: [],
         user: []
     },
-    run: (e, vars, args, settings) => {
+    run: async (e, vars, args, settings) => {
         let type = args.shift()
 
         if(!type) {
@@ -24,7 +25,7 @@ module.exports = {
             }
 
             let embed = new vars.discord.MessageEmbed()
-            .setDescription('Settings\' commands list:')
+            .setDescription('Settings commands list:')
             .setThumbnail(vars.assets.images.settings)
             for(let cmd of commands) {
                 if(!cmd.endsWith(".js")) continue
@@ -56,6 +57,11 @@ module.exports = {
                     return e.reply("I need to have the `" + perm + "` permission!")
                 }
             }
+        }
+
+        if(command.premium) {
+            const canDoCommand = await check(command.premium, vars, e.author)
+            if(!canDoCommand) return e.reply("This command is only for `" + command.premium + "` users!")
         }
 
         if(command.permissions) {

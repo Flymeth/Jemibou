@@ -1,3 +1,14 @@
+# 1.3.2
+> ## commands:
+> - `infos user` give you information about a user
+> ## bugs:
+> - `seeperms` => now if you don't indicate argument, bot will reply with your permissions
+> - fixed minor bugs
+> ## features:
+> - Added a premium system: to get premium role, go on the support discord server
+
+---
+
 # 1.3.0
 > ## commands:
 > - `infos` command become `bot` command

@@ -19,7 +19,7 @@ module.exports = {
             if(!user) user = e.guild.members.cache.get(args[0]) || e.guild.members.cache.find(m => m.user.username.toLowerCase() === args.join(' ').toLowerCase()) || e.guild.members.cache.find(m => m.nickname ? m.nickname.toLowerCase() === args.join(' ').toLowerCase() : null)
             if(!user) return e.reply('I have not found this member...')
         }else {
-            user = e.guild.me
+            user = e.member
         }
 
         let perms = user.permissions

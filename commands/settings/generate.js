@@ -16,7 +16,7 @@ module.exports = {
             let set = setSettings(c, vars)
 
             if(set) {
-                e.reply('You channel has been generate here: <#' + c + ">")
+                e.reply('You channel has been generate here: <#' + c + ">").then(msg => vars.setEndMessage(msg, "👍"))
             }else {
                 c.delete()
                 e.reply('ERROR')
