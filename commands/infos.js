@@ -29,7 +29,8 @@ module.exports = {
             let embed = new vars.discord.MessageEmbed()
             .setDescription('Infos commands list')
             for(let command of commands) {
-                embed.addField(settings.prefix + 'infos ' + command.replace('.js', ''), `Get information about a ${command.replace('.js', '')}`)
+                const cmd = require('./infos/' + command)
+                embed.addField(settings.prefix + 'infos ' + command.replace('.js', '') + (cmd.premium ? ' (`' + cmd.premium + '`)': ''), `Get information about a ${command.replace('.js', '')}`)
             }
             embed.setColor(this.color || "RANDOM")
 

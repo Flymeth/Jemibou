@@ -33,13 +33,15 @@ module.exports = {
         const informations = {
             "ID": guild.id,
             "Owner": guild.owner,
-            "Created at": '```' + `${guild.createdAt.getDate()}/${guild.createdAt.getMonth()}/${guild.createdAt.getFullYear()} at ${guild.createdAt.getHours()}h${guild.createdAt.getMinutes()}` + '```',
+            "Region": guild.region,
+            "Created at": `${guild.createdAt.getDate()}/${guild.createdAt.getMonth()}/${guild.createdAt.getFullYear()} at ${guild.createdAt.getHours()}h${guild.createdAt.getMinutes()}`,
             "Description": guild.description,
-            "Channels": '```' + stringChannelsCount + '``` ```' + stringChannels + '```',
+            "Channels": stringChannelsCount + '\n' + stringChannels,
             "Afk Channel": guild.afkChannel,
+            "Boost Tier": guild.premiumTier,
             "Emojis": stringEmojis,
-            "Members": "```Users: " + guild.members.cache.filter(m => !m.user.bot).size + "\nBots: " + guild.members.cache.filter(m => m.user.bot).size + "\nTotal: " + guild.memberCount + '```',
-            "Roles": '```' + stringRolesCount + '``` ```' + stringRoles + '```'
+            "Members": "Users: " + guild.members.cache.filter(m => !m.user.bot).size + "\nBots: " + guild.members.cache.filter(m => m.user.bot).size + "\nTotal: " + guild.memberCount,
+            "Roles": stringRolesCount + '\n' + stringRoles
         }
 
         let invite = await guild.channels.cache.filter(c => c.type === 'text').first().createInvite({reason: 'infos server command'})
@@ -50,6 +52,13 @@ module.exports = {
         .setThumbnail(guild.banner)
         for(let i in informations) {
             if(!informations[i]) continue
+            if(informations[i].length > 1000 && typeof informations[i] === 'string') {
+                const txt = informations[i].substr(0, 1000)
+                informations[i] = txt + ' [...]'
+            }
+            if(typeof informations[i] === 'string') {
+                informations[i] = '```' + informations[i] + '```'
+            }
             embed.addField(i, informations[i])
         }
 

@@ -141,10 +141,14 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
         return findedSettings
     }
 
-    try {
-        var jsonFile = JSON.parse(file)
-    } catch (err) {
-        vars.log(err)
+    if(file) {
+        try {
+            var jsonFile = JSON.parse(file)
+        } catch (err) {
+            vars.log(err)
+            return findedSettings
+        }
+    }else {
         return findedSettings
     }
 

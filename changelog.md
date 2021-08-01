@@ -1,3 +1,13 @@
+# 1.3.3
+> ## commands:
+> - `invite` give you the invite link of a bot
+> ## bugs:
+> - fixed minor bugs
+> ## features:
+> - Now show in `help` command if a command is premium
+
+---
+
 # 1.3.2
 > ## commands:
 > - `infos user` give you information about a user

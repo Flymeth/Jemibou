@@ -20,7 +20,6 @@ module.exports = {
         const userInformations = {
             "ID": user.id,
             "Bot": user.user.bot,
-            "Premium since": user.premiumSince ? `${user.premiumSince.getDate()}/${user.premiumSince.getMonth()}/${user.premiumSince.getFullYear()} at ${user.premiumSince.getHours()}h${user.premiumSince.getMinutes()}` : "",
             "Account created at": `${user.user.createdAt.getDate()}/${user.user.createdAt.getMonth()}/${user.user.createdAt.getFullYear()} at ${user.user.createdAt.getHours()}h${user.user.createdAt.getMinutes()}`,
             "Joined the guild at": `${user.joinedAt.getDate()}/${user.joinedAt.getMonth()}/${user.joinedAt.getFullYear()} at ${user.joinedAt.getHours()}h${user.joinedAt.getMinutes()}`
         }

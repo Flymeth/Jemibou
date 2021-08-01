@@ -89,7 +89,7 @@ module.exports = {
         for(let type in cmdByTypes) {
             let cmds = ""
             for(let cmd of cmdByTypes[type]) {
-                cmds+=settings.prefix + cmd + "\n"
+                cmds+=settings.prefix + cmd + (commands[cmd.toLowerCase()].premium ? ' (`' + commands[cmd.toLowerCase()].premium + '`)' : '') + "\n"
             }
             embed.addField(type, cmds, true)
         }

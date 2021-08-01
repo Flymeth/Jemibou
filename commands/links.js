@@ -1,5 +1,5 @@
 module.exports = {
-    name: "bot",
+    name: "links",
     alias: ["bot", "ping"],
     description: "Get the bot's information",
     ownersOnly: false,
