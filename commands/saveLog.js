@@ -4,7 +4,7 @@ module.exports = {
     description: "Save current log in the saved folder",
     ownersOnly: true,
     active: true,
-    type: "dangerous",
+    type: "owner only",
     color: "#4CD50F",
     deleteCommand: true,
     permissions: {

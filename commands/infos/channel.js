@@ -1,5 +1,4 @@
 module.exports = {
-    premium: "vip",
     run: (e, vars, args, settings) => {
         if(!args[0]) {
             var channel = e.channel
@@ -12,13 +11,12 @@ module.exports = {
         const channelInformations = {
             "ID": channel.id,
             "Type": channel.type + " channel",
-            "Created at": '```' + `${channel.createdAt.getDate()}/${channel.createdAt.getMonth()}/${channel.createdAt.getFullYear()} at ${channel.createdAt.getHours()}h${channel.createdAt.getMinutes()}` + '```',
+            "Created at": '```' + `${channel.createdAt.getDate()}/${channel.createdAt.getMonth()+1}/${channel.createdAt.getFullYear()} at ${channel.createdAt.getHours()}h${channel.createdAt.getMinutes()}` + '```',
             "Category": '```' + (channel.parent ? channel.parent.name : 'without') + '```'
         }
 
-        const embed = new vars.discord.MessageEmbed()
+        const embed = vars.newEmbed()
         .setDescription(`Informations about ${channel.toString()}`)
-        .setColor(this.color || "RANDOM")
 
         for(let info in channelInformations) {
             if(!channelInformations[info]) continue

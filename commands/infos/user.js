@@ -1,5 +1,4 @@
 module.exports = {
-    premium: "vip+",
     run: (e, vars, args, settings) => {
         let user;
         if(args[0]) {
@@ -19,9 +18,11 @@ module.exports = {
 
         const userInformations = {
             "ID": user.id,
+            "Tag": user.user.tag,
+            "Nickname": user.nickname,
             "Bot": user.user.bot,
-            "Account created at": `${user.user.createdAt.getDate()}/${user.user.createdAt.getMonth()}/${user.user.createdAt.getFullYear()} at ${user.user.createdAt.getHours()}h${user.user.createdAt.getMinutes()}`,
-            "Joined the guild at": `${user.joinedAt.getDate()}/${user.joinedAt.getMonth()}/${user.joinedAt.getFullYear()} at ${user.joinedAt.getHours()}h${user.joinedAt.getMinutes()}`
+            "Account created at": `${user.user.createdAt.getDate()}/${user.user.createdAt.getMonth()+1}/${user.user.createdAt.getFullYear()} at ${user.user.createdAt.getHours()}h${user.user.createdAt.getMinutes()}`,
+            "Joined the guild at": `${user.joinedAt.getDate()}/${user.joinedAt.getMonth()+1}/${user.joinedAt.getFullYear()} at ${user.joinedAt.getHours()}h${user.joinedAt.getMinutes()}`
         }
 
         const customStatus = user.presence.activities.find(a => a.type === "CUSTOM_STATUS")
@@ -33,11 +34,11 @@ module.exports = {
         const otherAct = user.presence.activities.find(a => a.type !== "CUSTOM_STATUS")
 
         if(otherAct) {
-            userInformations[otherAct.type] = "App: " + otherAct.name + "\n\n> " + otherAct.details + "\n" + otherAct.state
+            userInformations[otherAct.type] = "App: " + otherAct.name + (otherAct.details ? "\n\n> " + otherAct.details : "") + (otherAct.state ? "\n" + otherAct.state : "")
         }
 
         const embed = new vars.discord.MessageEmbed()
-        .setDescription(statusEmote[user.presence.status] + ` Informations about ${user.displayName}`)
+        .setDescription(statusEmote[user.presence.status] + ` Informations about ${user.user.username}`)
         .setColor(user.displayColor || "RANDOM")
         .setThumbnail(user.user.avatarURL({format: 'png', size: 1024, dynamic: true}))
 

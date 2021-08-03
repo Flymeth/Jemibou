@@ -27,8 +27,7 @@ module.exports = {
             informations.author += vars.client.users.cache.get(owner).tag
         }
 
-        let embed = new vars.discord.MessageEmbed()
-        .setColor(this.color || "RANDOM")
+        let embed = vars.newEmbed()
         .setAuthor("This is my informations:", vars.client.user.avatarURL())
         .setThumbnail(vars.assets.images.informations)
         for(let info in informations) {

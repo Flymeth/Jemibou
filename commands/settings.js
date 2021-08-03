@@ -24,7 +24,7 @@ module.exports = {
                 vars.log(err, "ERROR")
             }
 
-            let embed = new vars.discord.MessageEmbed()
+            let embed = vars.newEmbed()
             .setDescription('Settings commands list:')
             .setThumbnail(vars.assets.images.settings)
             for(let cmd of commands) {
@@ -32,7 +32,6 @@ module.exports = {
                 let command = require('./settings/' + cmd)
                 embed.addField(settings.prefix + 'settings ' + command.name, command.description)
             }
-            embed.setColor("RANDOM")
 
             return e.channel.send(embed)
         }

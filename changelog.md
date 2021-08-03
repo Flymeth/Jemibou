@@ -1,3 +1,20 @@
+# 1.4.0
+> ## commands:
+> - `game` (only for beta users) play some games with the bot (for now there is just the `chifumie`game (= rock paper scissors))
+> ## bugs:
+> - display error with the `infos server` (for emojis)
+> - `infos server`: channels aren't in order (same for the roles)
+> - fixed minor bugs
+> ## features:
+> - `infos user` & `infos channel` are now free but `infos role` require now a `vip`rank and `infos server` require a `vip+` rank
+> - `infos server` now display the server icon in the large image area
+> - `infos user` now display the tag and the nickname (if there is one)
+> - beta system
+> ## soon:
+> - More settings options
+
+---
+
 # 1.3.3
 > ## commands:
 > - `invite` give you the invite link of a bot

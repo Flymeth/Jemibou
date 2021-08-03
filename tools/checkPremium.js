@@ -20,7 +20,7 @@ module.exports = {
         }
 
         const supportGuild = vars.client.guilds.cache.get(vars.configs.supportGuildID)
-        if(!supportGuild) return new Error("Support guild is not valable")
+        if(!supportGuild) return new Error("Support guild is  unreachable")
 
         const role = vars.configs.roles[grade]
         if(!role) return true
@@ -32,6 +32,11 @@ module.exports = {
         if(!member) {
             return false
         }
+
+        if(!posRole) {
+            if(!member.roles.cache.get(role.id)) return false
+        }
+
         let roles = []
         const memberRoles = member.roles.cache
         memberRoles.forEach(r => {
@@ -61,6 +66,5 @@ module.exports = {
             return false
         }
         return true
-
     }
 }

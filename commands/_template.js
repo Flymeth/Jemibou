@@ -4,7 +4,7 @@ module.exports = {
     description: "DESCRIPTION",
     ownersOnly: true,
     active: false,
-    type: "dangerous",
+    type: "type",
     color: "#000",
     arguments: "<args> [args]",
     deleteCommand: false,

@@ -7,7 +7,7 @@ module.exports = {
     active: true,
     type: "informations",
     arguments: "[version number | \"list\"]",
-    color: "#FFD800",
+    color: "#16bd00",
     deleteCommand: false,
     permissions: {
         bot: [],
@@ -25,15 +25,13 @@ module.exports = {
         const versions = cl.toString().split('---')
 
         if(searchVersion.toLowerCase() === "list") {
-            let embed = new vars.discord.MessageEmbed()
+            let embed =  vars.newEmbed()
             .setTitle('List of the versions:')
-            .setColor(this.color || 'RANDOM')
             for(let v of versions) {
                 let splited = v.split('\n')
                 while(splited[0] === ' ' || splited[0] === '\r' || splited[0] === '\n' || !splited[0]) {
                     splited.shift()
                 }
-                console.log(splited);
                 let versionNumber = splited.shift().split('# ').join('')
                 let versionInfos =  '```md\n' + splited.join('\n').split('> ').join('') + '```'
 

@@ -33,10 +33,9 @@ module.exports = {
             }
         }
 
-        let embed = new vars.discord.MessageEmbed()
+        let embed = vars.newEmbed()
         .setTitle('This is the permission of ' + (user.nickname || user.user.username))
         .setDescription(msg)
-        .setColor(this.color || "RANDOM")
 
         e.channel.send(embed)
     }

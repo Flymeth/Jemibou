@@ -7,8 +7,8 @@ module.exports = {
     description: "reload bot's commands",
     ownersOnly: true,
     active: false,
-    type: "dangerous",
-    color: "#000",
+    type: "owner only",
+    color: "#0077e6",
     deleteCommand: false,
     permissions: {
         bot: [],
@@ -17,7 +17,7 @@ module.exports = {
     run: async (e, vars, args, settings) => {
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Reloaded!')
-        .setColor("#F3CA22")
+        .setColor(vars.configs.color.valid)
         .setTimestamp()
 
         try {

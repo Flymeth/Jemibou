@@ -4,7 +4,7 @@ module.exports = {
     description: "Turn off the bot",
     ownersOnly: true,
     active: true,
-    type: "dangerous",
+    type: "owner only",
     color: "#000",
     permissions: {
         bot: [],

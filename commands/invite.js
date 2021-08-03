@@ -1,6 +1,6 @@
 module.exports = {
     name: "invite",
-    alias: [""],
+    alias: [],
     description: "Send the invite link of a bot (or the invite link of Jemibou)",
     ownersOnly: false,
     active: true,
@@ -23,9 +23,8 @@ module.exports = {
         
         let link = `https://discord.com/api/oauth2/authorize?client_id=${user.user.id}&permissions=8&scope=bot`
 
-        let embed = new vars.discord.MessageEmbed()
+        let embed = vars.newEmbed()
         .setDescription(`[Click here to invite ${user.displayName}](${link})`)
-        .setColor(user.displayColor || this.color || "RANDOM")
 
         e.channel.send(embed)
     }

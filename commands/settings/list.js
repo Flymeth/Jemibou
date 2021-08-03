@@ -10,9 +10,8 @@ module.exports = {
             "variables": "🔢"
         }
 
-        let embed = new vars.discord.MessageEmbed()
+        let embed = vars.newEmbed()
         .setTitle('Settings list:')
-        .setColor('RANDOM')
 
         let settingValue = await getSettings(e.guild.id, vars)
         for(let set in settings) {

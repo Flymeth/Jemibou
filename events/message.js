@@ -114,6 +114,11 @@ module.exports = {
                     
                     await message.guild.members.fetch({force: true, cache: true})
                     await message.channel.messages.fetch({force: true, cache: true})
+
+                    const embed = new vars.discord.MessageEmbed()
+                    .setColor(cmd.color || message.guild.me.displayColor || "RANDOM")
+                    vars.newEmbed = () => {return embed}
+
                     cmd.run(message, vars, args, settings)
                 }
             }

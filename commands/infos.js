@@ -26,13 +26,12 @@ module.exports = {
 
             const settings = await getSettings(e.guild.id, vars)
 
-            let embed = new vars.discord.MessageEmbed()
+            let embed = vars.newEmbed()
             .setDescription('Infos commands list')
             for(let command of commands) {
                 const cmd = require('./infos/' + command)
                 embed.addField(settings.prefix + 'infos ' + command.replace('.js', '') + (cmd.premium ? ' (`' + cmd.premium + '`)': ''), `Get information about a ${command.replace('.js', '')}`)
             }
-            embed.setColor(this.color || "RANDOM")
 
             return e.channel.send(embed)
         }

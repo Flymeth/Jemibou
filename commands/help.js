@@ -81,9 +81,8 @@ module.exports = {
             cmdByTypes[command.type].push(name)
         }
 
-        let embed = new vars.discord.MessageEmbed()
+        let embed = vars.newEmbed()
         .setTitle('Command List:')
-        .setColor(this.color || "RANDOM")
         .setThumbnail(vars.assets.images.help)
         .setFooter('To get more detail on a command, use ' + settings.prefix + 'help <command>')
         for(let type in cmdByTypes) {
