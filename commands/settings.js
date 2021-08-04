@@ -123,8 +123,9 @@ module.exports = {
 }
 
 /**
- * @param {Discord.GuildID} guildId selected guild id
- * @param {*} vars vars
+ * @param {String} guildId selected guild id
+ * @param {Object} vars vars
+ * @param {Boolean} getChannelId If yes or no the object includes the settings channel id
  * @returns {Object} return the settings objects
  */
 module.exports.getSettings = async (guildId, vars, getChannelId) => {
@@ -167,20 +168,30 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
         if(message && message.content) {
             let args = message.content.split('=')
             let param = args.shift()
+            if(param) param = param.toLowerCase().split(' ').join('')
+
             let split = args.join('=')
-            if(param) param = param.toLowerCase()
-            if(split) split = split.split('\\"').join(Infinity).split('"')
+            if(split) {
+                var splitByQuotes = split.split('\\"').join(Infinity).split('"')
+                var splitBySpaces = split.split(' ')
+            }
+
+            while(splitBySpaces[0] === '' || splitBySpaces[0] === "\n") splitBySpaces.shift()
             
-            if(param && split) {
-                let values = []
-                for(let v in split) {
-                    if(v%2===0) continue
-                    values.push(split[v].split(Infinity).join('"'))
-                }
-
-                param = param.split(' ').join('')
-
+            if(param && (splitByQuotes || splitBySpaces)) {
                 for(let setting in settings.list) {
+                    let values = []
+
+                    if(settings.list[setting].isParagraph) {
+                        for(let v in splitByQuotes) {
+                            if(v%2===0) continue
+                            values.push(splitByQuotes[v].split(Infinity).join('"'))
+                        }
+                    }else {
+                        values = splitBySpaces
+                    }
+
+
                     if(!settings.list[setting].modifiable || !values[0] || !values[0].split(' ').join('')) continue
                     
                     for(let v in values) {

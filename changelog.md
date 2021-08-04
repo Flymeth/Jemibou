@@ -1,3 +1,11 @@
+# 1.4.1
+> ## new settings features:
+> - New settings, settings notation & settings variables (`settings list` for more informations)
+> ## bugs:
+> - fixed some minor bugs
+
+---
+
 # 1.4.0
 > ## commands:
 > - `game` (only for beta users) play some games with the bot (for now there is just the `chifumie`game (= rock paper scissors))

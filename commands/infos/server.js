@@ -44,7 +44,7 @@ module.exports = {
         const emojis = guild.emojis.cache
         let stringEmojis = emojis.size ? '\`\`\`' + `Animated: ${emojis.filter(e => e.animated).size}\nTotal: ${emojis.size}` + '\`\`\`' : ''
         emojis.forEach(e => {
-            stringEmojis+= '**`:' + e.name + ':` => ' + e.toString() + "**\n"
+            stringEmojis+= '\n**`:' + e.name + ':` => ' + e.toString() + "**"
         })
 
         const roles = guild.roles.cache

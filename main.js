@@ -21,9 +21,24 @@ const vars = {
     package: pkg,
     assets: assets,
     server: server,
+    /**
+     * The logger system
+     * @param {String} message The message to log
+     * @param {String} color The color of the embed to log
+     * @param {String} type The type of log
+     * @param {Boolean} private If yes or no the bot need to send an embed to the log discord channel (default: no)
+     * @returns {Boolean} True if the log succefull logged, false else
+     */
     log: (message, color, type, private) => log(message, color, type, private, vars),
     saveLog: (ignoreLastest) => saveLog(ignoreLastest),
-    setEndMessage: (message, emote) => doneMsg(message, vars, emote)
+    /**
+     * Set a specific message as the lastest message of a command
+     * @param {Object} message The message to delete
+     * @param {String} emote The emoji reaction
+     * @param {Array} otherMessages Other messages to delete
+     * @returns {Boolean} True: succefull, else False
+     */
+    setEndMessage: (message, emote, otherMessages) => doneMsg(message, vars, emote, otherMessages)
 }
 
 // events

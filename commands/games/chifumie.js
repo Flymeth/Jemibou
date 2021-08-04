@@ -22,6 +22,8 @@ module.exports = {
             }
         ]
 
+        const messageToDelete = e
+
         const embed = vars.newEmbed()
         .setDescription("Click on a reaction to choose it!")
         for(let e in emoji) {
@@ -65,7 +67,7 @@ module.exports = {
 
                         message.reactions.removeAll()
 
-                        return message.edit(embed).then(msg => vars.setEndMessage(msg, "🎮"))
+                        return message.edit(embed).then(msg => vars.setEndMessage(msg, "🎮", [messageToDelete]))
                     }
                 }
 

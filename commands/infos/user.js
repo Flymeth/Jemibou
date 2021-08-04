@@ -9,6 +9,12 @@ module.exports = {
             user = e.member
         }
 
+        const roles = user.roles.cache
+        let stringRoles = '```Count: ' + roles.size + "```"
+        roles.sort((a, b) => b.position - a.position).forEach(role => {
+            stringRoles += '\n' + role.toString()
+        });
+
         const statusEmote = {
             "online": "🟢",
             "idle": "🌙",
@@ -21,6 +27,7 @@ module.exports = {
             "Tag": user.user.tag,
             "Nickname": user.nickname,
             "Bot": user.user.bot,
+            "Roles": stringRoles,
             "Account created at": `${user.user.createdAt.getDate()}/${user.user.createdAt.getMonth()+1}/${user.user.createdAt.getFullYear()} at ${user.user.createdAt.getHours()}h${user.user.createdAt.getMinutes()}`,
             "Joined the guild at": `${user.joinedAt.getDate()}/${user.joinedAt.getMonth()+1}/${user.joinedAt.getFullYear()} at ${user.joinedAt.getHours()}h${user.joinedAt.getMinutes()}`
         }
@@ -44,7 +51,8 @@ module.exports = {
 
         for(let info in userInformations) {
             if(!userInformations[info]) continue
-            embed.addField(info, '```' + userInformations[info] + '```')
+            let msg = (userInformations[info].startsWith("```") ? userInformations[info] : "```" + userInformations[info] + "```")
+            embed.addField(info, msg)
         }
 
         e.channel.send(embed)

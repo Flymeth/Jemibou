@@ -1,6 +1,12 @@
+# node modules
 node_modules
-console.cmd
-token.json
-logs/saved/*
 
-commands/settings/_settings.json
+# I use this file to start & debug my bot
+console.cmd
+
+# This files is very confidentials
+token.json
+_settings.json
+
+# This file is useless for you
+logs/saved/*
