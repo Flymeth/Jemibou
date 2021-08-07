@@ -10,3 +10,6 @@ _settings.json
 
 # This file is useless for you
 logs/saved/*
+
+# The SSL keys for the web server
+web/server/keys

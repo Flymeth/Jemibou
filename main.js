@@ -5,7 +5,7 @@ const pkg = require('./package.json')
 const {log, saveLog} = require('./logs/lib')
 const assets = require('./_assets.json')
 const {doneMsg} = require('./tools/doneMSG')
-const server = require('./web/server')
+const server = require('./web/server/server')
 
 const token = process.env.TOKEN || require('./token.json').token
 
@@ -40,6 +40,7 @@ const vars = {
      */
     setEndMessage: (message, emote, otherMessages) => doneMsg(message, vars, emote, otherMessages)
 }
+module.exports.getBotInformations = () => {return vars}
 
 // events
 try {
@@ -65,4 +66,4 @@ for(let event of events) {
 }
 
 // SERVER
-server.startSrv()
+// server.startSrv()

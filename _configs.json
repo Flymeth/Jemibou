@@ -2,6 +2,10 @@
     "owners": [
         "514475217779818496"
     ],
+    "invite": {
+        "start": "https://discord.com/api/oauth2/authorize?client_id=",
+        "end": "&permissions=8&scope=bot%20applications.commands"
+    },
     "supportGuildID": "862643884459163658",
     "eventsPath": "./events/",
     "commandsPath": "./commands/",
@@ -10,17 +14,17 @@
         "savedPath": "./logs/saved/",
         "logDate": true,
         "active": true,
-        "embedColor": "#7919EA",
+        "embedColor": "#0046c7",
         "changelogPath": "./changelog.md"
     },
     "argumentsSeparator": " ",
     "colors": {
-        "valid": "#1ED700",
+        "valid": "#1cd100",
         "invalid": "#D72100"
     },
     "channels": {
-        "logs": ["859046108880830464","859052190903566347"],
-        "status": ["859052169953017886"]
+        "logs": ["873591492873166930"],
+        "status": ["873591642148438056"]
     },
     "roles": {
         "beta": {

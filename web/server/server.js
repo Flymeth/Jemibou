@@ -1,6 +1,8 @@
 const http = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
+const {variables} = serverProps
+const {getBotInformations} = require('../../main')
 
 let url404 = `
 <!DOCTYPE html>
@@ -70,8 +72,8 @@ let url404 = `
 
 function setupServer(close) {
     const secureOptions = {
-        key: fs.readFileSync(serverProps.secures_options.prvtKey).toString(),
-        cert: fs.readFileSync(serverProps.secures_options.cert).toString()
+        key: fs.readFileSync(serverProps.secures_options.prvtKey),
+        cert: fs.readFileSync(serverProps.secures_options.cert)
     }
 
     if(close && srv) {
@@ -91,7 +93,8 @@ function setupServer(close) {
             url[url.length-1] = url[url.length-1] + '.' + serverProps.defaultExtention.replace('.','')
         }
         
-        fs.readFile(serverProps.defaultPath + url.join('/'), (err, data) => {
+        const path = decodeURI(url.join('/'))
+        fs.readFile(serverProps.defaultHtmlPath + path, async (err, data) => {
             if(err) {
                 res.writeHead(404)
                 if(serverProps["404File"] == null || !serverProps["404File"]) {
@@ -106,12 +109,61 @@ function setupServer(close) {
                     })
                 }
             }else {
-                res.writeHead(200)
+
+                const canUseVars = req.headers.accept.includes("text/html")
+                if(canUseVars) {
+                    data = data.toString()
+
+                    let args = []
+                    for(let argument of data.split(variables.prefix)) {
+                        let v = argument.slice(0, argument.indexOf(variables.suffix))
+                        if(!v || v.includes(" ")) continue
+                        args.push({
+                            path: v.split('.')
+                        })
+                    }
+
+                    if(args) {
+                        const infos  = getBotInformations()
+
+                        for(let v of args) {
+                            let path = [...v.path]
+                            let value = infos
+                            while(path.length) {
+                                const goTo = path.shift().replace('()', '')
+                                value = value[goTo]
+                                if(typeof value === "function") {
+                                    try {
+                                        value = await value()
+                                    } catch (err) {
+                                        value = undefined
+                                        break
+                                    }
+                                }
+                                if(!value) break
+                            }
+
+                            if(!value) v.value = "undefined"
+                            else {
+                                if(typeof value === "object") v.value = JSON.stringify(value)
+                                else v.value = value
+                            }
+                        
+                            const needSplit = variables.prefix + v.path.join('.') + variables.suffix
+                            data = data.split(needSplit).join(v.value)
+                        }
+                    }
+                }
+
+                let accepts = req.headers.accept.split(",").find(a => a.includes(path.split('.').pop()))
+                res.writeHead(200, {
+                    "Content-Type": accepts || "*/*"
+                })
                 res.write(data)
             }
             res.end()
         })
-    }).listen(serverProps.port).on('listening', () => {
+    }).listen(process.env.PORT || serverProps.port).on('listening', () => {
         console.log(`server listening on port ${srv.address().port} !`);
         console.info('go to: %clocalhost:'+srv.address().port, 'color: cyan;')
     })
@@ -119,3 +171,5 @@ function setupServer(close) {
 
 module.exports.startSrv = () => setupServer()
 module.exports.stopSrv = () => setupServer(true)
+
+setupServer()

@@ -67,7 +67,7 @@ module.exports = {
 
                         message.reactions.removeAll()
 
-                        return message.edit(embed).then(msg => vars.setEndMessage(msg, "🎮", [messageToDelete]))
+                        return message.edit(embed)
                     }
                 }
 

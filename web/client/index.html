@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jemibou</title>
+
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="./css/__style.css">
+</head>
+<body>
+
+    <div class="invite_button">
+        <a href="$configs.invite.start;$client.user.id;$configs.invite.end;" target="invite">
+            <button>Invite Jemibou</button>
+        </a>
+    </div>
+
+    <div class="indev">
+        <p>You're viewing a preview version of the website. So if there isn't a lot of content or if there are some bugs, it's totally normal.</p>
+    </div>
+
+    <header>
+        <div class="top">
+            <img src="./assets/logo.png" alt="Logo Jemibou v$package.version;">
+            <h1>Jemibou <span class="version">v$package.version;</span></h1>
+        </div>
+        
+        <nav>
+            <a href="#desc">Description</a>
+            <a href="#cmds">Commands list</a>
+            <a href="#me">Author</a>
+            <a href="#more">More</a>
+            <a href="$package.homepage;" target="Github">Github</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Welcome on the Jemibou's website!</h1>
+        <p>A powerfull discord bot with a lot of functionnality</p>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 175">
+        <path fill="var(--bg-hero)" fill-opacity="1" d="M0,128L48,112C96,96,192,64,288,74.7C384,85,480,139,576,149.3C672,160,768,128,864,112C960,96,1056,96,1152,101.3C1248,107,1344,117,1392,122.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+    </svg>
+
+    <main>
+        <h1 id="desc">What's Jemibou ?</h1>
+        <p>Jemibou is a cool discord bot with a lot of functionnality!</p>
+        <h1 id="cmds">Commands</h1>
+        <p>This is the principals commands</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>command</th>
+                    <th>description</th>
+                    <th>arguments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>help</td>
+                    <td>Get the list of every commands.</td>
+                    <td>[command] to show more informations about one</td>
+                </tr>
+                <tr>
+                    <td>kick</td>
+                    <td>Kick a member of the server.</td>
+                    <td>[member] &lt;reason&gt;</td>
+                </tr>
+                <tr>
+                    <td>ban</td>
+                    <td>Ban a member of the server.</td>
+                    <td>[member] &lt;reason&gt;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h1 id="me">Me</h1>
+        <div class="head">
+            <img src="./assets/flymeth.png" alt="Logo Flymeth">
+            <h2>Hello! I'm Flymeth!</h2>
+        </div>
+        <p>A little web developper witch loves coding. I use html, css, javascript (native & nodejs) and python (not a lot).</p>
+        <p>This bot is my biggest project in javascript. I learned a lot of things with it: like how to push with git, how to separate each bot's command in differents files, and more...</p>
+        <p>If you want to learn more about me, i've my own website that you can reach by <a href="https://flymeth.net" target="_Flymeth">clicking here</a>!</p>
+    </main>
+</body>
+</html>

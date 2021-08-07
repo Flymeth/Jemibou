@@ -1,0 +1,65 @@
+main {
+    padding: 5pt 10pt;
+}
+
+main h1 {
+    margin: 15pt 0 5pt;
+    text-decoration: underline;
+}
+main h1::before {
+    content: "# ";
+}
+
+main p {
+    line-height: 150%;
+}
+
+main table {
+    border-radius: 15pt;
+    box-shadow: 0 15pt 20pt rgba(0, 0, 0, 0.1);
+    margin: 15pt auto;
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    max-width: 750pt;
+}
+
+main td, main th {
+    padding: 15pt 10pt;
+}
+
+main thead {
+    text-transform: uppercase;
+    text-decoration: underline;
+    background-color: var(--bg-header);
+    box-shadow: 0 0 7.5pt rgba(0,0,0, .5);
+}
+
+main tbody tr {
+    transition: all .25s;
+}
+main tbody tr:hover {
+    background-color: rgba(255,255,255, .2);
+    box-shadow: inset 0 0 10pt rgba(0,0,0, .5);
+}
+
+main .head {
+    display: flex;
+    align-items: center;
+    padding: 2.5pt;
+}
+main .head img {
+    width: 25pt;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 5pt;
+}
+main .head h2 {
+    font-style: italic;
+    font-size: 15pt;
+}

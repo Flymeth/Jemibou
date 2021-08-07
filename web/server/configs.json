@@ -1,0 +1,14 @@
+{
+    "secures_options": {
+        "cert": "./web/server/keys/cert.pem",
+        "prvtKey": "./web/server/keys/private.pem"
+    },
+    "port": 80,
+    "404File": null,
+    "defaultExtention": "html",
+    "defaultHtmlPath": "./web/client/",
+    "variables": {
+        "prefix": "$",
+        "suffix": ";"
+    }
+}

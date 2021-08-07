@@ -1,0 +1,95 @@
+/* FONTS */
+@import url('https://db.onlinewebfonts.com/c/161edcf1defa00caa0730d5eb8de8bbc?family=Uni+Sans+Heavy+CAPS');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+
+/* CSS */
+@import 'header.css';
+@import '_extra.css';
+@import 'hero.css';
+@import 'main.css';
+
+@import '_medias.css';
+
+*, ::before, ::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+
+    --bg-header: #1f1f1f;
+    --bg-hero: #5e5e5e;
+    --bg-body: #2f2f2f;
+    --header-maxHeight: 75pt;
+    --buttons-animDuration: .35s;
+
+    scroll-padding-top: calc(var(--header-maxHeight) + 5pt);
+}
+
+body {
+    background-color: var(--bg-body);
+    color: #e0e0e0;
+    font-family: 'Noto Sans TC', sans-serif;
+
+    min-height: 100vh;
+}
+h1,h2,h3,h4,h5,h6, button {
+    font-family: "Uni Sans Heavy CAPS", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10pt 7.5pt;
+    background-color: #000;
+    color: #fff;
+    position: relative;
+
+    overflow: hidden;
+
+    text-transform: uppercase;
+
+    will-change: transform;
+
+    transition: all ease;
+    transition-duration: var(--buttons-animDuration);
+}
+button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -110%;
+    width: 110%;
+    height: 100%;
+
+    z-index: -1;
+
+    background-color: #fff;
+    clip-path: polygon(0 0, 0 100%, 90% 100%, 100% 0);
+
+    transition: all ease-in-out;
+    --animPseudo: calc(var(--buttons-animDuration) / 1.5);
+    transition-duration: var(--animPseudo);
+}
+
+button:hover {
+    border-radius: 10pt;
+    transform: scale(1.1);
+    box-shadow: 0 0 5pt .5pt rgba(0,0,0,.5);
+
+    color: #000;
+}
+button:hover::before {
+    left: 55%;
+    transform: translateX(-50%);
+}

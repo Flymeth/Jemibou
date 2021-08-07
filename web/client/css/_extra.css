@@ -1,0 +1,26 @@
+.invite_button {
+    position: fixed;
+    bottom: 10pt;
+    right: 0;
+    padding: 10pt;
+    border-radius: 5pt 0 0 5pt;
+
+    background-color: #1f1f1f;
+}
+.invite_button button {
+    border: 1.5pt solid;
+}
+.invite_button button:hover {
+    border-color: transparent;
+}
+
+.indev {
+    position: fixed;
+    opacity: .25;
+    bottom: 5pt;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    z-index: -1;
+}
