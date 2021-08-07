@@ -6,6 +6,8 @@ module.exports = {
     run: async (e, vars) => {
         vars.saveLog()
 
+        vars.client.user.setActivity("try to wake up...", {type: "PLAYING"})
+
         let embed = new vars.discord.MessageEmbed()
         .setTitle('Turned on!')
         .setColor(vars.configs.colors.valid)

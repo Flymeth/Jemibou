@@ -176,7 +176,7 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
                 var splitBySpaces = split.split(' ')
             }
 
-            while(splitBySpaces[0] === '' || splitBySpaces[0] === "\n") splitBySpaces.shift()
+            if(splitBySpaces) while(splitBySpaces[0] === '' || splitBySpaces[0] === "\n") splitBySpaces.shift()
             
             if(param && (splitByQuotes || splitBySpaces)) {
                 for(let setting in settings.list) {

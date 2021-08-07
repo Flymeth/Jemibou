@@ -3,7 +3,7 @@ const getHelpMsg = "help"
 const {check} = require('../tools/checkPremium')
 module.exports = {
     name: "game",
-    alias: ["play"],
+    alias: [],
     description: "Play games with the bot!",
     ownersOnly: false,
     active: true,

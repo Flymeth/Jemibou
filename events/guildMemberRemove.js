@@ -6,7 +6,10 @@ module.exports = {
     active: true,
     run: async (e, vars) => {
         let settings = await getSettings(e.guild.id, vars)
-        if(!settings.leaveMessage || !settings.leaveMessageChannel || (!settings.leaveMessageIfBot && e.user.bot)) return
+
+        const executeIfBot = settings.leaveMessageIfBot.toString().toLowerCase() === "true"
+
+        if(!settings.leaveMessage || !settings.leaveMessageChannel || (!executeIfBot && e.user.bot)) return
 
         let channel = e.guild.channels.cache.get(settings.leaveMessageChannel.replace('<#', '').replace('>', ''))
         if(!channel) return

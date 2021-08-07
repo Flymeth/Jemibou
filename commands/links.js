@@ -15,10 +15,10 @@ module.exports = {
         let informations = {
             version: vars.package.version,
             ping: vars.client.ws.ping + 'ms',
-            "invite link": `[click here to add me](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot%20applications.commands)`,
-            "discord support server": `[click here to join it](https://discord.gg/B6cGv6hyHR)`,
-            "top.gg page": `[click here to view ${vars.client.user.username}'s top.gg page](https://top.gg/bot/${vars.client.user.id})`,
-            "github repo": "https://github.com/Flymeth/jemibou"
+            "Invite me on your server": `[Click to access](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot%20applications.commands)`,
+            "discord support server": `[click to access](https://discord.gg/B6cGv6hyHR)`,
+            "Top.gg page": `[Click to view my top.gg page](https://top.gg/bot/${vars.client.user.id})`,
+            "Github repository": "https://github.com/Flymeth/jemibou"
         }
 
         for(let owner of vars.configs.owners) {

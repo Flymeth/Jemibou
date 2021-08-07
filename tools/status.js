@@ -1,4 +1,4 @@
-let statusState = 0
+let statusState = 2
 module.exports.next = async (vars) => {
     let status = [
         {

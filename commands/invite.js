@@ -21,7 +21,7 @@ module.exports = {
         }
         if(!user || !user.user.bot) return e.reply("You need to indicate a valid discord bot!").then(msg => vars.setEndMessage(msg, "💢"))
         
-        let link = `https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot%20applications.commands`
+        let link = `https://discord.com/api/oauth2/authorize?client_id=${user.user.id}&permissions=8&scope=bot%20applications.commands`
 
         let embed = vars.newEmbed()
         .setDescription(`[Click here to invite ${user.displayName}](${link})`)

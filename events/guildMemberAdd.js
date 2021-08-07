@@ -6,7 +6,10 @@ module.exports = {
     active: true,
     run: async (e, vars) => {
         let settings = await getSettings(e.guild.id, vars)
-        if(!settings.joinMessage || !settings.joinMessageChannel || (!settings.joinMessageIfBot && e.user.bot)) return
+
+        const executeIfBot = settings.joinMessageIfBot.toString().toLowerCase() === "true"
+        
+        if(!settings.joinMessage || !settings.joinMessageChannel || (!executeIfBot && e.user.bot)) return
 
         let channel = e.guild.channels.cache.get(settings.joinMessageChannel.replace('<#', '').replace('>', ''))
 

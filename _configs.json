@@ -123,7 +123,7 @@
             },
             "joinMessageIfBot": {
                 "value": true,
-                "desc": "If yes or no (true or false) join message system works if the joiner is a bot",
+                "desc": "If yes or no (can only be `true` or `false`) join message system works if the joiner is a bot",
                 "modifiable": true
             },
             "leaveMessageChannel": {
@@ -140,7 +140,7 @@
             },
             "leaveMessageIfBot": {
                 "value": true,
-                "desc": "If yes or no (true or false) leave message system works if the leaver is a bot",
+                "desc": "If yes or no (can only be `true` or `false`) leave message system works if the leaver is a bot",
                 "modifiable": true
             }
         }

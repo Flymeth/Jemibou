@@ -3,6 +3,8 @@ module.exports = {
     run: async (e, vars, args, settings) => {
         const guild = e.guild
 
+        if(!e.guild.me.permissions.has("MANAGE_GUILD")) return e.reply("I need to have the `MANAGE_GUILD` permission!").then(msg => vars.setEndMessage(msg, "🛠", [e]))
+
         let channels = guild.channels.cache
         const stringChannelsCount = `Text: ${channels.filter(c => c.type === 'text').size}\nVoice: ${channels.filter(c => c.type === 'voice').size}\nCategory: ${channels.filter(c => c.type === 'category').size}`
         const channelTypes = {

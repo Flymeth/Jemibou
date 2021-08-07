@@ -1,3 +1,14 @@
+# 1.4.2
+> ## sorry:
+> - 1.4.1 was the buggest version of jemibou ^^
+> ## bugs:
+> - get parameter in-server errors
+> - `invite`: send now the correct invitation link
+> - `joinMessageIfBot` & `leaveMessageIfBot` now are working
+> - fixed many other bugs
+
+---
+
 # 1.4.1
 > ## new settings features:
 > - New settings, settings notation & settings variables (`settings list` for more informations)
