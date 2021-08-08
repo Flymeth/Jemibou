@@ -1,11 +1,13 @@
 .hero {
-    min-height: 80vh;
+    min-height: 75vh;
     background-color: var(--bg-hero);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     position: relative;
+
+    text-align: center;
 }
 .hero > * {
     margin: 7.5pt 0;

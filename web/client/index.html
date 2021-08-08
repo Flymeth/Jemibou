@@ -19,6 +19,9 @@
     </div>
 
     <div class="indev">
+        <div class="cross clickEvent" data-classTo=".indev">
+            <i class="fas fa-times"></i>
+        </div>
         <p>You're viewing a preview version of the website. So if there isn't a lot of content or if there are some bugs, it's totally normal.</p>
     </div>
 
@@ -86,5 +89,23 @@
         <p>This bot is my biggest project in javascript. I learned a lot of things with it: like how to push with git, how to separate each bot's command in differents files, and more...</p>
         <p>If you want to learn more about me, i've my own website that you can reach by <a href="https://flymeth.net" target="_Flymeth">clicking here</a>!</p>
     </main>
+
+    <script src="https://kit.fontawesome.com/c2bce3a9f7.js" crossorigin="anonymous"></script>
+
+    <script>
+        // For each elements with class "clickEvent":
+        document.querySelectorAll(".clickEvent").forEach(el => {
+            
+            // Add them a click event:
+            el.addEventListener('click', (e) => {
+                const queryAddClass = el.getAttribute('data-classTo').split(' ').join('').split(',')
+
+                if(!queryAddClass) return
+                queryAddClass.forEach(query => {
+                    document.querySelectorAll(query).forEach(q => q.classList.add('clicked'))
+                })
+            })
+        })
+    </script>
 </body>
 </html>

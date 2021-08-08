@@ -66,4 +66,4 @@ for(let event of events) {
 }
 
 // SERVER
-// server.startSrv()
+server.startSrv(vars)

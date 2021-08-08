@@ -2,7 +2,6 @@ const http = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
-const {getBotInformations} = require('../../main')
 
 let url404 = `
 <!DOCTYPE html>
@@ -70,7 +69,7 @@ let url404 = `
 </html>
 `
 
-function setupServer(close) {
+function setupServer(close, vars) {
     const secureOptions = {
         key: fs.readFileSync(serverProps.secures_options.prvtKey),
         cert: fs.readFileSync(serverProps.secures_options.cert)
@@ -124,7 +123,7 @@ function setupServer(close) {
                     }
 
                     if(args) {
-                        const infos  = getBotInformations()
+                        const infos  = vars
 
                         for(let v of args) {
                             let path = [...v.path]
@@ -169,7 +168,5 @@ function setupServer(close) {
     })
 }
 
-module.exports.startSrv = () => setupServer()
+module.exports.startSrv = (vars) => setupServer(false, vars)
 module.exports.stopSrv = () => setupServer(true)
-
-setupServer()

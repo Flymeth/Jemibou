@@ -1,5 +1,14 @@
-@media screen and (max-width: 455px) {
+@media screen and (max-width: 520px) {
     header nav {
         justify-content: stretch;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    h1,h2,h3,h4,h5,h6 {
+        font-size: x-large;
+    }
+    table {
+        font-size: xx-small;
     }
 }
