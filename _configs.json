@@ -13,7 +13,7 @@
         "lastestPath": "./logs/lastest.log",
         "savedPath": "./logs/saved/",
         "logDate": true,
-        "active": false,
+        "active": true,
         "embedColor": "#0046c7",
         "changelogPath": "./changelog.md"
     },

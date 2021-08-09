@@ -31,9 +31,11 @@ module.exports = {
             return e.channel.send(embed).then(msg => vars.setEndMessage(msg, "↗"))
         }
 
+        const reason = args.join(' ')
         try {
             await user.send("You have been kicked by <@" + e.author.id + ">.\nReason:```" + (reason ? reason : undefined) + "```")
         } catch (err) {
+            vars.log(err)
             e.reply('I can not send message to this user...')
         }
         try {
