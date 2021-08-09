@@ -1,10 +1,21 @@
+@media screen and (max-width: 770px) {
+    main .content-links {
+        grid-template-columns: repeat(2, 25%);
+    }
+}
+
 @media screen and (max-width: 520px) {
     header nav {
         justify-content: stretch;
     }
+
+    main .content-links {
+        grid-template-columns: repeat(1, 100%);
+        place-items: start;
+    }
 }
 
-@media screen and (max-width: 370px) {
+@media screen and (max-width: 480px) {
     h1,h2,h3,h4,h5,h6 {
         font-size: x-large;
     }

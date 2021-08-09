@@ -41,8 +41,11 @@ main thead {
 }
 
 main tbody tr {
+    border: 0 solid #fff;
+    border-width: .5pt 0;
     transition: all .25s;
 }
+main tbody tr:first-of-type, main tbody tr:last-of-type {border-width: 0;} 
 main tbody tr:hover {
     background-color: rgba(255,255,255, .2);
     box-shadow: inset 0 0 10pt rgba(0,0,0, .5);
@@ -62,4 +65,15 @@ main .head img {
 main .head h2 {
     font-style: italic;
     font-size: 15pt;
+}
+
+/* links */
+.content-links {
+    display: grid;
+    padding: 15pt;
+    align-items: center;
+    justify-items: center;
+
+    grid-template-columns: repeat(5, calc(75% / 5));
+    grid-gap: 7.5pt;
 }

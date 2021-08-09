@@ -51,7 +51,8 @@ module.exports = {
 
         for(let info in userInformations) {
             if(!userInformations[info]) continue
-            let msg = (userInformations[info].startsWith("```") ? userInformations[info] : "```" + userInformations[info] + "```")
+            const content = userInformations[info].toString()
+            let msg = (content.startsWith("```") ? content : "```" + content + "```")
             embed.addField(info, msg)
         }
 

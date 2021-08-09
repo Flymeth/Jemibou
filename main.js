@@ -38,9 +38,22 @@ const vars = {
      * @param {Array} otherMessages Other messages to delete
      * @returns {Boolean} True: succefull, else False
      */
-    setEndMessage: (message, emote, otherMessages) => doneMsg(message, vars, emote, otherMessages)
+    setEndMessage: (message, emote, otherMessages) => doneMsg(message, vars, emote, otherMessages),
+    commands: []
 }
 module.exports.getBotInformations = () => {return vars}
+
+// commands
+try {
+    var commands = fs.readdirSync(configs.commandsPath)
+} catch (e) {
+    vars.log(e)
+}
+for(let cmd of commands) {
+    if(!cmd.endsWith(".js") || cmd.startsWith('_')) continue
+    const mdl = require(configs.commandsPath + cmd)
+    if(mdl.active) vars.commands.push(mdl)
+}
 
 // events
 try {

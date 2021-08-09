@@ -5,8 +5,12 @@ module.exports = {
     description: "Set a new settings' channel (if there isn't argument, it'll set the settings' channel on the current text channel)",
     needPerms: false,
     premium: "vip+",
+    needPerms: {
+        bot: [],
+        user: ["MANAGE_GUILD"]
+    },
     run: (e, vars, args) => {
-        if(!args[0]){
+        if(!args[0]) {
             var channel = e.channel
         }else {
             var channel = e.mentions.channels.first() || e.guild.channels.cache.get(args[0]) || e.guild.channels.cache.find(c => c.name.toLowerCase() === args[0].toLowerCase() && c.isText())

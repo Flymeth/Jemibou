@@ -1,5 +1,4 @@
 /* FONTS */
-@import url('https://db.onlinewebfonts.com/c/161edcf1defa00caa0730d5eb8de8bbc?family=Uni+Sans+Heavy+CAPS');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
 /* CSS */
@@ -9,6 +8,17 @@
 @import 'main.css';
 
 @import '_medias.css';
+
+/* DISCORD FONT */
+@font-face {
+    font-family: "Uni Sans Heavy";
+    src: url('../fonts/Uni Sans Heavy/Uni\ Sans\ Heavy\ Italic.otf') format("opentype");
+}
+/* MOSK FONT */
+@font-face {
+    font-family: "Mosk";
+    src: url("../fonts/Mosk/Mosk\ Bold\ 700.ttf") format("truetype");
+}
 
 *, ::before, ::after {
     padding: 0;
@@ -35,8 +45,11 @@ body {
 
     min-height: 100vh;
 }
-h1,h2,h3,h4,h5,h6, button {
-    font-family: "Uni Sans Heavy CAPS", sans-serif;
+h1,h2,h3, button {
+    font-family: "Uni Sans Heavy", "Mosk", sans-serif;
+}
+h4,h5,h6 {
+    font-family: "Mosk", "Uni Sans Heavy", sans-serif;
 }
 
 a {

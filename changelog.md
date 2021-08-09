@@ -1,3 +1,15 @@
+# 1.5.0
+> ## commands:
+> - font: get custom font for your discord channels!
+> - `settings get`: doesn't require extra perm
+> ## bugs:
+> - `infos user`: command error if the user is a bot
+> - `settings set`: now require `MANAGE_GUILD`permission
+> ## features:
+> - `links`: rovelstars link added
+
+---
+
 # 1.4.2
 > ## sorry:
 > - 1.4.1 was the buggest version of jemibou ^^

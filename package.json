@@ -1,6 +1,6 @@
 {
   "name": "jemibou",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "Robot discord avec de nombreuse fonctionnalitées",
   "main": "main.js",
   "scripts": {

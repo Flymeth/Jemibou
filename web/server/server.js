@@ -141,7 +141,7 @@ function setupServer(close, vars) {
                                 }
                                 if(!value) break
                             }
-
+                            
                             if(!value) v.value = "undefined"
                             else {
                                 if(typeof value === "object") v.value = JSON.stringify(value)

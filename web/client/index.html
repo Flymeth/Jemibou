@@ -52,8 +52,7 @@
         <h1 id="desc">What's Jemibou ?</h1>
         <p>Jemibou is a cool discord bot with a lot of functionnality!</p>
         <h1 id="cmds">Commands</h1>
-        <p>This is the principals commands</p>
-        <table>
+        <table class="commands">
             <thead>
                 <tr>
                     <th>command</th>
@@ -62,21 +61,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>help</td>
-                    <td>Get the list of every commands.</td>
-                    <td>[command] to show more informations about one</td>
-                </tr>
-                <tr>
-                    <td>kick</td>
-                    <td>Kick a member of the server.</td>
-                    <td>[member] &lt;reason&gt;</td>
-                </tr>
-                <tr>
-                    <td>ban</td>
-                    <td>Ban a member of the server.</td>
-                    <td>[member] &lt;reason&gt;</td>
-                </tr>
             </tbody>
         </table>
 
@@ -88,10 +72,17 @@
         <p>A little web developper witch loves coding. I use html, css, javascript (native & nodejs) and python (not a lot).</p>
         <p>This bot is my biggest project in javascript. I learned a lot of things with it: like how to push with git, how to separate each bot's command in differents files, and more...</p>
         <p>If you want to learn more about me, i've my own website that you can reach by <a href="https://flymeth.net" target="_Flymeth">clicking here</a>!</p>
+    
+        <h1 id="more">Find me on</h1>
+        <div class="content-links">
+            <a href="https://top.gg/bot/$client.user.id;" target="_links"><button>top.gg</button></a>
+            <a href="https://discord.rovelstars.com/bots/$client.user.id;" target="_links"><button>rovelstars</button></a>
+            <a href="https://discord.gg/B6cGv6hyHR" target="_links"><button>discord</button></a>
+            <a href="https://github.com/Flymeth/jemibou" target="_links"><button>github</button></a>
+        </div>
     </main>
 
     <script src="https://kit.fontawesome.com/c2bce3a9f7.js" crossorigin="anonymous"></script>
-
     <script>
         // For each elements with class "clickEvent":
         document.querySelectorAll(".clickEvent").forEach(el => {
@@ -106,6 +97,25 @@
                 })
             })
         })
+
+        function setTable(commands) {
+            const body = document.querySelector('table.commands > tbody')
+
+            for(let cmd of commands.sort((a, b) => b.name - a.name)) {
+                if(!cmd.active || cmd.ownersOnly) continue
+
+                const infos = [cmd.name, cmd.description, cmd.arguments]
+                const tr = document.createElement('tr')
+                for(let i of infos) {
+                    const td = document.createElement('td')
+                    td.innerText = i || "/"
+                    tr.appendChild(td)
+                }
+                body.appendChild(tr)
+            }
+        }
+        const commands = $commands;
+        setTable(commands)
     </script>
 </body>
 </html>
