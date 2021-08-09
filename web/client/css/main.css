@@ -14,6 +14,16 @@ main p {
     line-height: 150%;
 }
 
+main video {
+    border-radius: 5pt;
+    width: 100%;
+    max-width: 450pt;
+    margin: 15pt auto;
+    display: block;
+    border: 1.5pt solid #fff;
+    box-shadow: 0 15pt 20pt rgba(0, 0, 0, 0.1);
+}
+
 main table {
     border-radius: 15pt;
     box-shadow: 0 15pt 20pt rgba(0, 0, 0, 0.1);
