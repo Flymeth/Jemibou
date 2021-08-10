@@ -18,14 +18,14 @@
         </a>
     </div>
 
-    <div class="indev">
+    <div class="indev no-select">
         <div class="cross clickEvent" data-classTo=".indev">
             <i class="fas fa-times"></i>
         </div>
         <p>You're viewing a preview version of the website. So if there isn't a lot of content or if there are some bugs, it's totally normal.</p>
     </div>
 
-    <header>
+    <header class="no-select">
         <div class="top">
             <img src="./assets/logo.png" alt="Logo Jemibou v$package.version;">
             <h1>Jemibou <span class="version">v$package.version;</span></h1>
@@ -43,6 +43,19 @@
     <div class="hero">
         <h1>Welcome on the Jemibou's website!</h1>
         <p>A powerfull discord bot with a lot of functionnality</p>
+
+        <div class="uptime">
+            <h3>Uptime since <span data-uptime="days"></span> days, <span data-uptime="hours"></span> hours <span data-uptime="minutes"></span> minutes and <span data-uptime="seconds"></span> seconds!</h3>
+        </div>
+
+        <div class="infos no-select">
+            <div class="servers">
+                <p><span class="count">$client.guilds.cache.size;</span> servers</p>
+            </div>
+            <div class="users">
+                <p><span class="count">$client.users.cache.size;</span> users</p>
+            </div>
+        </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 175">
         <path fill="var(--bg-hero)" fill-opacity="1" d="M0,128L48,112C96,96,192,64,288,74.7C384,85,480,139,576,149.3C672,160,768,128,864,112C960,96,1056,96,1152,101.3C1248,107,1344,117,1392,122.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
@@ -117,6 +130,28 @@
         }
         const commands = $commands;
         setTable(commands)
+        
+        let uptime = $client.uptime;
+        setInterval(() => {
+            uptime+= 4
+            displayTime()
+        });
+
+        function displayTime() {
+            const date = new Date(uptime)
+            const time = {
+                seconds: date.getSeconds(),
+                minutes: date.getMinutes(),
+                hours: date.getHours()-1,
+                days: Math.floor(date.getHours() / 24)
+            }
+
+            for(let num in time) {
+                document.querySelectorAll(`*[data-uptime=${num}]`).forEach(element => {
+                    element.innerText = time[num]
+                })
+            }
+        }
     </script>
 </body>
 </html>

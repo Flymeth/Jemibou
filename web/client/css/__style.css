@@ -17,7 +17,7 @@
 /* MOSK FONT */
 @font-face {
     font-family: "Mosk";
-    src: url("../fonts/Mosk/Mosk\ Bold\ 700.ttf") format("truetype");
+    src: url("../fonts/Mosk/Mosk\ Normal\ 400.ttf") format("truetype");
 }
 
 *, ::before, ::after {
@@ -32,6 +32,7 @@ html {
     --bg-header: #1f1f1f;
     --bg-hero: #5e5e5e;
     --bg-body: #2f2f2f;
+    --extra-color: #b0d073;
     --header-maxHeight: 75pt;
     --buttons-animDuration: .35s;
 
@@ -50,6 +51,12 @@ h1,h2,h3, button {
 }
 h4,h5,h6 {
     font-family: "Mosk", "Uni Sans Heavy", sans-serif;
+}
+button, .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 a {

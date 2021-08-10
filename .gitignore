@@ -9,4 +9,4 @@ token.json
 _settings.json
 
 # This file is useless for you
-logs/saved/*
+logs/saved/*.log
