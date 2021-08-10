@@ -1,5 +1,5 @@
 .hero {
-    min-height: 75vh;
+    min-height: 77.5vh;
     background-color: var(--bg-hero);
     display: flex;
     align-items: center;
@@ -19,6 +19,7 @@
 .hero .uptime h3 {
     font-family: "Mosk";
     font-style: italic;
+    font-size: 15pt;
 }
 .hero .uptime h3 span {
     text-shadow: 0 2.5pt 7.5pt #000;
@@ -27,7 +28,7 @@
 
 .hero .infos {
     position: absolute;
-    bottom: 7.5%;
+    bottom: 5%;
     left: 0;
     width: 100%;
     

@@ -2,6 +2,7 @@ const http = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
+const {getSettings} = require('../../commands/settings')
 
 let url404 = `
 <!DOCTYPE html>
@@ -68,7 +69,7 @@ let url404 = `
 </body>
 </html>
 `
-
+let srv;
 function setupServer(close, vars) {
     const secureOptions = {
         key: fs.readFileSync(serverProps.secures_options.prvtKey),
@@ -79,7 +80,7 @@ function setupServer(close, vars) {
         return srv.close()
     }
 
-    var srv = http.createServer(secureOptions, (req,res) => {
+    srv = http.createServer(secureOptions, (req,res) => {
         let url = req.url.split('/')
         url.shift()
 
@@ -87,13 +88,15 @@ function setupServer(close, vars) {
             url[url.length-1] = 'index'
         }
 
-        let extention = url[url.length-1].split('.')[1]
+        const urlInfos = new URL('http://' + req.headers.host + "/" + url.join('/'))
+
+        let path = urlInfos.pathname
+        let extention = path.split('.')[1]
         if(!extention) {
-            url[url.length-1] = url[url.length-1] + '.' + serverProps.defaultExtention.replace('.','')
+            path+= '.' + serverProps.defaultExtention.replace('.','')
         }
-        
-        const path = decodeURI(url.join('/'))
-        fs.readFile(serverProps.defaultHtmlPath + path, async (err, data) => {
+
+        fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
             if(err) {
                 res.writeHead(404)
                 if(serverProps["404File"] == null || !serverProps["404File"]) {
@@ -111,6 +114,7 @@ function setupServer(close, vars) {
 
                 const canUseVars = req.headers.accept.includes("text/html")
                 if(canUseVars) {
+
                     data = data.toString()
 
                     let args = []
@@ -123,7 +127,15 @@ function setupServer(close, vars) {
                     }
 
                     if(args) {
-                        const infos  = vars
+                        const infos = {...vars}
+
+                        if(urlInfos.pathname === '/settings') {
+                            const id = urlInfos.searchParams.get('guild')
+                            if(id) {
+                                const params = await getSettings(id, vars, true)
+                                if(params.channelID) infos.guildSettings = JSON.stringify(params)
+                            }
+                        }
 
                         for(let v of args) {
                             let path = [...v.path]
@@ -158,6 +170,7 @@ function setupServer(close, vars) {
                 res.writeHead(200, {
                     "Content-Type": accepts || "*/*"
                 })
+
                 res.write(data)
             }
             res.end()

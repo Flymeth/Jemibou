@@ -2,11 +2,22 @@ main {
     padding: 5pt 10pt;
 }
 
-main h1 {
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6
+{
     margin: 15pt 0 5pt;
     text-decoration: underline;
 }
-main h1::before {
+main h1::before,
+main h2::before,
+main h3::before,
+main h4::before,
+main h5::before,
+main h6::before {
     content: "# ";
 }
 

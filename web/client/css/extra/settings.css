@@ -1,0 +1,25 @@
+form {
+    margin-top: 25pt;
+}
+
+form input {
+    padding: 10pt 5pt;
+    border-radius: 5pt;
+    border: 2.5pt solid #fff;
+    background-color: transparent;
+    outline: none;
+    text-transform: uppercase;
+    box-shadow: 0 5pt 15pt #000;
+    font-family: "Noto Sans TC";
+    font-size: large;
+    text-align: center;
+}
+
+form .inputs {
+    margin-bottom: 10pt;
+}
+
+form button {
+    display: block;
+    margin: 0 auto;
+}

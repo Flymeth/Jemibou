@@ -18,7 +18,7 @@ module.exports = {
             "Invite me on your server": `[Click to access](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot%20applications.commands)`,
             "discord support server": `[click to access](https://discord.gg/B6cGv6hyHR)`,
             "Top.gg page": `[Click to view my top.gg page](https://top.gg/bot/${vars.client.user.id})`,
-            "Rovelstars page": `[Click to view my rovelstars page](https://dscrdly.com/b/jemibou)`,
+            "Discord list page": `[Click to view my discord list page](https://dscrdly.com/b/jemibou)`,
             "Github repository": "https://github.com/Flymeth/jemibou"
         }
 

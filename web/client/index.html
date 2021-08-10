@@ -37,6 +37,7 @@
             <a href="#me">Author</a>
             <a href="#more">More</a>
             <a href="$package.homepage;" target="Github">Github</a>
+            <a href="./settings">Your settings</a>
         </nav>
     </header>
 
@@ -45,7 +46,7 @@
         <p>A powerfull discord bot with a lot of functionnality</p>
 
         <div class="uptime">
-            <h3>Uptime since <span data-uptime="days"></span> days, <span data-uptime="hours"></span> hours <span data-uptime="minutes"></span> minutes and <span data-uptime="seconds"></span> seconds!</h3>
+            <h3>Up since <span data-uptime="days"></span> days, <span data-uptime="hours"></span> hours <span data-uptime="minutes"></span> minutes and <span data-uptime="seconds"></span> seconds!</h3>
         </div>
 
         <div class="infos no-select">
@@ -90,7 +91,7 @@
         <h1 id="more">Find me on</h1>
         <div class="content-links">
             <a href="https://top.gg/bot/$client.user.id;" target="_links"><button>top.gg</button></a>
-            <a href="https://discord.rovelstars.com/bots/$client.user.id;" target="_links"><button>rovelstars</button></a>
+            <a href="https://discord.rovelstars.com/bots/$client.user.id;" target="_links"><button>discord list</button></a>
             <a href="https://discord.gg/B6cGv6hyHR" target="_links"><button>discord</button></a>
             <a href="https://github.com/Flymeth/jemibou" target="_links"><button>github</button></a>
         </div>
@@ -125,6 +126,7 @@
                     td.innerText = i || "/"
                     tr.appendChild(td)
                 }
+                tr.children[0].classList.add('notranslate')
                 body.appendChild(tr)
             }
         }
@@ -143,7 +145,7 @@
                 seconds: date.getSeconds(),
                 minutes: date.getMinutes(),
                 hours: date.getHours()-1,
-                days: Math.floor(date.getHours() / 24)
+                days: Math.floor(uptime / 86400000)
             }
 
             for(let num in time) {
@@ -152,6 +154,9 @@
                 })
             }
         }
+
+        const infos = $settings;
+        console.log(infos);
     </script>
 </body>
 </html>

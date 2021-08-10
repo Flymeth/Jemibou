@@ -131,6 +131,7 @@ module.exports = {
 module.exports.getSettings = async (guildId, vars, getChannelId) => {
     let findedSettings = {}
     for(let setting in settings.list) {
+        if(!settings.list[setting].modifiable) continue
         findedSettings[setting] = settings.list[setting].value
     }
 
