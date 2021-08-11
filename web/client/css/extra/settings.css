@@ -3,7 +3,7 @@ form {
 }
 
 form input {
-    padding: 10pt 5pt;
+    padding: 10pt 0;
     border-radius: 5pt;
     border: 2.5pt solid #fff;
     background-color: transparent;
@@ -13,6 +13,8 @@ form input {
     font-family: "Noto Sans TC";
     font-size: large;
     text-align: center;
+    color: var(--extra-color);
+    font-weight: bolder;
 }
 
 form .inputs {

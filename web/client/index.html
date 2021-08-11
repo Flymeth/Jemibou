@@ -9,6 +9,21 @@
     <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
 
     <link rel="stylesheet" href="./css/__style.css">
+
+    <meta name="description" content="$package.description;">
+
+    <meta name="theme-color" content="var(--extra-color)">
+    <meta name="og:title" content="JEMIBOU - v$package.version;">
+    <meta name="og:type" content="website">
+    <meta name="og:description" content="$package.description;">
+
+    <meta name="og:image" content="./assets/logo.png">
+    <meta name="og:image:width" content="1024">
+    <meta name="og:image:height" content="1024">
+    <meta name="og:image:type" content="image/png">
+    <meta name="og:image:alt" content="Logo Jemibou">
+
+    <meta name="og:site_name" content="jemibou.tk">
 </head>
 <body>
 
@@ -64,7 +79,7 @@
 
     <main>
         <h1 id="desc">What's Jemibou ?</h1>
-        <p>Jemibou is a cool discord bot with a lot of functionnality!</p>
+        <p>$package.description;</p>
         <video src="./assets/videos/jemibou presentation.mp4" autoplay loop preload="auto" muted></video>
         <h1 id="cmds">Commands</h1>
         <table class="commands">
@@ -155,7 +170,7 @@
             }
         }
 
-        const infos = $settings;
+        const infos = $package;
         console.log(infos);
     </script>
 </body>

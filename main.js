@@ -9,7 +9,7 @@ const server = require('./web/server/server')
 
 const token = process.env.TOKEN || require('./token.json').token
 
-const client = new Discord.Client({})
+const client = new Discord.Client()
 
 client.login(token)
 

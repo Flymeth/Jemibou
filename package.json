@@ -1,7 +1,7 @@
 {
   "name": "jemibou",
-  "version": "1.5.0",
-  "description": "Robot discord avec de nombreuse fonctionnalitées",
+  "version": "1.5.2",
+  "description": "Jemibou est un robot discord possedant de nombreuse commande utile pour toute sorte de serveur discord!",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,9 +10,8 @@
   "author": "Flymeth",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.1"
+    "discord.js": "^12.5.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Flymeth/jemibou.git"

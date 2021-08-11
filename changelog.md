@@ -1,3 +1,12 @@
+# 1.5.2
+> ## commands:
+> - `infos server` doesn't longer require extra perms
+> - `pool` command added
+> ## infos:
+> - The website will be public soon: i just need to make it secure & fix 2/3 bugs :)
+
+---
+
 # 1.5.0
 > ## commands:
 > - font: get custom font for your discord channels!

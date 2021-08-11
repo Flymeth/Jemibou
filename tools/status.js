@@ -6,6 +6,10 @@ module.exports.next = async (vars) => {
             "type": "WATCHING"
         },
         {
+            "text": "mention me to get my prefix!",
+            "type": "PLAYING"
+        },
+        {
             "text": vars.client.guilds.cache.size + " servers",
             "type": "COMPETING"
         }

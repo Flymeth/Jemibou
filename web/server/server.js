@@ -140,9 +140,11 @@ function setupServer(close, vars) {
                         for(let v of args) {
                             let path = [...v.path]
                             let value = infos
+
                             while(path.length) {
                                 const goTo = path.shift().replace('()', '')
                                 value = value[goTo]
+
                                 if(typeof value === "function") {
                                     try {
                                         value = await value()

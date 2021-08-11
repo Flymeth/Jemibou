@@ -3,8 +3,6 @@ module.exports = {
     run: async (e, vars, args, settings) => {
         const guild = e.guild
 
-        if(!e.guild.me.permissions.has("MANAGE_GUILD")) return e.reply("I need to have the `MANAGE_GUILD` permission!").then(msg => vars.setEndMessage(msg, "🛠", [e]))
-
         let channels = guild.channels.cache
         const stringChannelsCount = `Text: ${channels.filter(c => c.type === 'text').size}\nVoice: ${channels.filter(c => c.type === 'voice').size}\nCategory: ${channels.filter(c => c.type === 'category').size}`
         const channelTypes = {
@@ -70,12 +68,15 @@ module.exports = {
             "Roles": stringRolesCount + '\n' + stringRoles
         }
 
-        const invites = await guild.fetchInvites()
-        let invite = invites.find(inv => !inv.maxAge)
-        if(!invite) invite = await guild.channels.cache.filter(c => c.type === 'text').first().createInvite({reason: 'infos server command', maxAge: 300})
+        let invite;
+        if(e.guild.me.permissions.has('MANAGE_GUILD')) {
+            invite = await guild.fetchInvites()
+            invite = invite.find(inv => !inv.maxAge)
+        }
+        if(!invite && e.guild.me.permissions.has('CREATE_INSTANT_INVITE')) invite = await guild.channels.cache.filter(c => c.type === 'text').first().createInvite({reason: 'infos server command', maxAge: 300})
 
         const embed = vars.newEmbed()
-        .setAuthor(`Informations about ${guild.name}:`, guild.iconURL() ? guild.iconURL({format: 'png', size: 1024, dynamic: true}) : "", invite.url)
+        .setAuthor(`Informations about ${guild.name}:`, guild.iconURL() ? guild.iconURL({format: 'png', size: 1024, dynamic: true}) : "", invite?.url)
         .setThumbnail(guild.banner)
         .setImage(guild.iconURL({format: 'png', size: 1024, dynamic: true}))
         for(let i in informations) {

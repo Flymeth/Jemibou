@@ -119,7 +119,11 @@ module.exports = {
                     .setColor(cmd.color || message.guild.me.displayColor || "RANDOM")
                     vars.newEmbed = () => {return embed}
 
-                    cmd.run(message, vars, args, settings)
+                    while(args[0] === "") {
+                        args.shift()
+                    }
+
+                    await cmd.run(message, vars, args, settings)
                 }
             }
 
