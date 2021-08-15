@@ -1,4 +1,4 @@
-const https = require('https')
+const https = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps

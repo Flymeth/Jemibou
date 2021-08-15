@@ -4,7 +4,7 @@
 > ## bugs/changes:
 > - `pool` arguments changed (use `.h pool` for more informations)
 > ## website:
-> - The website is now online: check it [here](https://jemibou.tk)!
+> - The website is now online: check it [here](http://jemibou.tk)!
 
 ---
 
