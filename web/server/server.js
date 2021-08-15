@@ -96,6 +96,8 @@ function setupServer(close, vars) {
             path+= '.' + serverProps.defaultExtention.replace('.','')
         }
 
+        res.write("ERR")
+
         fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
             if(err) {
                 res.writeHead(404)
