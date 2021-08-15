@@ -92,18 +92,18 @@
 
             "prefix": {
                 "value": ".",
-                "desc": "Change the bot's prefix in your server",
+                "desc": "The bot's prefix in your server",
                 "modifiable": true,
                 "isParagraph": true
             },
             "bannedWords": {
                 "value": [],
-                "desc": "Set words as banned in the server.",
+                "desc": "The banned words of your server.",
                 "modifiable": true
             },
             "joinMessageChannel": {
                 "value": "",
-                "desc": "Set the channel where join message will be send",
+                "desc": "the channel where join message will be send",
                 "modifiable": true
             },
             "joinMessage": {
@@ -122,7 +122,7 @@
             },
             "joinAutoRoles": {
                 "value": [],
-                "desc": "When a user join a guild, you can automatic attribute it some roles",
+                "desc": "Roles that are added to the user that joined",
                 "modifiable": true
             },
             "joinMessageIfBot": {
@@ -132,7 +132,7 @@
             },
             "leaveMessageChannel": {
                 "value": "",
-                "desc": "Set the channel where leave message will be send",
+                "desc": "The channel where leave message will be send",
                 "modifiable": true
             },
             "leaveMessage": {

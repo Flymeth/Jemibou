@@ -87,7 +87,6 @@
                 <tr>
                     <th>command</th>
                     <th>description</th>
-                    <th>arguments</th>
                 </tr>
             </thead>
             <tbody>
@@ -112,7 +111,15 @@
         </div>
     </main>
 
+    <footer>
+        <div class="changelog">
+            <h1 class="title">ChangeLog:</h1>
+            <div class="content"></div>
+        </div>
+    </footer>
+
     <script src="https://kit.fontawesome.com/c2bce3a9f7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
     <script>
         // For each elements with class "clickEvent":
         document.querySelectorAll(".clickEvent").forEach(el => {
@@ -134,7 +141,7 @@
             for(let cmd of commands.sort((a, b) => b.name - a.name)) {
                 if(!cmd.active || cmd.ownersOnly) continue
 
-                const infos = [cmd.name, cmd.description, cmd.arguments]
+                const infos = [cmd.name, cmd.description]
                 const tr = document.createElement('tr')
                 for(let i of infos) {
                     const td = document.createElement('td')
@@ -149,18 +156,19 @@
         setTable(commands)
         
         let uptime = $client.uptime;
+        displayTime()
         setInterval(() => {
-            uptime+= 4
+            uptime+= 1000
             displayTime()
-        });
+        }, 1000);
 
         function displayTime() {
             const date = new Date(uptime)
             const time = {
                 seconds: date.getSeconds(),
                 minutes: date.getMinutes(),
-                hours: date.getHours()-1,
-                days: Math.floor(uptime / 86400000)
+                hours: date.getHours(),
+                days: Math.floor(uptime / (1000*60*60*24))
             }
 
             for(let num in time) {
@@ -170,8 +178,15 @@
             }
         }
 
-        const infos = $package;
-        console.log(infos);
+        const changeLog = `$changelog;`
+        const block = document.querySelector('.changelog>.content')
+
+        const converter = new showdown.Converter({
+            'noHeaderId': "true"
+        })
+        const html = converter.makeHtml(changeLog.split(Infinity).join('`'));
+
+        block.innerHTML = html
     </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 650px) {
     header nav {
         justify-content: stretch;
     }
@@ -20,6 +20,6 @@
         font-size: x-large;
     }
     table {
-        font-size: xx-small;
+        font-size: small;
     }
 }

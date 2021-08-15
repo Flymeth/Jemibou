@@ -6,7 +6,7 @@ module.exports = {
     active: true,
     type: "usefull",
     color: "#b60bf4",
-    arguments: "<\"your question\"> <emote_1> <emote_2> [emote_3] ...",
+    arguments: "<\"your question\"> <\"option 1\"> <\"option 2\"> [\"option 3\"]... (max: 9)",
     deleteCommand: true,
     permissions: {
         bot: [],
@@ -16,31 +16,45 @@ module.exports = {
         let content = args.join(vars.configs.argumentsSeparator)
 
         args = content.split('\\"').join(Infinity).split('"')
-        while(args[0] === "") args.shift()
+
+        let newArgs = []
+        for(let a in args) {
+            if(a%2==0 || !args[a]) continue
+            newArgs.push(args[a].split(Infinity).join('"'))
+        }
+        args = newArgs
 
         const pool = args.shift()
         if(!pool) return e.reply("You need to indicate a pool question inside some quotes!")
-        
-        content = args.join('"')
-        const countainEmoji = /\p{Emoji}/u
-        const emojis = content.split(' ').filter(e => e.length == 2 && countainEmoji.test(e))
-        
-        if(!emojis || emojis.length < 2) return e.reply("You need to indicate 2 or more emote to react!")
+        if(!args || args.length < 2 || args.length > 9) return e.reply("Please indicate between 2 and 9 options for the pool!")
 
         const embed = vars.newEmbed()
-        .setTitle("Pool created by " + e.member.displayName + ":")
-        .setDescription(pool)
+        .setDescription("*created by " + e.author.toString() + "*")
+        .setTitle(pool)
         .setFooter("React with the reactions bellow to participate to the pool!")
 
-        e.channel.send(embed).then(p => {
-            for(let e of emojis) {
-                if(!e) continue
-                try {
-                    p.react(e)
-                } catch (err) {
-                    vars.log(err)
-                }
+        const emojiArray = [
+            "1️⃣",
+            "2️⃣",
+            "3️⃣",
+            "4️⃣",
+            "5️⃣",
+            "6️⃣",
+            "7️⃣",
+            "8️⃣",
+            "9️⃣"
+        ]
+
+        for(let option in args) {
+            embed.addField(`Option ${emojiArray[option]}:`, "> " + args[option])
+        }
+
+        e.channel.send(embed).then(msg => {
+            
+            for(let nb in args) {
+                msg.react(emojiArray[nb])
             }
+
         })
     }
 }

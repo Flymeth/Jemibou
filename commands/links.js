@@ -19,7 +19,8 @@ module.exports = {
             "discord support server": `[click to access](https://discord.gg/B6cGv6hyHR)`,
             "Top.gg page": `[Click to view my top.gg page](https://top.gg/bot/${vars.client.user.id})`,
             "Discord list page": `[Click to view my discord list page](https://dscrdly.com/b/jemibou)`,
-            "Github repository": "https://github.com/Flymeth/jemibou"
+            "Github repository": "https://github.com/Flymeth/jemibou",
+            "Website": "https://jemibou.tk"
         }
 
         for(let owner of vars.configs.owners) {

@@ -1,0 +1,24 @@
+footer {
+    padding: 15pt;
+    background-color: var(--bg-header);
+    z-index: 52;
+    border-radius: 15pt 15pt 0 0;
+}
+
+footer > * {
+    margin-bottom: 15vh;
+}
+
+.changelog .content {
+    border: 0 solid var(--extra-color);
+    border-left-width: 2.5pt;
+    padding: 5pt;
+    list-style-position: inside;
+    margin-top: 10pt;
+    border-radius: 2.5pt;
+    box-shadow: 0 .5pt 5pt var(--bg-body);
+}
+.changelog li {list-style-type: "- ";}
+.changelog .content h1, .changelog h2 {
+    margin-top: 5pt;
+}

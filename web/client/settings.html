@@ -43,7 +43,7 @@
         <form method="GET">
             <div class="inputs">
                 <label for="guildid">
-                    <input type="number" name="guild" id="guildid" placeholder="Enter your guild id">
+                    <input type="number" name="guild" id="guildid" placeholder="Enter your guild id" required>
                 </label>
             </div>
             <button type="submit">Show settings</button>
@@ -55,14 +55,13 @@
     </svg>
 
     <main>
-        <h2>Your settings</h2>
-        <p>Note: if the guild id is missing or unvalaible, the default settings will be show</p>
+        <h2>Default settings</h2>
+        <p>This is every settings that you can use for your server (here is the default value, to change them use .settings generate in your server)</p>
         <table>
             <thead>
                 <tr>
-                    <th>Setting name</th>
-                    <th>Description</th>
-                    <th>Current value</th>
+                    <th>Settings</th>
+                    <th>Values</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,6 +75,11 @@
         const defaultSettings = $configs.settings.list;
         const tbody = document.querySelector('tbody')
         
+        if(settings) {
+            document.querySelector('main>h2').innerText = "Your settings"
+            document.querySelector('main>p').innerText = "Settings channel ID: " + settings.channelID
+        }
+
         for(let setting in defaultSettings) {
             const obj = defaultSettings[setting]
             if(!obj.modifiable) continue
@@ -93,7 +97,6 @@
             }
 
             const infos = [
-                setting,
                 obj.desc,
                 value
             ]

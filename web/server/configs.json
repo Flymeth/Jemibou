@@ -1,9 +1,9 @@
 {
     "secures_options": {
         "cert": "./web/server/keys/cert.pem",
-        "prvtKey": "./web/server/keys/private.pem"
+        "key": "./web/server/keys/key.pem"
     },
-    "port": 80,
+    "port": 443,
     "404File": null,
     "defaultExtention": "html",
     "defaultHtmlPath": "./web/client/",

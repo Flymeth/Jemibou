@@ -10,3 +10,6 @@ _settings.json
 
 # This file is useless for you
 logs/saved/*.log
+
+# The server private keys
+web/server/keys

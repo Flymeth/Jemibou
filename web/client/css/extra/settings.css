@@ -1,5 +1,6 @@
 form {
     margin-top: 25pt;
+    width: 100%;
 }
 
 form input {
@@ -19,6 +20,7 @@ form input {
 
 form .inputs {
     margin-bottom: 10pt;
+    width: 100%;
 }
 
 form button {

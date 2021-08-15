@@ -1,3 +1,13 @@
+# 1.6.0
+> ## bot:
+> - Now the bot can't ping @everyone
+> ## bugs/changes:
+> - `pool` arguments changed (use `.h pool` for more informations)
+> ## website:
+> - The website is now online: check it [here](https://jemibou.tk)!
+
+---
+
 # 1.5.2
 > ## commands:
 > - `infos server` doesn't longer require extra perms

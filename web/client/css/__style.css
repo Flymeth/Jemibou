@@ -6,6 +6,7 @@
 @import '_extra.css';
 @import 'hero.css';
 @import 'main.css';
+@import 'footer.css';
 
 @import '_medias.css';
 
@@ -61,7 +62,7 @@ button, .no-select {
 
 a {
     text-decoration: none;
-    color: inherit;
+    color: var(--extra-color);
 }
 a:hover {
     text-decoration: underline;
@@ -112,4 +113,15 @@ button:hover {
 button:hover::before {
     left: 55%;
     transform: translateX(-50%);
+}
+
+code {
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    user-select: all;
+    padding: .5pt;
+    background-color: #fff;
+    color: #000;
+    font-weight: 600;
+    border-radius: 2.5pt;
 }

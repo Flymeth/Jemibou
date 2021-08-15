@@ -9,6 +9,7 @@ header {
 
     max-height: var(--header-maxHeight);
 }
+
 header .top {
     padding: 5pt;
     display: flex;
@@ -47,6 +48,7 @@ header a {
     margin: 0 2.5pt;
     transition: background-color .15s;
     white-space: nowrap;
+    color: inherit;
 }
 header a:hover {
     background-color: rgba(0, 0, 0, .5);

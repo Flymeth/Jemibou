@@ -9,10 +9,11 @@ const server = require('./web/server/server')
 
 const token = process.env.TOKEN || require('./token.json').token
 
-const client = new Discord.Client()
+const client = new Discord.Client({
+    disableMentions: "everyone"
+})
 
 client.login(token)
-
 const vars = {
     discord: Discord,
     client: client,

@@ -1,4 +1,4 @@
-const http = require('http')
+const https = require('https')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
@@ -72,7 +72,7 @@ let url404 = `
 let srv;
 function setupServer(close, vars) {
     const secureOptions = {
-        key: fs.readFileSync(serverProps.secures_options.prvtKey),
+        key: fs.readFileSync(serverProps.secures_options.key),
         cert: fs.readFileSync(serverProps.secures_options.cert)
     }
 
@@ -80,7 +80,7 @@ function setupServer(close, vars) {
         return srv.close()
     }
 
-    srv = http.createServer(secureOptions, (req,res) => {
+    srv = https.createServer(secureOptions, (req,res) => {
         let url = req.url.split('/')
         url.shift()
 
@@ -112,9 +112,8 @@ function setupServer(close, vars) {
                 }
             }else {
 
-                const canUseVars = req.headers.accept.includes("text/html")
+                const canUseVars = req.headers.accept?.includes("text/html")
                 if(canUseVars) {
-
                     data = data.toString()
 
                     let args = []
@@ -127,7 +126,8 @@ function setupServer(close, vars) {
                     }
 
                     if(args) {
-                        const infos = {...vars}
+                        var infos = {...vars}
+                        infos.changelog = fs.readFileSync('./changelog.md').toString().split('---').find(txt => txt.includes(vars.package.version)).split('`').join(Infinity)
 
                         if(urlInfos.pathname === '/settings') {
                             const id = urlInfos.searchParams.get('guild')
