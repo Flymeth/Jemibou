@@ -72,8 +72,8 @@ let url404 = `
 let srv;
 function setupServer(close, vars) {
     const secureOptions = {
-        key: fs.readFileSync(serverProps.secures_options.key),
-        cert: fs.readFileSync(serverProps.secures_options.cert)
+        key: process.env.KEY || fs.readFileSync(serverProps.secures_options.key),
+        cert: process.env.CERT || fs.readFileSync(serverProps.secures_options.cert)
     }
 
     if(close && srv) {
