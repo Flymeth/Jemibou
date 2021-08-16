@@ -80,7 +80,7 @@ function setupServer(close, vars) {
         return srv.close()
     }
 
-    srv = https.createServer(secureOptions, (req,res) => {
+    srv = https.createServer(secureOptions, (req, res) => {
         let url = req.url.split('/')
         url.shift()
 
@@ -98,7 +98,9 @@ function setupServer(close, vars) {
 
         fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
             if(err) {
-                res.writeHead(404)
+                res.writeHead(404, {
+                    "Content-Type": "*/*; charset=UTF-8"
+                })
                 if(serverProps["404File"] == null || !serverProps["404File"]) {
                     res.write(url404.replace('{{ err }}', err))
                 }else {
@@ -170,7 +172,7 @@ function setupServer(close, vars) {
 
                 let accepts = req.headers.accept.split(",").find(a => a.includes(path.split('.').pop()))
                 res.writeHead(200, {
-                    "Content-Type": accepts || "*/*"
+                    "Content-Type": (accepts || "*/*") + "; charset=UTF-8"
                 })
 
                 res.write(data)

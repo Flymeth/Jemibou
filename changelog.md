@@ -1,4 +1,4 @@
-# 1.6.1
+# 1.6.2
 > ## commands:
 > - `customfont` gets new fonts!
 > ## bugs:

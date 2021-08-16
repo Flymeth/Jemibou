@@ -57,7 +57,7 @@ module.exports.log = async (message, color, type, private, vars) => {
     
         try {
             for(let channel of channels.logs) {
-                let c = vars.client.channels.cache.get(channel)
+                let c = await vars.client.channels.cache.find(c => c.id === channel)
                 if(c && c.isText()) {
                     await c.send(embed)
                 }else {

@@ -15,9 +15,12 @@ module.exports = {
 
         try {
             for(let channel of vars.configs.channels.status) {
-                let c = vars.client.channels.cache.get(channel)
-                if(!c || !c.isText()) continue
-                c.send(embed)
+                let c = vars.client.channels.cache.find(c => c.id === channel)
+                if(c && c.isText()) {
+                    await c.send(embed)
+                }else {
+                    console.log("ERROR: the channel with the id `" + channel + "` is invalid!")
+                }
             }
         } catch (err) {
             vars.log(err);

@@ -20,6 +20,7 @@ module.exports.next = async (vars) => {
     try {
         vars.client.user.setActivity(status[statusState].text, {type: status[statusState].type})
     } catch (err) {
+        vars.log(err)
         return false
     }
 
