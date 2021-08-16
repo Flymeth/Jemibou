@@ -1,4 +1,4 @@
-const https = require('http')
+const https = require('https')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
@@ -96,8 +96,6 @@ function setupServer(close, vars) {
             path+= '.' + serverProps.defaultExtention.replace('.','')
         }
 
-        res.write("ERR")
-
         fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
             if(err) {
                 res.writeHead(404)
@@ -113,8 +111,8 @@ function setupServer(close, vars) {
                     })
                 }
             }else {
-
-                const canUseVars = req.headers.accept?.includes("text/html")
+                
+                const canUseVars = req.headers.accept?.includes("text")
                 if(canUseVars) {
                     data = data.toString()
 

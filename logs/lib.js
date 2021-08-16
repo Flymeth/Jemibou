@@ -52,14 +52,17 @@ module.exports.log = async (message, color, type, private, vars) => {
         const embed = new vars.discord.MessageEmbed()
     
         .setDescription(typeLog)
-        .setColor(color || log.embedColor || log.embedColor || "RANDOM")
+        .setColor(color || log.embedColor || "RANDOM")
         .setTimestamp()
     
         try {
             for(let channel of channels.logs) {
                 let c = vars.client.channels.cache.get(channel)
-                if(!c || !c?.isText()) continue
-                await c.send(embed)
+                if(c && c.isText()) {
+                    await c.send(embed)
+                }else {
+                    console.log("ERROR: the channel with the id `" + channel + "` is invalid!")
+                }
             }
         } catch (err) {
             console.log(err);

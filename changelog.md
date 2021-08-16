@@ -1,3 +1,12 @@
+# 1.6.1
+> ## commands:
+> - `customfont` gets new fonts!
+> ## bugs:
+> - Website is now working
+> - Minor bug fixed
+
+---
+
 # 1.6.0
 > ## bot:
 > - Now the bot can't ping @everyone

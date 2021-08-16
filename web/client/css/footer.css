@@ -16,7 +16,7 @@ footer > * {
     list-style-position: inside;
     margin-top: 10pt;
     border-radius: 2.5pt;
-    box-shadow: 0 .5pt 5pt var(--bg-body);
+    box-shadow: 0 .5pt 10pt var(--bg-body);
 }
 .changelog li {list-style-type: "- ";}
 .changelog .content h1, .changelog h2 {

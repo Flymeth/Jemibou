@@ -1,6 +1,6 @@
 {
   "name": "jemibou",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Jemibou est un robot discord possedant de nombreuse commande utile pour toute sorte de serveur discord!",
   "main": "main.js",
   "scripts": {
