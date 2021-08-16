@@ -30,7 +30,6 @@ module.exports = {
         }
         
         await vars.log('Bot turned to off', vars.configs.colors.invalid, "STATUS");
-        await vars.server.stopSrv()
         await vars.client.destroy()
     }
 }

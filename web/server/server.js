@@ -69,18 +69,13 @@ let url404 = `
 </body>
 </html>
 `
-let srv;
-function setupServer(close, vars) {
+
+function setupServer(vars) {
     const secureOptions = {
         key: process.env.KEY || fs.readFileSync(serverProps.secures_options.key),
         cert: process.env.CERT || fs.readFileSync(serverProps.secures_options.cert)
     }
-
-    if(close && srv) {
-        return srv.close()
-    }
-
-    srv = https.createServer(secureOptions, (req, res) => {
+    const srv = https.createServer(secureOptions, (req, res) => {
         let url = req.url.split('/')
         url.shift()
 
@@ -185,5 +180,4 @@ function setupServer(close, vars) {
     })
 }
 
-module.exports.startSrv = (vars) => setupServer(false, vars)
-module.exports.stopSrv = () => setupServer(true)
+module.exports.startSrv = (vars) => setupServer(vars)
