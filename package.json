@@ -1,6 +1,6 @@
 {
   "name": "jemibou",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Jemibou est un robot discord possedant de nombreuse commande utile pour toute sorte de serveur discord!",
   "main": "main.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "Flymeth",
   "license": "ISC",
   "dependencies": {
+    "@iamtraction/google-translate": "^1.1.2",
     "discord.js": "^12.5.3"
   },
   "repository": {

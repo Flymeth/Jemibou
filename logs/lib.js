@@ -61,7 +61,7 @@ module.exports.log = async (message, color, type, private, vars) => {
                 if(c && c.isText()) {
                     await c.send(embed)
                 }else {
-                    console.log("ERROR: the channel with the id `" + channel + "` is invalid!")
+                    console.log("[LOG]> ERROR: the channel with the id `" + channel + "` is invalid!")
                 }
             }
         } catch (err) {

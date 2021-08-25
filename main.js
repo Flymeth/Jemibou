@@ -6,6 +6,7 @@ const {log, saveLog} = require('./logs/lib')
 const assets = require('./_assets.json')
 const {doneMsg} = require('./tools/doneMSG')
 const server = require('./web/server/server')
+const {getCommands, getEvents} = require('./tools/getModules')
 
 const token = process.env.TOKEN || require('./token.json').token
 
@@ -39,45 +40,17 @@ const vars = {
      * @param {Array} otherMessages Other messages to delete
      * @returns {Boolean} True: succefull, else False
      */
-    setEndMessage: (message, emote, otherMessages) => doneMsg(message, vars, emote, otherMessages),
-    commands: []
+    setEndMessage: (message, emote, otherMessages) => doneMsg(message, vars, emote, otherMessages)
 }
-module.exports.getBotInformations = () => {return vars}
-
-// commands
-try {
-    var commands = fs.readdirSync(configs.commandsPath)
-} catch (e) {
-    vars.log(e)
-}
-for(let cmd of commands) {
-    if(!cmd.endsWith(".js") || cmd.startsWith('_')) continue
-    const mdl = require(configs.commandsPath + cmd)
-    if(mdl.active) vars.commands.push(mdl)
-}
+vars.commands = getCommands(vars)
+vars.events = getEvents(vars)
 
 // events
-try {
-    var events = fs.readdirSync(configs.eventsPath)
-} catch (e) {
-    vars.log(e);
-}
-
-for(let event of events) {
-    if(!event.endsWith('.js')) continue
-    let eventName = event.replace('.js','')
-
-    client.on(eventName, async (eventElement) => {
-        try {
-            let evt = require(configs.eventsPath + event)
-            if(evt.active) {
-                evt.run(eventElement, vars)
-            }
-        } catch (e) {
-            vars.log(e);
-        }
+for(let event of vars.events) {
+    client.on(event.name, (eventElement) => {
+        event.run(eventElement, vars)
     })
 }
 
 // SERVER
-server.startSrv(vars)
+server(vars)

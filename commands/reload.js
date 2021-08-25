@@ -1,6 +1,7 @@
-let exe = require('child_process')
+const { change } = require('../tools/changeStatusMessage')
+const {getCommands, getEvents} = require('../tools/getModules')
 
-// need more support (has a lot of errors)
+// doesn't working
 module.exports = {
     name: "reload",
     alias: ["restart"],
@@ -15,29 +16,11 @@ module.exports = {
         user: []
     },
     run: async (e, vars, args, settings) => {
-        let embed = new vars.discord.MessageEmbed()
-        .setTitle('Reloaded!')
-        .setColor(vars.configs.color.valid)
-        .setTimestamp()
+        vars.commands = getCommands(vars)
+        vars.events = getEvents(vars)
 
-        try {
-            for(let channel of vars.configs.channels.status) {
-                let c = vars.client.channels.cache.get(channel)
-                if(!c || !c.isText()) continue
-                c.send(embed)
-            }
-        } catch (err) {
-            vars.log(err);
-        }
-        
-        await vars.log('Bot reloaded', "#F3CA22", "STATUS");
-        await e.react('♻')
-        await vars.client.destroy()
-        exe.exec("node main.js", (err, e) => {
-            if(err) {
-                vars.log(err, vars.configs.invalid, "ERROR")
-            }
-            vars.log(e, vars.configs.valid)
-        })
+        await change("Reloaded!", "#F3CA22", vars)
+        await e.react("♻")
+
     }
 }

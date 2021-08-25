@@ -13,40 +13,17 @@ module.exports = {
         user: []
     },
     run: (e, vars, args, settings) => {
-        try {
-            var cmds = fs.readdirSync(vars.configs.commandsPath)
-        } catch (err) {
-            vars.log(err);
-        }
-
-        let commands = {}
-        let cmdByTypes = {}
-
-        try {
-            for(let command of cmds) {
-                if(!command.endsWith('.js')) continue
-
-                let cmd = require('.' + vars.configs.commandsPath + command)
-                if(!cmd.active) continue
-                commands[cmd.name.toLowerCase()] = cmd
-                cmdByTypes[cmd.type] = []
-            }
-        } catch (err) {
-            vars.log(err);
-        }
+        const {commands} = vars
 
         // Si ya un args[0] & que cet args[0] est une commande: donner plus d'infos sur celle-ci
         if(args[0]) {
-            let infos = commands[args[0].toLowerCase()]
-
-            for(let cmd in commands) {
-                for(let alias of commands[cmd].alias) {
-                    if(args[0].toLowerCase() === alias) {
-                        infos = commands[cmd]
-                        break
-                    }
+            const cmdName = args.shift()
+            const infos = commands.find((cmd) => {
+                if (cmd.name.toLowerCase() === cmdName.toLowerCase()) return true;
+                for (let alias of cmd.alias) {
+                    if (alias.toLowerCase() === cmdName.toLowerCase()) return true;
                 }
-            }
+            });
 
             if(infos) {
                 let embed = new vars.discord.MessageEmbed()
@@ -61,7 +38,7 @@ module.exports = {
                     embed.addField('Alias', alias)
                 }
                 if(infos.arguments) {
-                    embed.addField('Arguments', infos.arguments)
+                    embed.addField('Usage:', '```' + settings.prefix + infos.name + ' ' + infos.arguments + '```')
                 }
                 if(infos.premium) {
                     embed.addField('Need rank', infos.premium)
@@ -73,12 +50,13 @@ module.exports = {
         }
 
         //Sinon, donner la liste des commandes
-        for(let cmd in commands) {
-            let command = commands[cmd]
-            if(!command.active) continue
+        let cmdByTypes = {}
+        for(let command of commands) {
+            const type = command.type
+            const name = command.name
 
-            let name = commands[cmd].name
-            cmdByTypes[command.type].push(name)
+            if(!cmdByTypes[type]) cmdByTypes[type] = [name]
+            else cmdByTypes[type].push(name)
         }
 
         let embed = vars.newEmbed()
@@ -88,7 +66,8 @@ module.exports = {
         for(let type in cmdByTypes) {
             let cmds = ""
             for(let cmd of cmdByTypes[type]) {
-                cmds+=settings.prefix + cmd + (commands[cmd.toLowerCase()].premium ? ' (`' + commands[cmd.toLowerCase()].premium + '`)' : '') + "\n"
+                const cmdInformations = commands.find(c => c.name.toLowerCase() === cmd.toLowerCase())
+                cmds+= '`' + settings.prefix + cmd + '`' + (cmdInformations.premium ? ' *(**' + cmdInformations.premium + '**)*' : '') + "\n"
             }
             embed.addField(type, cmds, true)
         }

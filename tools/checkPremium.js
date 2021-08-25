@@ -3,11 +3,11 @@ module.exports = {
     description: "check if a user can do a premium command",
     /**
      * 
-     * @type {Promise}
      * @param {String} grade The grade name the user need to have 
      * @param {Object} vars The main variables
      * @param {Object} user The user to verify
      * @returns {Boolean} true if it can do, false else
+     * @type {Promise}
      */
     check: async(grade, vars, user) => {
 

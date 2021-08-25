@@ -1,3 +1,18 @@
+# 1.7.0
+> ## commands:
+> - `translate` Translate a text to a specific language!
+> - `game` Added 2 games: the coin game & the wikipedia game!
+> ## bugs:
+> - `annonce` (only for bot owners) block the command if there isn't any message!
+> - In the support server, the status message will no longer spam: the message will be edited
+> ## website:
+> - fixed some major bugs
+> - re-passed the website on http because of bugs (i still working on making a secure website)
+> ## improuvement:
+> - I made a lot of little improuvement for a better code & a better bot ;)
+
+---
+
 # 1.6.2
 > ## commands:
 > - `customfont` gets new fonts!

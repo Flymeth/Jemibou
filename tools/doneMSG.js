@@ -16,7 +16,7 @@ module.exports.doneMsg = async (msg, vars, emoji, otherMessages) => {
     setTimeout(() => {
         if(!message || !message.deletable) return
         deleteMsg()
-    }, vars.configs.doneMessageDeleteTimeout);
+    }, vars.configs.reactionMessageTimeout);
 
     vars.client.on('messageReactionAdd', async (reaction, user) => {
         if(

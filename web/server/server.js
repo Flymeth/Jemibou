@@ -1,4 +1,4 @@
-const https = require('https')
+const https = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
@@ -70,7 +70,7 @@ let url404 = `
 </html>
 `
 
-function setupServer(vars) {
+module.exports = function setupServer(vars) {
     const secureOptions = {
         key: process.env.KEY || fs.readFileSync(serverProps.secures_options.key),
         cert: process.env.CERT || fs.readFileSync(serverProps.secures_options.cert)
@@ -108,11 +108,11 @@ function setupServer(vars) {
                     })
                 }
             }else {
-                
+
                 const canUseVars = req.headers.accept?.includes("text")
                 if(canUseVars) {
                     data = data.toString()
-
+                    
                     let args = []
                     for(let argument of data.split(variables.prefix)) {
                         let v = argument.slice(0, argument.indexOf(variables.suffix))
@@ -125,7 +125,7 @@ function setupServer(vars) {
                     if(args) {
                         var infos = {...vars}
                         infos.changelog = fs.readFileSync('./changelog.md').toString().split('---').find(txt => txt.includes(vars.package.version)).split('`').join(Infinity)
-
+                        
                         if(urlInfos.pathname === '/settings') {
                             const id = urlInfos.searchParams.get('guild')
                             if(id) {
@@ -133,18 +133,18 @@ function setupServer(vars) {
                                 if(params.channelID) infos.guildSettings = JSON.stringify(params)
                             }
                         }
-
+                        
                         for(let v of args) {
                             let path = [...v.path]
                             let value = infos
-
+                            
                             while(path.length) {
                                 const goTo = path.shift().replace('()', '')
                                 value = value[goTo]
-
+                                
                                 if(typeof value === "function") {
                                     try {
-                                        value = await value()
+                                        value = await value.call()
                                     } catch (err) {
                                         value = undefined
                                         break
@@ -158,7 +158,7 @@ function setupServer(vars) {
                                 if(typeof value === "object") v.value = JSON.stringify(value)
                                 else v.value = value
                             }
-                        
+                            
                             const needSplit = variables.prefix + v.path.join('.') + variables.suffix
                             data = data.split(needSplit).join(v.value)
                         }
@@ -179,5 +179,3 @@ function setupServer(vars) {
         console.info('go to: %clocalhost:'+srv.address().port, 'color: cyan;')
     })
 }
-
-module.exports.startSrv = (vars) => setupServer(vars)

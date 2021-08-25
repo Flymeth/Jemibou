@@ -1,3 +1,5 @@
+const { change } = require('../tools/changeStatusMessage')
+
 module.exports = {
     name: "stop",
     alias: ["destroy", "end"],
@@ -12,22 +14,10 @@ module.exports = {
     },
     run: async (e, vars, args, settings) => {
         await e.react('💤')
-        let embed = new vars.discord.MessageEmbed()
-        .setTitle('Turned off!')
-        .setColor(vars.configs.colors.invalid)
-        .setTimestamp()
 
         clearInterval(vars.statusInterval)
 
-        try {
-            for(let channel of vars.configs.channels.status) {
-                let c = vars.client.channels.cache.get(channel)
-                if(!c || !c.isText()) continue
-                c.send(embed)
-            }
-        } catch (err) {
-            vars.log(err);
-        }
+        await change("Turned off!", vars.configs.colors.invalid, vars)
         
         await vars.log('Bot turned to off', vars.configs.colors.invalid, "STATUS");
         await vars.client.destroy()

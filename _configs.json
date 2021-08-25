@@ -58,7 +58,7 @@
         "confirm": "✅",
         "unconfirm": "❎"
     },
-    "doneMessageDeleteTimeout": 10000,
+    "reactionMessageTimeout": 10000,
     "settings": {
         "path":"./_settings.json",
         "variables": {
@@ -79,17 +79,6 @@
             }
         },
         "list": {
-            "variablesStart": {
-                "value":"{{",
-                "desc": "prefix of a variable",
-                "modifiable": false
-            },
-            "variablesEnd": {
-                "value":"}}",
-                "desc": "suffix of a variable",
-                "modifiable": false
-            },
-
             "prefix": {
                 "value": ".",
                 "desc": "The bot's prefix in your server",

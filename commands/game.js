@@ -1,6 +1,6 @@
 const help = require('./games/_help')
-const getHelpMsg = "help"
 const {check} = require('../tools/checkPremium')
+const startGameReaction = "⚡"
 module.exports = {
     name: "game",
     alias: [],
@@ -8,19 +8,19 @@ module.exports = {
     ownersOnly: false,
     active: true,
     type: "fun",
-    color: "#0acdcd",
-    arguments: "[GAME_NAME] | [\"" + getHelpMsg + "\" <GAME_NAME>]",
+    color: "#2c6ca0",
+    arguments: "<game_name>",
     deleteCommand: false,
     premium: "beta",
     permissions: {
-        bot: [],
+        bot: ["MANAGE_MESSAGES"],
         user: []
     },
     run: async (e, vars, args, settings) => {
-        const needHelp = args[0] === getHelpMsg
-        if(needHelp) args.shift()
-        const gameName = args.join(' ')
-        if(!gameName || gameName.includes(getHelpMsg)) return help.run(e, vars, settings)
+
+        const gameName = args.shift()
+
+        if(!gameName) return help.run(e, vars, settings)
 
         try {
             var game = require('./games/' + gameName)
@@ -29,14 +29,58 @@ module.exports = {
             return e.reply("This game is not available...").then(msg => vars.setEndMessage(msg, "🎰"))
         }
 
-        if(needHelp) {
-            help.run(e, vars, settings, game)
-        }else {
-            if(game.premium) {
-                let canDoCommand = await check(game.premium, vars, e.author)
-                if(!canDoCommand) return e.reply("This command need to have a `" + command.premium + "` rank!")
-            }
-            game.start(e, vars, settings)
+        // if it's a premium game: check if this user is premium
+        let canPlayGame = true
+        if(game.premium) {
+            canPlayGame = await check(game.premium, vars, e.author)
         }
+        
+        const embed = vars.newEmbed()
+        .setTitle(game.name)
+        .setDescription(game.description)
+        .addField("Usage:", game.help)
+
+        // If it's a premium game & the user hasn't the needed rank
+        if(!canPlayGame) {
+            embed.setFooter("This game is only available for `" + game.premium + "` users! Use `" + settings.prefix + "premium` to get more informations!")
+            return e.channel.send(embed)
+        }
+        
+        // else
+        embed.setFooter("React with " + startGameReaction + " to launch this game!")
+        const msg = await e.channel.send(embed)
+        msg.react(startGameReaction)
+
+        const tm = setTimeout(async () => {
+            await e.delete()
+            return msg.delete()
+        }, vars.configs.reactionMessageTimeout);
+
+        vars.client.on('messageReactionAdd', async (reaction, user) => {
+
+            if(
+                user.bot
+                || user.id !== e.author.id
+                || reaction.message.id !== msg.id
+            ) return
+
+            if(reaction.emoji.name === startGameReaction) {
+                clearTimeout(tm)
+                await msg.reactions.removeAll()
+                for(let content in msg.embeds[0]) {  
+                    if(!msg.embeds[0][content]) continue
+                    
+                    if(content !== "color" && typeof msg.embeds[0][content] === "string") msg.embeds[0][content] = ""
+                    else if(typeof msg.embeds[0][content] === "object") {
+                        if(Array.isArray(msg.embeds[0][content])) msg.embeds[0][content] = []
+                        else msg.embeds[0][content] = {}
+                    }
+
+                }
+
+                await e.delete()
+                return game.start(msg, e.author, vars, settings)
+            }
+        })
     }
 }

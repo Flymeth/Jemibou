@@ -3,7 +3,7 @@
         "cert": "./web/server/keys/cert.pem",
         "key": "./web/server/keys/key.pem"
     },
-    "port": 443,
+    "port": 80,
     "404File": null,
     "defaultExtention": "html",
     "defaultHtmlPath": "./web/client/",

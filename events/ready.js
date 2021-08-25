@@ -1,4 +1,5 @@
 let {next} = require('../tools/status')
+const {change} = require('../tools/changeStatusMessage')
 module.exports = {
     name: "ready",
     description: "When the bot is connect",
@@ -8,23 +9,7 @@ module.exports = {
 
         vars.client.user.setActivity("try to wake up...", {type: "PLAYING"})
 
-        let embed = new vars.discord.MessageEmbed()
-        .setTitle('Turned on!')
-        .setColor(vars.configs.colors.valid)
-        .setTimestamp()
-
-        try {
-            for(let channel of vars.configs.channels.status) {
-                let c = vars.client.channels.cache.find(c => c.id === channel)
-                if(c && c.isText()) {
-                    await c.send(embed)
-                }else {
-                    console.log("ERROR: the channel with the id `" + channel + "` is invalid!")
-                }
-            }
-        } catch (err) {
-            vars.log(err);
-        }
+        change("Turned on!", vars.configs.colors.valid, vars)
         
         vars.log(`connected as ${vars.client.user.tag}! (version ${vars.package.version})`, vars.configs.colors.valid, "STATUS");
 

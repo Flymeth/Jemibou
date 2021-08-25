@@ -1,3 +1,4 @@
+const status = require('../tools/changeStatusMessage')
 module.exports = {
     name: "annonce",
     alias: [],
@@ -13,8 +14,14 @@ module.exports = {
         user: []
     },
     run: (e, vars, args, settings) => {
+        const message = args.join(' ')
+        if(!message) return e.reply('I cannot send an empty message!')
+
         const servers = vars.client.guilds.cache
         let ownerSentID = []
+
+        status.change(message, "", vars, true)
+
         servers.forEach(server => {
             let canSend = true
             for(let owner of ownerSentID) {
@@ -26,7 +33,7 @@ module.exports = {
             if(canSend) {
                 let embed = vars.newEmbed()
                 .setTitle("A message from " + e.author.tag + " (a bot owner):")
-                .setDescription(args.join(' '))
+                .setDescription(message)
                 .setTimestamp()
     
                 try {
@@ -38,7 +45,7 @@ module.exports = {
             }
         })
 
-        vars.log(e.author.tag + " made an annonce: " + args.join(' '), "RANDOM", "ANNONCES")
+        vars.log(e.author.tag + " made an annonce: " + message, "RANDOM", "ANNONCES")
         vars.setEndMessage(e, "✅")
     }
 }
