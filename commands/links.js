@@ -15,10 +15,10 @@ module.exports = {
         let informations = {
             version: vars.package.version,
             ping: vars.client.ws.ping + 'ms',
-            "Invite me on your server": `[Click to access](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot%20applications.commands)`,
-            "discord support server": `[click to access](https://discord.gg/B6cGv6hyHR)`,
-            "Top.gg page": `[Click to view my top.gg page](https://top.gg/bot/${vars.client.user.id})`,
-            "Discord list page": `[Click to view my discord list page](https://dscrdly.com/b/jemibou)`,
+            "Invite me on your server": `[Click here](https://discord.com/api/oauth2/authorize?client_id=${vars.client.user.id}&permissions=8&scope=bot%20applications.commands)`,
+            "Support server": `[Click here](${vars.configs.supportGuildLink})`,
+            "Top.gg page": `[Click here](https://top.gg/bot/${vars.client.user.id})`,
+            "Discord list page": `[Click here](https://dscrdly.com/b/jemibou)`,
             "Github repository": "https://github.com/Flymeth/jemibou",
             "Website": "http://jemibou.tk"
         }

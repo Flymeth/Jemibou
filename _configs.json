@@ -7,6 +7,7 @@
         "end": "&permissions=8&scope=bot%20applications.commands"
     },
     "supportGuildID": "862643884459163658",
+    "supportGuildLink": "https://discord.gg/CPKfxVGTCe",
     "eventsPath": "./events/",
     "commandsPath": "./commands/",
     "log": {

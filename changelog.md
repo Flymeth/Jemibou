@@ -1,3 +1,16 @@
+# 1.7.1
+> ## commands:
+> - `pool` Error of language: now renamed on "poll" + you can now use discord markdown in your questions
+> - `translate` Now doesn't require extra perms
+> - `clear` when this command returns an error: you can now delete this error by clicking on the reaction
+> ## bugs:
+> - Now the support discord link is working
+> - fixing some other minor bugs
+> ## website:
+> - The description is now in english
+
+---
+
 # 1.7.0
 > ## commands:
 > - `translate` Translate a text to a specific language!

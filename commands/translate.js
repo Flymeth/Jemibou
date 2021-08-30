@@ -11,7 +11,7 @@ module.exports = {
     arguments: "[language (ex: **en**; **fr**; **es**...)] [message]",
     deleteCommand: true,
     permissions: {
-        bot: ["MANAGE_MESSAGES"],
+        bot: [],
         user: []
     },
     run: async (e, vars, args, settings) => {

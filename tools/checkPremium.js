@@ -13,11 +13,7 @@ module.exports = {
 
         if(!grade || !vars || !user) return new Error("A parameter has been forget")
 
-        for(let ownerid of vars.configs.owners) {
-            if(ownerid === user.id) {
-                return true
-            }
-        }
+        if(vars.configs.owners.find(id => id === user.id)) return true
 
         const supportGuild = vars.client.guilds.cache.get(vars.configs.supportGuildID)
         if(!supportGuild) return new Error("Support guild is  unreachable")

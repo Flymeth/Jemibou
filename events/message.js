@@ -69,12 +69,7 @@ module.exports = {
         if(!cmd) return
 
         if (cmd.ownersOnly) {
-            let isOwner = false;
-            for (let ownerid of vars.configs.owners) {
-                if (ownerid === message.author.id) {
-                    isOwner = true;
-                }
-            }
+            const isOwner = vars.configs.owners.find(id => id === message.author.id)
             if (!isOwner)
                 return message.reply("Only my owners can do that command!");
         }

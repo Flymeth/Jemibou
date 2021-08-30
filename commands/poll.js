@@ -1,7 +1,7 @@
 module.exports = {
-    name: "pool",
-    alias: [],
-    description: "Make a pool!",
+    name: "poll",
+    alias: ["survey"],
+    description: "Make a poll!",
     ownersOnly: false,
     active: true,
     type: "usefull",
@@ -29,8 +29,8 @@ module.exports = {
         if(!args || args.length < 2 || args.length > 9) return e.reply("Please indicate between 2 and 9 options for the pool!")
 
         const embed = vars.newEmbed()
-        .setDescription("*created by " + e.author.toString() + "*")
-        .setTitle(pool)
+        .setAuthor("New poll by " + e.author.username + ":", e.author.avatarURL({size: 1024, dynamic: true}))
+        .setDescription(pool)
         .setFooter("React with the reactions bellow to participate to the pool!")
 
         const emojiArray = [

@@ -7,22 +7,39 @@ const assets = require('./_assets.json')
 const {doneMsg} = require('./tools/doneMSG')
 const server = require('./web/server/server')
 const {getCommands, getEvents} = require('./tools/getModules')
+const mongodb = require('mongodb')
 
-const token = process.env.TOKEN || require('./token.json').token
+let secret;
+try {
+    secret = require('./_secret.json')
+} catch (e) {}
+
+const token = process.env.TOKEN || secret.discord.token
 
 const client = new Discord.Client({
     disableMentions: "everyone"
 })
 
 client.login(token)
+
+// mongodb (soon)
+
+// const {mongoClient} = mongodb
+// const uri = `mongodb+srv://${process.env.MONGO_USERNAME || secret.mongodb.username}:${process.env.MONGO_PASSWORD || secret.mongodb.password}@${process.env.MONGO_CLSTURL || secret.mongodb.clr_url}`
+
+// const mongoDB = async() => {
+//     const client = new mongoClient(uri)
+//     await client.connect()
+// }
+
 const vars = {
     discord: Discord,
-    client: client,
-    configs: configs,
+    client,
+    configs,
     settings: configs.settings.list,
     package: pkg,
-    assets: assets,
-    server: server,
+    assets,
+    server,
     /**
      * The logger system
      * @param {String} message The message to log

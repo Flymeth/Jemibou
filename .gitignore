@@ -5,7 +5,7 @@ node_modules
 console.cmd
 
 # This files is very confidentials
-token.json
+_secret.json
 _settings.json
 
 # This file is useless for you

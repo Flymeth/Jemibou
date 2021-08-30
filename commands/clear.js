@@ -31,7 +31,7 @@ module.exports = {
             .addField('Messages too old', 'Discord blocks the message suppretion that are under 14 days old')
             .addField('Other', 'The error can be cause of the developper. If is that, he has been triggered!')
 
-            return e.reply(embed)
+            return e.reply(embed).then(msg => vars.setEndMessage(msg, "😿"))
         }
 
         e.reply(`I've deleted ${messagesDeleted || args[0]} message(s)!`).then(msg => {
