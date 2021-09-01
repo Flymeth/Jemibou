@@ -12,8 +12,7 @@ async function getUser(token) {
     return fetch('https://discord.com/api/users/@me', {
         headers: {
             authorization: `${type} ${access}`,
-        },
-        method: "GET"
+        }
     }).then(res => res.json())
 }
 async function getGuilds(token) {
@@ -24,8 +23,7 @@ async function getGuilds(token) {
     return fetch('https://discord.com/api/users/@me/guilds', {
         headers: {
             authorization: `${type} ${access}`,
-        },
-        method: "GET"
+        }
     }).then(res => res.json())
     .then(async srv => {
         const filtered = []

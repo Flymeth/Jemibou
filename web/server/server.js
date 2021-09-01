@@ -4,7 +4,6 @@ const serverProps = require('./configs.json')
 const {variables} = serverProps
 const {getSettings, setSettings} = require('../../commands/settings')
 const stringify = require('json-stringify-safe')
-
 let url404 = `
 <!DOCTYPE html>
 <html lang="en">

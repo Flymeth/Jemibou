@@ -32,6 +32,8 @@
         const mainContent = document.querySelector('body')
         const accountCookieName = "account"
 
+        setLoadingTimeout(document.querySelector('.loader'))
+
         window.onload = async () => {
             const target = new URLSearchParams(window.location.hash.slice(1))
             const token = {

@@ -1,3 +1,4 @@
+const timeoutDelay = 15
 function setLoading(e) {
     if(!e) {
         document.querySelectorAll('.loader').forEach(l => {
@@ -10,5 +11,13 @@ function setLoading(e) {
             <div class="point2"></div>
             <div class="point3"></div>
         </div>`
+
+        document.querySelectorAll('.loading').forEach(e => setLoadingTimeout(e))
     }
+}
+
+function setLoadingTimeout(e) {
+    setTimeout(() => {
+        e.classList.add('timeout')
+    }, timeoutDelay*1000);
 }

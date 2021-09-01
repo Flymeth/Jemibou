@@ -38,3 +38,22 @@
         transform: scale(1.2) translateY(-15pt);
     }
 }
+
+.loader::before {
+    content: 'The current operation takes a long time... Try to refresh the page or using the main domain name: https://jemibou.herokuapp.com.';
+    position: absolute;
+    top: 175%;
+    left: 0;
+    width: 100%;
+    transform: translateY(50%);
+    z-index: -1;
+
+    text-align: center;
+    opacity: 0;
+
+    transition: all 1.5s ease-out;
+}
+.loader.timeout::before {
+    opacity: 1;
+    transform: translateY(0);
+}
