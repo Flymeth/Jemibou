@@ -14,9 +14,6 @@ A cool discord bot for moderation!
 ## mention
 > If you mention the bot, it'll respond with his prefix.
 
-## inDev commands/system:
-> `props (<server> or <member <member mention>> or <role <role mention>> or <channel <channel mention>>)` => see informations about the server or member or role or channel...
-
 [VOTE FOR THE BOT](https://top.gg/bot/859139199172083713)
 
 # Flymeth

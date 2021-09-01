@@ -13,7 +13,7 @@ async function getUser(token) {
         headers: {
             authorization: `${type} ${access}`,
         },
-        mode: "no-cors"
+        mode: "cors"
     }).then(res => res.json())
 }
 async function getGuilds(token) {
@@ -25,7 +25,7 @@ async function getGuilds(token) {
         headers: {
             authorization: `${type} ${access}`
         },
-        mode: "no-cors"
+        mode: "cors"
     }).then(res => res.json())
     .then(async srv => {
         const filtered = []
