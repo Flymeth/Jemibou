@@ -9,7 +9,7 @@ module.exports.getCommands = (vars) => {
     try {
         var commands = fs.readdirSync(vars.configs.commandsPath)
     } catch (e) {
-        vars.log(e)
+        console.log(e)
     }
 
     for(let cmd of commands) {
@@ -23,7 +23,7 @@ module.exports.getCommands = (vars) => {
         if(mdl.active) allCommands.push(mdl)
     }
 
-    vars.log("Commands loaded")
+    console.log("Commands loaded")
 
     return allCommands
 }
@@ -37,7 +37,7 @@ module.exports.getEvents = (vars) => {
     try {
         var events = fs.readdirSync(vars.configs.eventsPath)
     } catch (e) {
-        vars.log(e);
+        console.log(e);
     }
 
     for(let event of events) {
@@ -51,7 +51,7 @@ module.exports.getEvents = (vars) => {
         if(mdl.active) allEvents.push(mdl)
     }
 
-    vars.log("Events loaded!")
+    console.log("Events loaded!")
 
     return allEvents
 }

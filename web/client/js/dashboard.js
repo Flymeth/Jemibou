@@ -1,6 +1,6 @@
 async function showGuilds(user, guilds, guild_card) {
     setLoading()
-
+    
     user.avatar= `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
     document.querySelectorAll('*[data-user]').forEach(el => {
         const need = el.getAttribute('data-user')
