@@ -1,0 +1,75 @@
+<div class="login_modal">
+    <img src="../assets/logo.png" alt="Logo Jemibou">
+    <h1>Login</h1>
+    <p>Please connect your discord account to continue!</p>
+    <button class="connect important">
+        connect
+    </button>
+    <a href="/">
+        <button>cancel</button>
+    </a>
+
+
+    <style>
+
+        body {overflow: hidden;}
+
+        .login_modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+    
+            background-color: var(--extra-color);
+    
+            border-radius: 15pt;
+
+            padding: 7.5pt 5pt;
+    
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            box-shadow: .5pt 0 5pt var(--bg-hero);
+
+            color: var(--bg-header);
+        }
+        .login_modal> * {
+            margin: 7.5pt 5pt;
+        }
+    
+        .login_modal> img {
+            width: 50%;
+        }
+
+        .login_modal>a {
+            width: 50%;
+        }
+        .login_modal button {
+            width: 75%;
+        }
+        .login_modal> a> button {
+            width: 100%;
+        }
+
+        .login_modal .connect {
+            border: 2pt solid #fff;
+        }
+        .login_modal .connect:hover {
+            border-color: transparent;
+        }
+    
+        @media screen and (max-width: 550px) {
+            .login_modal {
+                width: 75vw;
+            }
+
+            .login_modal> img {
+                width: auto;
+                height: 25vh;
+            }
+        }
+    </style>
+</div>

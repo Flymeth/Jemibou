@@ -1,4 +1,8 @@
 {
+    "active": {
+        "bot": true,
+        "webapp": true
+    },
     "owners": [
         "514475217779818496"
     ],

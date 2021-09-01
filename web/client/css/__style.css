@@ -5,6 +5,7 @@
 @import 'header.css';
 @import '_extra.css';
 @import 'hero.css';
+@import 'loading.css';
 @import 'main.css';
 @import 'footer.css';
 
@@ -35,7 +36,7 @@ html {
     --bg-body: #2f2f2f;
     --extra-color: #b0d073;
     --header-maxHeight: 75pt;
-    --buttons-animDuration: .35s;
+    --buttons-animDuration: .30s;
 
     scroll-padding-top: calc(var(--header-maxHeight) + 5pt);
 }
@@ -113,6 +114,13 @@ button:hover {
 button:hover::before {
     left: 55%;
     transform: translateX(-50%);
+}
+
+button.important {
+    border: 1.5pt solid;
+}
+button.important:hover {
+    border-color: transparent;
 }
 
 code {

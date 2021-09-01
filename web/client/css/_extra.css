@@ -1,5 +1,5 @@
 /* Invite button */
-.invite_button {
+.extra_button {
     position: fixed;
     bottom: 10pt;
     right: 0;
@@ -9,12 +9,6 @@
     z-index: 1;
 
     background-color: #1f1f1f;
-}
-.invite_button button {
-    border: 1.5pt solid;
-}
-.invite_button button:hover {
-    border-color: transparent;
 }
 
 

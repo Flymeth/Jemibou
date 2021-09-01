@@ -2,7 +2,8 @@ const https = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
-const {getSettings} = require('../../commands/settings')
+const {getSettings, setSettings} = require('../../commands/settings')
+const stringify = require('json-stringify-safe')
 
 let url404 = `
 <!DOCTYPE html>
@@ -91,6 +92,44 @@ module.exports = function setupServer(vars) {
             path+= '.' + serverProps.defaultExtention.replace('.','')
         }
 
+        if(urlInfos.pathname === '/getVars') {
+            res.writeHead(200, {
+                "Content-Type": "text/json; charset=UTF-8"
+            })
+            const response = stringify(vars)
+            return res.end(response)
+        }
+
+        if(urlInfos.pathname === '/permissions') {
+            res.writeHead(200, {
+                "Content-Type": "text/json; charset=UTF-8"
+            })
+
+            const permCode = urlInfos.searchParams.get('code')
+            const perm = new vars.discord.Permissions(parseInt(permCode))
+
+            const end = {
+                code: permCode,
+                list: perm.toArray()
+            }
+
+            return res.end(JSON.stringify(end))
+        }
+        
+        if(urlInfos.pathname === '/save' && req.method === "POST") {
+            const chucks= []
+            req.on('data', (c) => chucks.push(c.toString()))
+            req.on('end', async () => {
+                const queryPOST = new URLSearchParams(chucks.join('&'))
+                const channel = vars.client.channels.cache.get(queryPOST.get('channel'))
+                if(!channel) return res.end("false")
+                const success = setSettings(channel, vars)
+                res.end(success.toString())
+            })
+
+            return
+        }
+
         fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
             if(err) {
                 res.writeHead(404, {
@@ -124,6 +163,7 @@ module.exports = function setupServer(vars) {
 
                     if(args) {
                         var infos = {...vars}
+
                         infos.changelog = fs.readFileSync('./changelog.md').toString().split('---').find(txt => txt.includes(vars.package.version)).split('`').join(Infinity)
                         
                         if(urlInfos.pathname === '/settings') {
@@ -165,7 +205,7 @@ module.exports = function setupServer(vars) {
                     }
                 }
 
-                let accepts = req.headers.accept.split(",").find(a => a.includes(path.split('.').pop()))
+                let accepts = req.headers.accept?.split(",").find(a => a.includes(path.split('.').pop()))
                 res.writeHead(200, {
                     "Content-Type": (accepts || "*/*") + "; charset=UTF-8"
                 })

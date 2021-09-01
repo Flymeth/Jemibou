@@ -28,7 +28,7 @@
 
     <div class="invite_button">
         <a href="$configs.invite.start;$client.user.id;$configs.invite.end;" target="invite">
-            <button>Invite Jemibou</button>
+            <button class="important">Invite Jemibou</button>
         </a>
     </div>
 
@@ -51,7 +51,8 @@
             <a href="#me">Author</a>
             <a href="#more">More</a>
             <a href="$package.homepage;" target="Github">Github</a>
-            <a href="./settings">Your settings</a>
+            <a href="/dashboard">Dashboard (beta)</a>
+            <a href="/settings">Your settings</a>
         </nav>
     </header>
 
@@ -119,6 +120,10 @@
 
     <script src="https://kit.fontawesome.com/c2bce3a9f7.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+
+    <script src="./js/fetch.js"></script>
+
+
     <script>
         // For each elements with class "clickEvent":
         document.querySelectorAll(".clickEvent").forEach(el => {

@@ -63,11 +63,13 @@ vars.commands = getCommands(vars)
 vars.events = getEvents(vars)
 
 // events
-for(let event of vars.events) {
-    client.on(event.name, (eventElement) => {
-        event.run(eventElement, vars)
-    })
+if(configs.active.bot) {
+    for(let event of vars.events) {
+        client.on(event.name, (eventElement) => {
+            event.run(eventElement, vars)
+        })
+    }
 }
 
 // SERVER
-server(vars)
+if(configs.active.webapp) server(vars)

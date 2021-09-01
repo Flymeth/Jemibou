@@ -1,0 +1,288 @@
+header {
+    position: -webkit-sticky;
+    position: sticky;
+
+    top: 0;
+    left: 0;
+}
+
+header .top {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+header .top img {
+    height: 25pt;
+    border-radius: 50%;
+}
+header .top> h1 * {
+    vertical-align: middle;
+}
+
+/* no server */
+.noguilds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.noguilds h1 {
+    color: var(--extra-color);
+    text-align: center;
+}
+.noguilds h1::before {
+    content: "";
+}
+.noguilds img {
+    filter: grayscale(1);
+    width: 100%;
+    max-height: 70vh;
+}
+
+/* servers */
+.guilds_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15pt;
+}
+.guilds_list> * {
+    margin: 5pt 10pt;
+    border-radius: 5pt;
+}
+
+.guild {
+    --animDuration: .20s;
+
+    width: 150pt;
+    height: 200pt;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    background-color: var(--bg-hero);
+
+    transition-duration: var(--animDuration);
+
+    will-change: transform;
+}
+.guild * {
+    transition-duration: var(--animDuration);
+}
+
+.guild img {
+    width: 35%;
+    border-radius: 25%;
+    transition: .15s;
+}
+.guild h3 {
+    text-align: center;
+}
+.guild h3::before {content: ""}
+
+:not(.unreachable)> .guild:hover {
+    z-index: 1;
+    transform: scale(1.025);
+    box-shadow: 0 0 15pt rgba(255, 255, 255, .25);
+}
+
+:not(.unreachable)> .guild:hover img {
+    transform: scale(1.2);
+    border-radius: 2.5pt;
+}
+
+.unreachable {
+    position: relative;
+    cursor: not-allowed;
+    overflow: hidden;
+}
+.unreachable::before {
+    content: "Invite me on the guild to unlock the dashboard. (click)";
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background-color: rgba(0, 0, 0, .5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-weight: 900;
+
+    opacity: 0;
+
+    transition: all .5s;
+
+    z-index: 1;
+}
+.unreachable:hover::before {
+    opacity: 1;
+}
+
+.unreachable> .guild {
+    filter: grayscale(1) brightness(0.4);
+    cursor: not-allowed;
+
+    overflow: hidden;
+}
+.unreachable:hover> .guild {
+    filter: grayscale(1) brightness(0.15);
+    cursor: not-allowed;
+
+    overflow: hidden;
+}
+
+/* editor */
+
+.editor {
+    border-radius: 15pt;
+    background-color: var(--bg-header);
+    margin: 15pt auto;
+    max-width: 750pt;
+    padding: 10pt 5pt;
+}
+
+.editor .infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.editor .infos img {
+    width: 50vw;
+    max-width: 100pt;
+    border-radius: 50%;
+    margin-bottom: 2.5pt;
+}
+.editor .infos h2 {
+    text-align: center;
+}
+.editor .infos h2::before {
+    content: "";
+}
+
+.editor form {
+    margin: 15pt 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.editor form> * {
+    margin: 7.5pt 0;
+}
+
+/* response message */
+body {position: relative;}
+form .response {
+    position: fixed;
+    bottom: 15pt;
+    right: 15pt;
+
+    padding: 5pt;
+
+    border-radius: 2.5pt;
+    background-color: var(--bg-hero);
+
+    border-style: solid;
+    border-width: 0 2.5pt 0 0;
+
+    max-width: 250pt;
+}
+form .response::before {
+    content: "";
+    height: 2.5pt;
+    width: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    border-radius: 100pt 100pt 0 0;
+
+    transform: translateX(-50%);
+
+    animation: beforeTimeout linear;
+    animation-duration: var(--timeout);
+}
+@keyframes beforeTimeout {
+    0% {
+        width: 0;
+    }
+    90% {
+        width: 90%;
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        width: 90%;
+    }
+}
+
+form .response[data-success=true] {
+    border-color: greenyellow;
+}
+form .response[data-success=true]::before {
+    background-color: greenyellow;
+}
+form .response[data-success=true] .cross {
+    background-color: greenyellow;
+    color: black;
+}
+
+form .response[data-success=false] {
+    border-color: red;
+}
+form .response[data-success=false]::before {
+    background-color: red;
+}
+form .response[data-success=false] .cross {
+    background-color: red;
+}
+
+form .response .cross {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 15pt;
+    height: 15pt;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form .response svg {
+    height: 100%;
+    width: 100%;
+}
+
+/* when close response */
+form .response.closed {
+    opacity: 0;
+    transition-duration: var(--closeAnim);
+    transition-property: all;
+}

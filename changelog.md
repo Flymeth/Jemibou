@@ -1,3 +1,11 @@
+# 1.8.0
+> ## website (biggest update):
+> - Now the website has a dashboard! see http://jemibou.tk/dashboard !
+> ## soon:
+> - i've improuved the settings system to made easier than now! stay informed :)
+
+---
+
 # 1.7.1
 > ## commands:
 > - `pool` Error of language: now renamed on "poll" + you can now use discord markdown in your questions
@@ -68,7 +76,7 @@
 
 # 1.4.2
 > ## sorry:
-> - 1.4.1 was the buggest version of jemibou ^^
+> - 1.4.1 was the buggest version of jemibou :(
 > ## bugs:
 > - get parameter in-server errors
 > - `invite`: send now the correct invitation link

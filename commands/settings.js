@@ -91,7 +91,7 @@ module.exports = {
  * @param {*} vars the vars
  * @returns {Boolean} true if done, false else
  */
- module.exports.setSettings = (channel, vars) => {
+ module.exports.setSettings = (channel, vars, input) => {
     try {
         var file = fs.readFileSync(settings.path, {encoding: "utf-8"})
     } catch (err) {
@@ -110,7 +110,9 @@ module.exports = {
         var guildsSettings = {}
     }
 
-    guildsSettings[channel.guild.id] = channel.id
+    guildsSettings[channel.guild.id] = {}
+    guildsSettings[channel.guild.id].channel = channel.id
+    if(input) guildsSettings[channel.guild.id].settings = input
 
     try {
         var file = fs.writeFileSync(settings.path, JSON.stringify(guildsSettings), {encoding: 'utf-8'})
@@ -153,9 +155,12 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
         return findedSettings
     }
 
-    let channelID = jsonFile[guildId]
+    if(!jsonFile[guildId]) return findedSettings
+    const channelID = jsonFile[guildId].channel
+    const guildSettings = jsonFile[guildId].settings
 
     if(!channelID) return findedSettings
+    else if(guildSettings) findedSettings= guildSettings
 
     let guild = vars.client.guilds.cache.get(guildId)
     if(!guild) return false

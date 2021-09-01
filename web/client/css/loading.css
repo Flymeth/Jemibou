@@ -1,0 +1,40 @@
+/* loader */
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader> * {
+    height: 10pt;
+    width: 10pt;
+
+    border-radius: 50%;
+
+    margin: 0 5pt;
+
+    background-color: var(--extra-color);
+
+    animation: loaderPoint infinite ease-in-out 1s;
+}
+
+.loader> .point2 {
+    animation-delay: .05s;
+}
+.loader> .point3 {
+    animation-delay: .1s;
+}
+
+@keyframes loaderPoint {
+    0%,90% {
+        transform: scale(1) translateY(0);
+    }
+    45% {
+        transform: scale(1.2) translateY(-15pt);
+    }
+}

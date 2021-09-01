@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔨 Dashboard</title>
+
+    <link rel="stylesheet" href="./css/extra/dashboard.css">
+    <link rel="stylesheet" href="./css/__style.css">
+
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
+</head>
+<body>
+    
+    <div class="loader">
+        <div class="point1"></div>
+        <div class="point2"></div>
+        <div class="point3"></div>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/c2bce3a9f7.js" crossorigin="anonymous"></script>
+
+    <script src="./js/fetch.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/dashboard.js"></script>
+    <script src="./js/setLoading.js"></script>
+    <script src="./js/defaultIMG.js"></script>
+    <script>
+        const mainContent = document.querySelector('body')
+        const accountCookieName = "account"
+
+        window.onload = async () => {
+            const target = new URLSearchParams(window.location.hash.slice(1))
+            const token = {
+                type: target.get('token_type'),
+                access: target.get('access_token'),
+            }
+
+            if(token.type && token.access) {
+                document.cookie = `${accountCookieName}=${JSON.stringify(token)}`
+                window.location = window.location.protocol + '//' + window.location.hostname + window.location.pathname
+            }
+
+            const tokens = new URLSearchParams(document.cookie).get('account')
+            if(!tokens || tokens === "false") return register()
+            else login(JSON.parse(tokens))
+        }
+    </script>
+</body>
+</html>
