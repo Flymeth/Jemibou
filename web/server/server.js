@@ -4,6 +4,7 @@ const serverProps = require('./configs.json')
 const {variables} = serverProps
 const {getSettings, setSettings} = require('../../commands/settings')
 const stringify = require('json-stringify-safe')
+
 let url404 = `
 <!DOCTYPE html>
 <html lang="en">
@@ -104,15 +105,17 @@ module.exports = function setupServer(vars) {
                 "Content-Type": "text/json; charset=UTF-8"
             })
 
-            const permCode = urlInfos.searchParams.get('code')
-            const perm = new vars.discord.Permissions(parseInt(permCode))
+            const list = urlInfos.searchParams.get('json')
+            const servers = JSON.parse(list)
+            
+            const filtered = servers.filter(srv => {
+                const perms = new vars.discord.Permissions(parseInt(srv.permissions)).toArray()
+                return perms.find(p => p === "MANAGE_GUILD")
+            })
 
-            const end = {
-                code: permCode,
-                list: perm.toArray()
-            }
+            console.log(filtered);
 
-            return res.end(JSON.stringify(end))
+            return res.end(JSON.stringify(filtered))
         }
         
         if(urlInfos.pathname === '/save' && req.method === "POST") {

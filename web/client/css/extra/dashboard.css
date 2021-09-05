@@ -72,6 +72,8 @@ header .top> h1 * {
 
     transition-duration: var(--animDuration);
 
+    border-radius: inherit;
+
     will-change: transform;
 }
 .guild * {

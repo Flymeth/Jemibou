@@ -1,3 +1,9 @@
+# 1.8.1
+> ## website:
+> - improuved dashboard performances & add specific url to go on your dashboard without pass by your server list (http://jemibou.tk/dashboard?guild=YOUR_GUILD_ID) !
+
+---
+
 # 1.8.0
 > ## website (biggest update):
 > - Now the website has a dashboard! see http://jemibou.tk/dashboard !

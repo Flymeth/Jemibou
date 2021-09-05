@@ -23,14 +23,17 @@
     <script src="https://kit.fontawesome.com/c2bce3a9f7.js" crossorigin="anonymous"></script>
 
     <script src="./js/fetch.js"></script>
+    <script src="./js/userDatas.js"></script>
+    <script src="./js/guildsDatas.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/login.js"></script>
     <script src="./js/dashboard.js"></script>
     <script src="./js/setLoading.js"></script>
     <script src="./js/defaultIMG.js"></script>
     <script>
-        const mainContent = document.querySelector('body')
         const accountCookieName = "account"
+        let mainContent = document.querySelector('body')
+        let tokens;
 
         setLoadingTimeout(document.querySelector('.loader'))
 
@@ -41,14 +44,29 @@
                 access: target.get('access_token'),
             }
 
-            if(token.type && token.access) {
-                document.cookie = `${accountCookieName}=${JSON.stringify(token)}`
-                window.location = window.location.protocol + '//' + window.location.hostname + window.location.pathname
+            const params = new URLSearchParams(window.location.search)
+            if(params.get('guild')) {
+                document.cookie = 'guild=' + params.get('guild')
+                return reloadPath()
             }
 
-            const tokens = new URLSearchParams(document.cookie).get('account')
+            if(token.type && token.access) {
+                document.cookie = `${accountCookieName}=${JSON.stringify(token)}`
+                return reloadPath()
+            }
+
+            const cookies = new URLSearchParams(document.cookie.split('; ').join('&'))
+            try {
+                tokens = JSON.parse(cookies.get(accountCookieName))
+            } catch (e) {
+                tokens = false
+            }
             if(!tokens || tokens === "false") return register()
-            else login(JSON.parse(tokens))
+            else login(tokens, cookies.get('guild'))
+        }
+
+        function reloadPath() {
+            window.location = window.location.protocol + '//' + window.location.hostname + window.location.pathname
         }
     </script>
 </body>

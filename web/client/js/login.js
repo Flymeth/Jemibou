@@ -1,12 +1,18 @@
-async function login(token) {
+let user;
+async function login(token, guild) {
     console.log("LOGIN YOU WITH TOKEN " + token.access)
+    user = await getUserDatas(token)
+    if(!user) return register()
+
+    const dashboard = await getTemplate('dashboard')
     
-    const temp = await getTemplate('servers')
-    const datas = await getGuildsDatas(token)
+    mainContent.innerHTML = dashboard
+    mainContent = document.querySelector('.dashboard')
+    
+    // user informations
+    displayUserDatas(user)
 
-    mainContent.innerHTML = temp
-    showGuilds(datas.user, datas.guilds, datas.guild_card)
-
+    // user disconnection
     document.querySelectorAll('.disconnect').forEach(e => {
         e.addEventListener('click', (e) => {
             e.preventDefault()
@@ -15,15 +21,7 @@ async function login(token) {
             window.location.reload()
         })
     })
-}
+    
 
-async function getGuildsDatas(token) {
-    const user = await getUser(token)
-    const guilds = await getGuilds(token)
-    const guild_card = await getTemplate('guild_card')
-    return {
-        user,
-        guilds,
-        guild_card
-    }
+    showGuilds(guild)
 }

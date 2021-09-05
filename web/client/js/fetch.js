@@ -12,8 +12,12 @@ async function getUser(token) {
     return fetch('https://discord.com/api/users/@me', {
         headers: {
             authorization: `${type} ${access}`,
+            "Content-Type": "application/json"
         }
-    }).then(res => res.json())
+    }).then(res => {
+        if(res.ok) return res.json()
+        else return false
+    })
 }
 async function getGuilds(token) {
     if(!token) return false
@@ -23,14 +27,15 @@ async function getGuilds(token) {
     return fetch('https://discord.com/api/users/@me/guilds', {
         headers: {
             authorization: `${type} ${access}`,
+            "Content-Type": "application/json"
         }
-    }).then(res => res.json())
+    }).then(res => {
+        if(res.ok) return res.json()
+        else return false
+    })
     .then(async srv => {
-        const filtered = []
-        for(let s of srv) {
-            const perms = await fetch('/permissions?code=' + s.permissions).then(r => r.json())
-            if(perms.list.find(p => p === "MANAGE_GUILD")) filtered.push(s)
-        }
+        if(!srv) return false
+        const filtered = await fetch('/permissions?json=' + JSON.stringify(srv)).then(r => r.json())
         return filtered
     })
 }

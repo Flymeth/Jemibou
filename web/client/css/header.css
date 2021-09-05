@@ -43,14 +43,15 @@ header nav {
 }
 header nav::-webkit-scrollbar {display: none;}
 
-header a {
+header nav> *{
     padding: 10pt 5pt;
     margin: 0 2.5pt;
     transition: background-color .15s;
     white-space: nowrap;
     color: inherit;
+    cursor: pointer;
 }
-header a:hover {
+header nav> *:hover {
     background-color: rgba(0, 0, 0, .5);
     text-decoration: none;
 }

@@ -1,14 +1,12 @@
-async function showGuilds(user, guilds, guild_card) {
+async function showGuilds(guildID) {
+    setLoading(mainContent)
+
+    const temp = await getTemplate('servers')
+    const {guilds, guild_card} = await getGuildsDatas(tokens)
+    if(!user) return register()
+
     setLoading()
-    
-    user.avatar= `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
-    document.querySelectorAll('*[data-user]').forEach(el => {
-        const need = el.getAttribute('data-user')
-        const value = user[need]
-        if(el.localName === 'img') {
-            el.src= user.avatar
-        }else el.innerText = value
-    })
+    mainContent.innerHTML = temp
 
     const guildContainer = document.querySelector('.guilds_list')
 
@@ -21,7 +19,15 @@ async function showGuilds(user, guilds, guild_card) {
     
     const guildList = []
     for(let guild of guilds) {
+        const reachable = client.guilds.find(g => g === guild.id) ? true : false
+
         guild.icon= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=256`
+
+        if(reachable) {
+            guild.editLink = window.location.protocol + '//' + window.location.hostname + window.location.pathname + '?guild=' + guild.id
+        }else {
+            guild.editLink = configs.invite.start + client.user + configs.invite.end + '&guild_id=' + guild.id
+        }
 
         let card = guild_card
         for(let infos in guild) {
@@ -30,27 +36,37 @@ async function showGuilds(user, guilds, guild_card) {
         const g = {
             guild,
             html: card,
-            reachable: client.guilds.find(g => g === guild.id) ? 1 : 0
+            reachable
         }
 
         guildList.push(g)
+    }
+
+    if(guildID) {
+        const guild = guildList.find(g => g.guild.id === guildID && g.reachable)
+        if(guild) {
+            document.cookie = "guild=false"
+            return editSRV(guild)
+        }
     }
 
     guildList.sort((a, b) => b.reachable - a.reachable)
 
     for(let guild of guildList) {
 
+        const container = document.createElement('a')
+        container.innerHTML = guild.html
+        container.classList.add('guild_container')
+        
         if(!guild.reachable) {
-
-            const container = document.createElement('a')
-            container.href = configs.invite.start + client.user + configs.invite.end + '&guild_id=' + guild.guild.id
+            
+            container.href = guild.guild.editLink
             container.target = 'invite'
             container.classList.add('unreachable')
-            container.innerHTML= guild.html
-            guildContainer.appendChild(container)
-
-        }else guildContainer.innerHTML+= guild.html
-
+            
+        }
+        
+        guildContainer.appendChild(container)
     }
     document.querySelectorAll(':not(.unreachable)> .guild').forEach(e => {
         const guild = guildList.find(g => g.guild.id === e.id.replace('g-', ''))
@@ -73,19 +89,21 @@ async function editSRV(guild, guildContainer, event) {
     for(let infos in guild.guild) {
         editor= editor.split('>' + infos).join(guild.guild[infos])
     }
-    setLoading(false)
+    setLoading()
 
     const dashboardContainer = document.querySelector('.dashboard')
     dashboardContainer.innerHTML= editor
 
     imgDetect()
 
-    const a = document.createElement('a')
+    const a = document.createElement('p')
     a.addEventListener('click', () => {
-        window.location.reload()
+        setTimeout(() => {
+            a.parentElement.removeChild(a)
+        }, 100);
+        showGuilds()
     })
     a.innerText= "servers list"
-    a.href=""
     document.querySelector('nav').insertBefore(a, document.querySelector('nav').firstChild)
 
     // form
