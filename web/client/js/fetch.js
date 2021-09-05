@@ -35,7 +35,10 @@ async function getGuilds(token) {
     })
     .then(async srv => {
         if(!srv) return false
-        const filtered = await fetch('/permissions?json=' + JSON.stringify(srv)).then(r => r.json())
+        const filtered = await fetch('/permissions', {
+            body: JSON.stringify(srv), 
+            method: "POST"
+        }).then(r => r.json())
         return filtered
     })
 }

@@ -76,12 +76,19 @@ module.exports = function setupServer(vars) {
         key: process.env.KEY || fs.readFileSync(serverProps.secures_options.key),
         cert: process.env.CERT || fs.readFileSync(serverProps.secures_options.cert)
     }
-    const srv = https.createServer(secureOptions, (req, res) => {
+    const srv = https.createServer(secureOptions, async (req, res) => {
         let url = req.url.split('/')
         url.shift()
 
         if(url.join('') === '') {
             url[url.length-1] = 'index'
+        }
+
+        let chucks = []
+        if(req.method === "POST") {
+            req.on('data', chuck => {chucks.push(chuck)})
+            await req.on('end', () => {return})
+            chucks.join('&')
         }
 
         const urlInfos = new URL('http://' + req.headers.host + "/" + url.join('/'))
@@ -105,29 +112,22 @@ module.exports = function setupServer(vars) {
                 "Content-Type": "text/json; charset=UTF-8"
             })
 
-            const list = urlInfos.searchParams.get('json')
-            const servers = JSON.parse(list)
-            
+            const servers = JSON.parse(chucks)
+
             const filtered = servers.filter(srv => {
                 const perms = new vars.discord.Permissions(parseInt(srv.permissions)).toArray()
                 return perms.find(p => p === "MANAGE_GUILD")
             })
 
-            console.log(filtered);
-
             return res.end(JSON.stringify(filtered))
         }
         
         if(urlInfos.pathname === '/save' && req.method === "POST") {
-            const chucks= []
-            req.on('data', (c) => chucks.push(c.toString()))
-            req.on('end', async () => {
-                const queryPOST = new URLSearchParams(chucks.join('&'))
-                const channel = vars.client.channels.cache.get(queryPOST.get('channel'))
-                if(!channel) return res.end("false")
-                const success = setSettings(channel, vars)
-                res.end(success.toString())
-            })
+            const queryPOST = new URLSearchParams(chucks)
+            const channel = vars.client.channels.cache.get(queryPOST.get('channel'))
+            if(!channel) return res.end("false")
+            const success = setSettings(channel, vars)
+            res.end(success.toString())
 
             return
         }
