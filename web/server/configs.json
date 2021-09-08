@@ -10,5 +10,6 @@
     "variables": {
         "prefix": "$",
         "suffix": ";"
-    }
+    },
+    "modules_folder": "./apis/"
 }

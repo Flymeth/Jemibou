@@ -2,6 +2,11 @@ async function getVars() {
     return fetch('/getVars', {
         method: "GET"
     }).then(res => res.json())
+    .then(res => {
+        if(res.code === 200) {
+            return res.value
+        }else return false
+    })
 }
 
 async function getUser(token) {
@@ -39,6 +44,11 @@ async function getGuilds(token) {
             body: JSON.stringify(srv), 
             method: "POST"
         }).then(r => r.json())
+        .then(res => {
+            if(res.code === 200) {
+                return res.value
+            }else return false
+        })
         return filtered
     })
 }

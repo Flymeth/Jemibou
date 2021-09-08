@@ -2,7 +2,7 @@ const https = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
-const {getSettings, setSettings} = require('../../commands/settings')
+const {getSettings} = require('../../commands/settings')
 const stringify = require('json-stringify-safe')
 
 let url404 = `
@@ -76,6 +76,26 @@ module.exports = function setupServer(vars) {
         key: process.env.KEY || fs.readFileSync(serverProps.secures_options.key),
         cert: process.env.CERT || fs.readFileSync(serverProps.secures_options.cert)
     }
+
+    // modules
+    const modulesList = fs.readdirSync('./web/server/' + serverProps.modules_folder)
+    const modules = []
+    for(let m of modulesList) {
+        if(!m.endsWith('.js')) continue
+
+        try {
+            var el = require(serverProps.modules_folder + m.replace('.js',''))
+        } catch (e) {
+            console.log(e);
+            continue
+        }
+
+        if(el && el.active) {
+            modules.push(el)
+            console.log("(server): url " + el.url + " is now set as a module!");
+        }
+    }
+
     const srv = https.createServer(secureOptions, async (req, res) => {
         let url = req.url.split('/')
         url.shift()
@@ -84,11 +104,11 @@ module.exports = function setupServer(vars) {
             url[url.length-1] = 'index'
         }
 
-        let chucks = []
+        let chunks = []
         if(req.method === "POST") {
-            req.on('data', chuck => {chucks.push(chuck)})
+            req.on('data', chuck => {chunks.push(chuck.toString())})
             await req.on('end', () => {return})
-            chucks.join('&')
+            chunks.join('&')
         }
 
         const urlInfos = new URL('http://' + req.headers.host + "/" + url.join('/'))
@@ -99,38 +119,30 @@ module.exports = function setupServer(vars) {
             path+= '.' + serverProps.defaultExtention.replace('.','')
         }
 
-        if(urlInfos.pathname === '/getVars') {
-            res.writeHead(200, {
-                "Content-Type": "text/json; charset=UTF-8"
-            })
-            const response = stringify(vars)
-            return res.end(response)
+        const module = modules.find(m => m.url === urlInfos.pathname && m.method === req.method)
+        if(module) {
+
+            const response = {
+                request: module.url,
+                method: req.method,
+                value: await module.value(vars, urlInfos, chunks)
+            }
+            if(response) {
+                res.writeHead(200, {
+                    "Content-Type": "text/json; charset=UTF-8"
+                })
+                response.code = 200
+            }else {
+                res.writeHead(500, {
+                    "Content-Type": "text/json; charset=UTF-8"
+                })
+                response.code = 500
+                response.message = "error server"
+            }
+
+            return res.end(stringify(response))
         }
 
-        if(urlInfos.pathname === '/permissions') {
-            res.writeHead(200, {
-                "Content-Type": "text/json; charset=UTF-8"
-            })
-
-            const servers = JSON.parse(chucks)
-
-            const filtered = servers.filter(srv => {
-                const perms = new vars.discord.Permissions(parseInt(srv.permissions)).toArray()
-                return perms.find(p => p === "MANAGE_GUILD")
-            })
-
-            return res.end(JSON.stringify(filtered))
-        }
-        
-        if(urlInfos.pathname === '/save' && req.method === "POST") {
-            const queryPOST = new URLSearchParams(chucks)
-            const channel = vars.client.channels.cache.get(queryPOST.get('channel'))
-            if(!channel) return res.end("false")
-            const success = setSettings(channel, vars)
-            res.end(success.toString())
-
-            return
-        }
 
         fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
             if(err) {

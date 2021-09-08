@@ -122,7 +122,9 @@ async function editSRV(guild, guildContainer, event) {
         const success = await fetch(form.action, {
             method: form.method,
             body: query
-        }).then(res=> res.text()).then(v=> v == "true")
+        }).then(res=> res.text()).then(res => {
+            return res.code === 200
+        })
 
         form.classList.remove('saving')
 
