@@ -139,7 +139,7 @@ async function editSRV(guild, guildContainer, event) {
         responseDIV.style.setProperty('--closeAnim', anim + 's')
 
         const successMSG = {
-            true: "You settings is now saved!",
+            true: "Your settings is now saved!",
             false: "Oups: please verify each settings parameters and re-try!"
         }
 
