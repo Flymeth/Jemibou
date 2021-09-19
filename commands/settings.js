@@ -206,6 +206,6 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
     if(getChannelId) {
         findedSettings.channel = channelID
     }
-
+    
     if(findedSettings) return findedSettings
 }
