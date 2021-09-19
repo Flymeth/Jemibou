@@ -25,8 +25,9 @@ module.exports = {
         for(let set in settings) {
             let setting = settings[set]
             if(!setting.modifiable) continue
-            let actually = settingValue[set] || setting.value
-            if(!actually || actually.length === 0) actually = "unset"
+            let actually = settingValue[set]
+            if(actually === undefined) actually = setting.value
+            if(actually === undefined || actually.length === 0) actually = "unset"
 
             let extra = ""
             for(let note in notationsCaracts) {

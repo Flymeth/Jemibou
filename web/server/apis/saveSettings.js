@@ -6,12 +6,15 @@ module.exports = {
     active: true,
 
     value: (vars, url, chuncks) => {
-        const queryPOST = new URLSearchParams(chuncks)
+        if(!chuncks) return false
 
-        const channel = vars.client.channels.cache.get(queryPOST.get('channel'))
-        if(!channel) return undefined
+        const {guildID, settings} = JSON.parse(chuncks)
+        if(!guildID || !settings) return undefined
 
-        const success = setSettings(channel, vars)
-        return "saved!"
+        const guild = vars.client.guilds.cache.get(guildID)
+        if(!guild) return undefined
+
+
+        return setSettings(guild, vars, settings)
     }
 }

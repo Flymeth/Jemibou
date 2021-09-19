@@ -1,0 +1,119 @@
+/* servers */
+.guilds_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15pt;
+    max-width: 725pt;
+    margin: 15pt auto;
+}
+.guilds_list> * {
+    margin: 5pt 10pt;
+    border-radius: 5pt;
+}
+
+.guild {
+    --animDuration: .15s;
+
+    width: 125pt;
+    height: 175pt;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    background-color: var(--bg-hero);
+
+    transition-duration: var(--animDuration);
+
+    border-radius: inherit;
+
+    will-change: transform;
+}
+.guild * {
+    transition-duration: var(--animDuration);
+    transition-timing-function: ease-out;
+}
+
+.guild img {
+    width: 35%;
+    border-radius: 25%;
+    transition: .15s;
+}
+.guild h3 {
+    text-align: center;
+    font-size: 12.5pt;
+    padding: 0 .25pt;
+    width: inherit;
+    max-height: 50pt;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.guild h3::before {content: ""}
+
+:not(.unreachable)> .guild:hover {
+    z-index: 1;
+    transform: scale(1.05);
+    box-shadow: 2px 4px 25px -1px rgba(0,0,0,0.54);
+}
+
+:not(.unreachable)> .guild:hover img {
+    border-radius: 2.5pt;
+}
+
+.unreachable {
+    position: relative;
+    cursor: not-allowed;
+    overflow: hidden;
+}
+.unreachable::before {
+    content: "Invite me on your guild to unlock the dashboard. (click)";
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background-color: rgba(0, 0, 0, .5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-weight: 900;
+
+    opacity: 0;
+
+    transition: all .5s;
+
+    z-index: 1;
+}
+.unreachable:hover::before {
+    opacity: 1;
+}
+
+.unreachable> .guild {
+    filter: grayscale(1) brightness(0.4);
+    cursor: not-allowed;
+
+    overflow: hidden;
+}
+.unreachable:hover> .guild {
+    filter: grayscale(1) brightness(0.15);
+    cursor: not-allowed;
+
+    overflow: hidden;
+}

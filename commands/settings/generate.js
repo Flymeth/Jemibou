@@ -8,12 +8,12 @@ module.exports = {
     },
     run: async (e, vars, args) => {
         let settings  = await getSettings(e.guild.id, vars, true)
-        if(settings.channelID) {
-            return e.reply('Your settings channel is here: <#' + settings.channelID + ">!")
+        if(settings.channel) {
+            return e.reply('Your settings channel is here: <#' + settings.channel + ">!")
         }
 
         e.guild.channels.create(vars.client.user.username + '-settings', {type: 'text', topic: 'write bot\'s settings here!'}).then(c => {
-            let set = setSettings(c, vars)
+            let set = setSettings(e.guild, vars, {channel: c.id})
 
             if(set) {
                 e.reply('You channel has been generate here: <#' + c + ">").then(msg => vars.setEndMessage(msg, "👍"))

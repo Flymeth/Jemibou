@@ -18,7 +18,7 @@ module.exports = {
 
         if(!channel || !channel.isText()) return e.reply('Please indicate a text channel!')
 
-        let set = setSettings(channel, vars)
+        let set = setSettings(e.guild, vars, {channel: e.channel.id})
 
         if(set) {
             e.reply(`Settings channel set to <#${channel.id}>!`).then(msg => vars.setEndMessage(msg, "💜"))

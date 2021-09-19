@@ -31,7 +31,7 @@ module.exports = {
 
         let embed = new vars.discord.MessageEmbed()
         .setDescription(`This is the avatar of <@${userAvatar.id}>:`)
-        .setImage(userAvatar.avatarURL({dynamic: true, size: 4096}))
+        .setImage(userAvatar.avatarURL({dynamic: true, size: 4096, format: 'png'}))
         .setColor(e.guild.members.cache.get(userAvatar.id).roles.highest.color || "RANDOM")
 
         e.channel.send(embed)

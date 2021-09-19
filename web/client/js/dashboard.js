@@ -54,16 +54,19 @@ async function showGuilds(guildID) {
 
     for(let guild of guildList) {
 
-        const container = document.createElement('a')
+        const containerType = {
+            true: 'div',
+            false: 'a'
+        }
+
+        const container = document.createElement(containerType[guild.reachable])
         container.innerHTML = guild.html
         container.classList.add('guild_container')
         
         if(!guild.reachable) {
-            
             container.href = guild.guild.editLink
             container.target = 'invite'
             container.classList.add('unreachable')
-            
         }
         
         guildContainer.appendChild(container)
@@ -79,6 +82,8 @@ async function showGuilds(guildID) {
     imgDetect()
 }
 
+
+// guild settings editor
 async function editSRV(guild, guildContainer, event) {
     setLoading(guildContainer)
 
@@ -106,23 +111,96 @@ async function editSRV(guild, guildContainer, event) {
     a.innerText= "servers list"
     document.querySelector('nav').insertBefore(a, document.querySelector('nav').firstChild)
 
-    // form
+    const settings = (await getGuildSettings(guild.guild.id)).value
+    // salon inchangeable depuis le dashboard
+    if(settings.channel) delete settings.channel
+
     const form = document.querySelector('form')
+    // form create
+    const baseSettings = (await getVars()).settings
+    const typeInputsBySetting = {
+        string: "text",
+        number: "number",
+        boolean: "checkbox",
+        object: "text" 
+    }
+
+    function getType(setting) {
+        return typeof baseSettings[setting].value
+    }
+
+    function changeType(setting, element) {
+        if(getType(setting) === "string") return element
+        else if(getType(setting) === "boolean") return element.toString() === "true"
+        else if(getType(setting) === "object") {
+            if(typeof element === "object") {
+                return element.join(',')
+            }else {
+                if(!element) return []
+                else return element.split(',')
+            }
+        }
+        else return element
+    }
+    
+    for(let setting in settings) {
+        const settingContainer = document.createElement('div')
+        settingContainer.classList.add('setting-container')
+
+        const settingType = getType(setting)
+        const type = typeInputsBySetting[settingType]
+        const hint = baseSettings[setting].desc
+
+        const settingName = document.createElement('h3')
+        settingName.innerText = setting
+
+        const label = document.createElement('label')
+        label.for = setting
+        label.innerText = hint
+
+        const input = document.createElement('input')
+        input.type = type
+        input.placeholder = "Change your setting"
+        input.name = setting
+        input.id = setting
+
+        const value = changeType(setting, settings[setting])
+        if(type === "checkbox") input.checked = value
+        else input.value = value
+
+        label.append(input)
+
+        settingContainer.appendChild(settingName)
+        settingContainer.appendChild(label)
+
+        form.insertBefore(settingContainer, form.children[form.children.length])
+    }
+    
+    // form submit
     form.onsubmit = async (e) => {
         e.preventDefault()
 
         form.classList.add('saving')
 
-        let query= ""
+
+        let query= {
+            guildID: guild.guild.id,
+            settings: {settings: {}}
+        }
         form.querySelectorAll('*[name]').forEach(e => {
-            if(query) query+= "&"
-            query+= e.name + "=" + e.value
+            if(e.type === "checkbox") {
+                var value = changeType(e.name, e.checked)
+            }else {
+                var value = changeType(e.name, e.value)
+            }
+
+            query.settings.settings[e.name]= value
         })
 
-        const success = await fetch(form.action, {
+        const success = await fetch('/save', {
             method: form.method,
-            body: query
-        }).then(res=> res.text()).then(res => {
+            body: JSON.stringify(query)
+        }).then(res=> res.json()).then(res => {
             return res.code === 200
         })
 

@@ -87,41 +87,32 @@ module.exports = {
 
 /**
  * 
- * @param {Discord.Channel} channel The channel
+ * @param {Discord.Channel} guild The guild
  * @param {*} vars the vars
+ * @param {Object} input The input
  * @returns {Boolean} true if done, false else
  */
- module.exports.setSettings = (channel, vars, input) => {
+ module.exports.setSettings = (guild, vars, input) => {
     try {
-        var file = fs.readFileSync(settings.path, {encoding: "utf-8"})
-    } catch (err) {
-        vars.log(err)
-        return false
-    }
-    
-    if(file) {
-        try {
-            var guildsSettings = JSON.parse(file)
-        } catch (err) {
-            vars.log(err)
-            return false
-        }
-    }else {
-        var guildsSettings = {}
-    }
-
-    guildsSettings[channel.guild.id] = {}
-    guildsSettings[channel.guild.id].channel = channel.id
-    if(input) guildsSettings[channel.guild.id].settings = input
-
-    try {
-        var file = fs.writeFileSync(settings.path, JSON.stringify(guildsSettings), {encoding: 'utf-8'})
+        var guildsSettings = require('.' + settings.path)
     } catch (err) {
         vars.log(err)
         return false
     }
 
-    return true
+    if(!guildsSettings[guild.id]) guildsSettings[guild.id] = {}
+
+    if(input.channel) guildsSettings[guild.id].channel = input.channel
+    if(input.settings) guildsSettings[guild.id].settings = input.settings
+
+    try {
+        fs.writeFileSync(settings.path, JSON.stringify(guildsSettings), {encoding: 'utf-8'})
+    } catch (err) {
+        vars.log(err)
+        return false
+    }
+
+    return "saved"
 }
 
 /**
@@ -138,20 +129,9 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
     }
 
     try {
-        var file = fs.readFileSync(settings.path)
-    } catch (err) {
+        jsonFile= require('.' + settings.path)
+    } catch (e) {
         vars.log(err)
-        return findedSettings
-    }
-
-    if(file) {
-        try {
-            var jsonFile = JSON.parse(file)
-        } catch (err) {
-            vars.log(err)
-            return findedSettings
-        }
-    }else {
         return findedSettings
     }
 
@@ -159,9 +139,14 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
     const channelID = jsonFile[guildId].channel
     const guildSettings = jsonFile[guildId].settings
 
-    if(!channelID) return findedSettings
-    else if(guildSettings) findedSettings= guildSettings
-
+    
+    if(!channelID && !guildSettings) return findedSettings
+    if(guildSettings) {
+        for(let setting in findedSettings) {
+            if(guildSettings[setting] !== undefined) findedSettings[setting] = guildSettings[setting]
+        }
+    }
+    
     let guild = vars.client.guilds.cache.get(guildId)
     if(!guild) return false
     let channel = guild.channels.cache.get(channelID)
@@ -219,7 +204,7 @@ module.exports.getSettings = async (guildId, vars, getChannelId) => {
     })
 
     if(getChannelId) {
-        findedSettings.channelID = channelID
+        findedSettings.channel = channelID
     }
 
     if(findedSettings) return findedSettings

@@ -12,6 +12,8 @@ async function login(token, guild) {
     // user informations
     displayUserDatas(user)
 
+    clickEvent()
+
     // user disconnection
     document.querySelectorAll('.disconnect').forEach(e => {
         e.addEventListener('click', (e) => {

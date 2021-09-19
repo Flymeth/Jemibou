@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🔨 Dashboard</title>
+    <meta name="description" content="Config your servers' settings!">
 
     <link rel="stylesheet" href="./css/extra/dashboard.css">
     <link rel="stylesheet" href="./css/__style.css">
@@ -30,6 +31,7 @@
     <script src="./js/dashboard.js"></script>
     <script src="./js/setLoading.js"></script>
     <script src="./js/defaultIMG.js"></script>
+    <script src="./js/clickEvents.js"></script>
     <script>
         const accountCookieName = "account"
         let mainContent = document.querySelector('body')
@@ -61,6 +63,7 @@
             } catch (e) {
                 tokens = false
             }
+            
             if(!tokens || tokens === "false") return register()
             else login(tokens, cookies.get('guild'))
         }

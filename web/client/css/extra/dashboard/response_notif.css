@@ -1,0 +1,91 @@
+/* response message */
+body {position: relative;}
+form .response {
+    position: fixed;
+    bottom: 15pt;
+    right: 15pt;
+
+    padding: 5pt;
+
+    border-radius: 2.5pt;
+    background-color: var(--bg-hero);
+
+    border-style: solid;
+    border-width: 0 2.5pt 0 0;
+
+    max-width: 250pt;
+}
+form .response::before {
+    content: "";
+    height: 2.5pt;
+    width: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    border-radius: 100pt 100pt 0 0;
+
+    transform: translateX(-50%);
+
+    animation: beforeTimeout linear;
+    animation-duration: var(--timeout);
+}
+@keyframes beforeTimeout {
+    0% {
+        width: 0;
+    }
+    90% {
+        width: 90%;
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        width: 90%;
+    }
+}
+
+form .response[data-success=true] {
+    border-color: greenyellow;
+}
+form .response[data-success=true]::before {
+    background-color: greenyellow;
+}
+form .response[data-success=true] .cross {
+    background-color: greenyellow;
+    color: black;
+}
+
+form .response[data-success=false] {
+    border-color: red;
+}
+form .response[data-success=false]::before {
+    background-color: red;
+}
+form .response[data-success=false] .cross {
+    background-color: red;
+}
+
+form .response .cross {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 15pt;
+    height: 15pt;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form .response svg {
+    height: 100%;
+    width: 100%;
+}
+
+/* when close response */
+form .response.closed {
+    opacity: 0;
+    transition-duration: var(--closeAnim);
+    transition-property: all;
+}

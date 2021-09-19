@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="../css/extra/dashboard.css">
 <header>
-    <div class="top">
-        <h1><img src="" alt="Icon of user" data-user="icon"> <span data-user="username"></span>'s dashboard</h1>
+    <h1><span data-user="username"></span>'s dashboard</h1>
+    <div class="user">
+        <img src="" alt="Icon of user" data-user="icon" class="clickEvent" data-type="toggle" data-classTo="header">
+        
+        <nav>
+            <a href="/">Home</a>
+            <a href="" class="disconnect">disconnect</a>
+        </nav>
     </div>
-    <nav>
-        <a href="/">Home</a>
-        <a href="" class="disconnect">disconnect</a>
-    </nav>
 </header>
 <main class="dashboard"></main>

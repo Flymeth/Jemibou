@@ -1,3 +1,12 @@
+# 1.9.0
+> ## commands:
+> - `avatar`: now the picture is in png if it's not dynamic.
+> ## website:
+> - You can now change each bot's setting directly from the dashboard. Go on jemibou.tk/dashboard !
+> - Changed dashboard display for smaller screen size
+
+---
+
 # 1.8.1
 > ## website:
 > - improuved dashboard performances & add specific url to go on your dashboard without pass by your server list (http://jemibou.tk/dashboard?guild=YOUR_GUILD_ID) !

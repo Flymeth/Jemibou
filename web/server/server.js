@@ -4,6 +4,7 @@ const serverProps = require('./configs.json')
 const {variables} = serverProps
 const {getSettings} = require('../../commands/settings')
 const stringify = require('json-stringify-safe')
+const awaitEvents = require('../../tools/awaitEvents')
 
 let url404 = `
 <!DOCTYPE html>
@@ -109,132 +110,127 @@ module.exports = function setupServer(vars) {
             req.on('data', chunk => {
                 datas+=chunk.toString()
             })
-            req.once('end', () => {
-                return continueProcess(datas)
-            })
-        }else {
-            return continueProcess(datas)
+            await awaitEvents.await(req, 'end')
         }
 
-        async function continueProcess(body) {
-            const urlInfos = new URL('http://' + req.headers.host + "/" + url.join('/'))
-    
-            let path = urlInfos.pathname
-            let extention = path.split('.')[1]
-            if(!extention) {
-                path+= '.' + serverProps.defaultExtention.replace('.','')
+        const urlInfos = new URL('http://' + req.headers.host + "/" + url.join('/'))
+
+        let path = urlInfos.pathname
+        let extention = path.split('.')[1]
+        if(!extention) {
+            path+= '.' + serverProps.defaultExtention.replace('.','')
+        }
+
+        // chercher si l'url est un module (et si c'est le cas l'executer)
+        const module = modules.find(m => m.url === urlInfos.pathname && m.method === req.method)
+        if(module) {
+            const response = {
+                request: module.url,
+                method: req.method,
+                value: await module.value(vars, urlInfos, datas)
             }
-    
-            const module = modules.find(m => m.url === urlInfos.pathname && m.method === req.method)
-            if(module) {
-                const response = {
-                    request: module.url,
-                    method: req.method,
-                    value: await module.value(vars, urlInfos, body)
-                }
-                if(response) {
-                    res.writeHead(200, {
-                        "Content-Type": "text/json; charset=UTF-8"
-                    })
-                    response.code = 200
+            if(response.value !== undefined) {
+                res.writeHead(200, {
+                    "Content-Type": "text/json; charset=UTF-8"
+                })
+                response.code = 200
+            }else {
+                res.writeHead(500, {
+                    "Content-Type": "text/json; charset=UTF-8"
+                })
+                response.code = 500
+                response.message = "error server"
+            }
+
+            return res.end(stringify(response))
+        }
+
+
+        fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
+            if(err) {
+                res.writeHead(404, {
+                    "Content-Type": "*/*; charset=UTF-8"
+                })
+                if(serverProps["404File"] == null || !serverProps["404File"]) {
+                    res.write(url404.replace('{{ err }}', err))
                 }else {
-                    res.writeHead(500, {
-                        "Content-Type": "text/json; charset=UTF-8"
+                    fs.readFile(serverProps["404File"], 'utf-8', (readErr, fileData) => {
+                        if(readErr) {
+                            res.write(url404.replace('{{ err }}', readErr))
+                        }else {
+                            res.write(fileData.replace('{{ err }}', err))
+                        }
                     })
-                    response.code = 500
-                    response.message = "error server"
                 }
-    
-                return res.end(stringify(response))
-            }
-    
-    
-            fs.readFile(serverProps.defaultHtmlPath + decodeURI(path.replace('/','')), async (err, data) => {
-                if(err) {
-                    res.writeHead(404, {
-                        "Content-Type": "*/*; charset=UTF-8"
-                    })
-                    if(serverProps["404File"] == null || !serverProps["404File"]) {
-                        res.write(url404.replace('{{ err }}', err))
-                    }else {
-                        fs.readFile(serverProps["404File"], 'utf-8', (readErr, fileData) => {
-                            if(readErr) {
-                                res.write(url404.replace('{{ err }}', readErr))
-                            }else {
-                                res.write(fileData.replace('{{ err }}', err))
-                            }
+            }else {
+
+                const canUseVars = req.headers.accept?.includes("text")
+                if(canUseVars) {
+                    data = data.toString()
+                    
+                    let args = []
+                    for(let argument of data.split(variables.prefix)) {
+                        let v = argument.slice(0, argument.indexOf(variables.suffix))
+                        if(!v || v.includes(" ")) continue
+                        args.push({
+                            path: v.split('.')
                         })
                     }
-                }else {
-    
-                    const canUseVars = req.headers.accept?.includes("text")
-                    if(canUseVars) {
-                        data = data.toString()
+
+                    if(args) {
+                        var infos = {...vars}
+
+                        infos.changelog = fs.readFileSync('./changelog.md').toString().split('---').find(txt => txt.includes(vars.package.version)).split('`').join(Infinity)
                         
-                        let args = []
-                        for(let argument of data.split(variables.prefix)) {
-                            let v = argument.slice(0, argument.indexOf(variables.suffix))
-                            if(!v || v.includes(" ")) continue
-                            args.push({
-                                path: v.split('.')
-                            })
+                        if(urlInfos.pathname === '/settings') {
+                            const id = urlInfos.searchParams.get('guild')
+                            if(id) {
+                                const params = await getSettings(id, vars, true)
+                                if(params.channelID) infos.guildSettings = JSON.stringify(params)
+                            }
                         }
-    
-                        if(args) {
-                            var infos = {...vars}
-    
-                            infos.changelog = fs.readFileSync('./changelog.md').toString().split('---').find(txt => txt.includes(vars.package.version)).split('`').join(Infinity)
+                        
+                        for(let v of args) {
+                            let path = [...v.path]
+                            let value = infos
                             
-                            if(urlInfos.pathname === '/settings') {
-                                const id = urlInfos.searchParams.get('guild')
-                                if(id) {
-                                    const params = await getSettings(id, vars, true)
-                                    if(params.channelID) infos.guildSettings = JSON.stringify(params)
-                                }
-                            }
-                            
-                            for(let v of args) {
-                                let path = [...v.path]
-                                let value = infos
+                            while(path.length) {
+                                const goTo = path.shift().replace('()', '')
+                                value = value[goTo]
                                 
-                                while(path.length) {
-                                    const goTo = path.shift().replace('()', '')
-                                    value = value[goTo]
-                                    
-                                    if(typeof value === "function") {
-                                        try {
-                                            value = await value.call()
-                                        } catch (err) {
-                                            value = undefined
-                                            break
-                                        }
+                                if(typeof value === "function") {
+                                    try {
+                                        value = await value.call()
+                                    } catch (err) {
+                                        value = undefined
+                                        break
                                     }
-                                    if(!value) break
                                 }
-                                
-                                if(!value) v.value = "undefined"
-                                else {
-                                    if(typeof value === "object") v.value = JSON.stringify(value)
-                                    else v.value = value
-                                }
-                                
-                                const needSplit = variables.prefix + v.path.join('.') + variables.suffix
-                                data = data.split(needSplit).join(v.value)
+                                if(!value) break
                             }
+                            
+                            if(!value) v.value = "undefined"
+                            else {
+                                if(typeof value === "object") v.value = JSON.stringify(value)
+                                else v.value = value
+                            }
+                            
+                            const needSplit = variables.prefix + v.path.join('.') + variables.suffix
+                            data = data.split(needSplit).join(v.value)
                         }
                     }
-    
-                    let accepts = req.headers.accept?.split(",").find(a => a.includes(path.split('.').pop()))
-                    res.writeHead(200, {
-                        "Content-Type": (accepts || "*/*") + "; charset=UTF-8"
-                    })
-    
-                    res.write(data)
                 }
-                res.end()
-    
-            })
-        }
+
+                let accepts = req.headers.accept?.split(",").find(a => a.includes(path.split('.').pop()))
+                res.writeHead(200, {
+                    "Content-Type": (accepts || "*/*") + "; charset=UTF-8"
+                })
+
+                res.write(data)
+            }
+            res.end()
+
+        })
     }).listen(process.env.PORT || serverProps.port).on('listening', () => {
         console.log(`server listening on port ${srv.address().port} !`);
         console.info('go to: %clocalhost:'+srv.address().port, 'color: cyan;')

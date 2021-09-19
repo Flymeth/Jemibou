@@ -58,3 +58,8 @@ async function getTemplate(template) {
 
     return fetch('./templates/' + template).then(res => res.text())
 }
+
+async function getGuildSettings(guildId) {
+    return await fetch('/getSettings?guild=' + guildId)
+    .then(res => res.json())
+}

@@ -43,9 +43,9 @@
     content: 'The current operation takes a long time... Try to refresh the page or using the main domain name: https://jemibou.herokuapp.com.';
     position: absolute;
     top: 175%;
-    left: 0;
-    width: 100%;
-    transform: translateY(50%);
+    left: 50%;
+    width: 90vw;
+    transform: translate(-50%, 50%);
     z-index: -1;
 
     text-align: center;
@@ -55,5 +55,5 @@
 }
 .loader.timeout::before {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
 }

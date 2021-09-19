@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/__style.css">
     <meta name="description" content="$package.description;">
 
-    <meta property="og:title" content="JEMIBOU - v$package.version;">
+    <meta property="og:title" content="JEMIBOU">
     <meta property="og:type" content="website">
     <meta property="theme-color" content="var(--extra-color)">
     <meta property="og:description" content="$package.description;">
@@ -32,12 +32,12 @@
         </a>
     </div>
 
-    <div class="indev no-select">
+    <!-- <div class="indev no-select">
         <div class="cross clickEvent" data-classTo=".indev">
             <i class="fas fa-times"></i>
         </div>
         <p>You're viewing a preview version of the website. So if there isn't a lot of content or if there are some bugs, it's totally normal.</p>
-    </div>
+    </div> -->
 
     <header class="no-select">
         <div class="top">
@@ -122,23 +122,9 @@
     <script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
 
     <script src="./js/fetch.js"></script>
-
+    <script src="./js/clickEvents.js"></script>
 
     <script>
-        // For each elements with class "clickEvent":
-        document.querySelectorAll(".clickEvent").forEach(el => {
-            
-            // Add them a click event:
-            el.addEventListener('click', (e) => {
-                const queryAddClass = el.getAttribute('data-classTo').split(' ').join('').split(',')
-
-                if(!queryAddClass) return
-                queryAddClass.forEach(query => {
-                    document.querySelectorAll(query).forEach(q => q.classList.add('clicked'))
-                })
-            })
-        })
-
         function setTable(commands) {
             const body = document.querySelector('table.commands > tbody')
 
