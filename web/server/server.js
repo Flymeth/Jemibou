@@ -182,14 +182,6 @@ module.exports = function setupServer(vars) {
 
                         infos.changelog = fs.readFileSync('./changelog.md').toString().split('---').find(txt => txt.includes(vars.package.version)).split('`').join(Infinity)
                         
-                        if(urlInfos.pathname === '/settings') {
-                            const id = urlInfos.searchParams.get('guild')
-                            if(id) {
-                                const params = await getSettings(id, vars, true)
-                                if(params.channelID) infos.guildSettings = JSON.stringify(params)
-                            }
-                        }
-                        
                         for(let v of args) {
                             let path = [...v.path]
                             let value = infos

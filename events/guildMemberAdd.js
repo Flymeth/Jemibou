@@ -8,10 +8,9 @@ module.exports = {
         let settings = await getSettings(e.guild.id, vars)
 
         const executeIfBot = settings.joinMessageIfBot.toString().toLowerCase() === "true"
-        
-        if(!settings.joinMessage || !settings.joinMessageChannel || (!executeIfBot && e.user.bot)) return
+        if(!executeIfBot && e.user.bot) return
 
-        let channel = e.guild.channels.cache.get(settings.joinMessageChannel.replace('<#', '').replace('>', ''))
+        let channel = e.guild.channels.cache.get(settings.joinMessageChannel)
 
         const variablesContent = await get(e)
 
@@ -32,7 +31,7 @@ module.exports = {
         }
 
         for(let roleTarget of settings.joinAutoRoles) {
-            const role = await e.guild.roles.fetch(roleTarget.replace('<@&', '').replace('>',''))
+            const role = await e.guild.roles.fetch(roleTarget)
             if(role && role.editable) {
                 try {
                     e.roles.add(role)
@@ -42,7 +41,7 @@ module.exports = {
             }
         }
 
-        if(channel) {
+        if(channel && finalyMsg) {
             try {
                 channel.send(finalyMsg)
             } catch (err) {

@@ -1,3 +1,12 @@
+# 2.0.0
+> ## commands:
+> - `dashboard`: new command that send you a link to your guild's dashboard.
+> ## website:
+> - Better dashboard display (better that better)
+> - Removed settings displayer on the website
+
+---
+
 # 1.9.0
 > ## commands:
 > - `avatar`: now the picture is in png if it's not dynamic.

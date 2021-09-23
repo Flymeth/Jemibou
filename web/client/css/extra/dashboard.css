@@ -2,6 +2,8 @@
 @import 'dashboard/guilds.css';
 @import 'dashboard/noguilds.css';
 @import 'dashboard/response_notif.css';
+@import 'dashboard/textVariables.css';
+@import 'dashboard/forms.css';
 
 header {
     position: -webkit-sticky;

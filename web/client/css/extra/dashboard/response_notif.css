@@ -1,6 +1,9 @@
 /* response message */
 body {position: relative;}
 form .response {
+    --color-saved: #26c94f;
+    --color-error: #d91c1c;
+
     position: fixed;
     bottom: 15pt;
     right: 15pt;
@@ -44,24 +47,24 @@ form .response::before {
 }
 
 form .response[data-success=true] {
-    border-color: greenyellow;
+    border-color: var(--color-saved);
 }
 form .response[data-success=true]::before {
-    background-color: greenyellow;
+    background-color: var(--color-saved);
 }
 form .response[data-success=true] .cross {
-    background-color: greenyellow;
+    background-color: var(--color-saved);
     color: black;
 }
 
 form .response[data-success=false] {
-    border-color: red;
+    border-color: var(--color-error);
 }
 form .response[data-success=false]::before {
-    background-color: red;
+    background-color: var(--color-error);
 }
 form .response[data-success=false] .cross {
-    background-color: red;
+    background-color: var(--color-error);
 }
 
 form .response .cross {

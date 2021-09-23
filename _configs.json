@@ -88,58 +88,70 @@
                 "value": ".",
                 "desc": "The bot's prefix in your server",
                 "modifiable": true,
-                "isParagraph": true
+                "isParagraph": true,
+                "required": true,
+                "type": "string/string"
             },
             "bannedWords": {
                 "value": [],
                 "desc": "The banned words of your server.",
-                "modifiable": true
+                "modifiable": true,
+                "webHint": "seperated by a space",
+                "type": "string/strings"
             },
             "joinMessageChannel": {
                 "value": "",
                 "desc": "the channel where join message will be send",
-                "modifiable": true
+                "modifiable": true,
+                "type": "list/text-channel"
             },
             "joinMessage": {
                 "value": "Welcome to {{user}}! 🎉",
                 "desc": "Value of the join message",
                 "modifiable": true,
                 "variables": true,
-                "isParagraph": true
+                "isParagraph": true,
+                "type": "text/string"
             },
             "joinMessageDM": {
                 "value": "",
                 "desc": "Value of the join message sent to the user that joined the server",
                 "modifiable": true,
                 "variables": true,
-                "isParagraph": true
+                "isParagraph": true,
+                "type": "text/string"
             },
             "joinAutoRoles": {
                 "value": [],
                 "desc": "Roles that are added to the user that joined",
-                "modifiable": true
+                "modifiable": true,
+                "type": "list/roles"
             },
             "joinMessageIfBot": {
                 "value": true,
                 "desc": "If yes or no (can only be `true` or `false`) join message system works if the joiner is a bot",
-                "modifiable": true
+                "modifiable": true,
+                "type": "boolean/boolean"
             },
             "leaveMessageChannel": {
                 "value": "",
                 "desc": "The channel where leave message will be send",
-                "modifiable": true
+                "modifiable": true,
+                "type": "list/text-channel"
             },
             "leaveMessage": {
                 "value": "Goodbye to {{user.tag}}! 😔",
                 "desc": "Value of the leave message",
                 "modifiable": true,
                 "variables": true,
-                "isParagraph": true
+                "isParagraph": true,
+                "type": "text/string"
             },
             "leaveMessageIfBot": {
                 "value": true,
                 "desc": "If yes or no (can only be `true` or `false`) leave message system works if the leaver is a bot",
-                "modifiable": true
+                "modifiable": true,
+                "type": "boolean/boolean"
             }
         }
     },

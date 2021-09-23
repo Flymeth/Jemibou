@@ -1,0 +1,110 @@
+/* base */
+.form_input {
+    padding: 2.5pt;
+    outline: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    border-radius: 5pt;
+    border: none;
+    width: 70vw;
+    max-width: 280pt;
+    margin: 5pt auto;
+    display: block;
+
+    background-color: var(--bg-hero);
+    border: 1.5pt solid transparent;
+    color: #f5f5f5;
+
+    position: relative;
+
+    font-size: 11.5pt;
+    transition-property: border-color, box-shadow;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+
+    resize: none;
+}
+.form_input:focus {
+    border-color: var(--extra-color);
+    box-shadow: 0 0 5pt var(--bg-hero);
+}
+select[multiple]::-webkit-scrollbar {
+    display: none;
+}
+
+textarea {
+    height: 200pt;
+    display: block;
+}
+button[type="submit"] {
+    width: auto;
+    height: auto;
+}
+
+/* select */
+select:after{
+    background-color: red;
+}
+
+/* input checkbox */
+input[type="checkbox"] {
+    --animDuration: .25s;
+    width: 0;
+    min-width: 0;
+    cursor: pointer;
+    margin-top: 12pt !important;
+}
+input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    width: 35pt;
+    height: 18pt;
+    border-radius: 15pt;
+    z-index: 1;
+
+    transition-property: background-color;
+    transition-duration: var(--animDuration);
+}
+input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-100%, -50%);
+    background-color: var(--bg-hero);
+    height: 20pt;
+    width: 20pt;
+    z-index: 1;
+    
+    transition-property: transform;
+    transition-duration: var(--animDuration);
+}
+input[type="checkbox"]:checked:before {
+    background-color: green;
+}
+input[type="checkbox"]:checked:after {
+    transform: translate(0, -50%);
+}
+
+/* scrollbars */
+.form_input::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5pt;
+}
+.form_input::-webkit-scrollbar-thumb {
+    border-radius: 50pt;
+    background-color: var(--bg-body);
+}
+
+@media screen and (max-width: 500px) {
+    .editor form>*> h3 {
+        font-size: 12.5pt;
+    }
+    .form_input {
+        width: 75vw;
+    }
+}

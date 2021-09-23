@@ -8,10 +8,9 @@ module.exports = {
         let settings = await getSettings(e.guild.id, vars)
 
         const executeIfBot = settings.leaveMessageIfBot.toString().toLowerCase() === "true"
+        if(!executeIfBot && e.user.bot) return
 
-        if(!settings.leaveMessage || !settings.leaveMessageChannel || (!executeIfBot && e.user.bot)) return
-
-        let channel = e.guild.channels.cache.get(settings.leaveMessageChannel.replace('<#', '').replace('>', ''))
+        let channel = e.guild.channels.cache.get(settings.leaveMessageChannel)
         if(!channel) return
 
         const variablesContent = await get(e)
@@ -22,10 +21,12 @@ module.exports = {
             finalyMsg = finalyMsg.split(variables.start + v + variables.end).join(variablesContent[v])
         }
 
-        try {
-            channel.send(finalyMsg)
-        } catch (err) {
-            return vars.log(err)
+        if(channel && finalyMsg) {
+            try {
+                channel.send(finalyMsg)
+            } catch (err) {
+                return vars.log(err)
+            }
         }
     }
 }
