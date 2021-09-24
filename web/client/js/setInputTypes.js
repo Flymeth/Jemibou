@@ -42,4 +42,40 @@ function finishedForm(form) {
     saveButton.innerText = "Save"
     form.insertBefore(saveButton, form.children[0])
     form.appendChild(saveButton.cloneNode(true))
+    botVariableDisplayerInit()
+}
+
+function botVariableDisplayerInit() {
+    const canHaveVariables = document.querySelectorAll(".form_input[data-variables]")
+    const variables = document.querySelector('.textVariables')
+    // on mobile ?
+    let event = "contextmenu"
+    if(navigator.userAgent.toLowerCase().includes('mobile')) {
+        event= "dblclick"
+    }
+    function hideVars() {
+        variables.classList.remove('show')
+    }
+    function showVars() {
+        variables.classList.add('show')
+    }
+    canHaveVariables.forEach(element => {
+        element.addEventListener(event, e => {
+            e.preventDefault()
+            const position = element.getBoundingClientRect()
+            const varsPos = variables.getBoundingClientRect()
+            const offSet = 10
+            const positionY = window.scrollY + position.top - (varsPos.height + offSet)
+            variables.style.top = positionY + 'px'
+            // when a variable is clicked
+            variables.querySelectorAll('*[data-value]').forEach(item => {
+                item.onclick = () => {
+                    element.value+= item.getAttribute('data-value')
+                    element.focus()
+                }
+            })
+            showVars()
+            document.body.onclick = () => hideVars()
+        })
+    })
 }

@@ -70,17 +70,17 @@
             "start": "{{",
             "end": "}}",
             "list": {
-                "user": "user mention",
-                "user.username": "user username",
-                "user.avatar": "link of the user avatar",
-                "user.tag": "user username with his tag",
-                "members.all": "number of users + bots in the server",
-                "members.bots": "number of bots in the server",
-                "members.users": "number of users in the server",
-                "guild.name": "the name of the guild",
-                "guild.icon": "the icon of the guild",
-                "guild.banner": "the banner of the guild",
-                "guild.rulesChannel": "The rule channel of the guild"
+                "user": "User mention",
+                "user.username": "User username",
+                "user.avatar": "Link of the user avatar",
+                "user.tag": "User username with his tag",
+                "members.all": "Number of users + bots in the server",
+                "members.bots": "Number of bots in the server",
+                "members.users": "Number of users in the server",
+                "guild.name": "Name of the guild",
+                "guild.icon": "Icon of the guild",
+                "guild.banner": "Banner of the guild",
+                "guild.rulesChannel": "Rule channel of the guild"
             }
         },
         "list": {

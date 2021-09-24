@@ -1,3 +1,11 @@
+# 2.0.1
+> ## website:
+> - You can now view and set bot's variable into your dashboard's settings!
+> - Changed some element disposition because of feedback
+> - The gren color has been replaced by the famous discord blur color
+
+---
+
 # 2.0.0
 > ## commands:
 > - `dashboard`: new command that send you a link to your guild's dashboard.

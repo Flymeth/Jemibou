@@ -34,7 +34,8 @@ html {
     --bg-header: #1f1f1f;
     --bg-hero: #5e5e5e;
     --bg-body: #2f2f2f;
-    --extra-color: #b0d073;
+    /* --extra-color: #b0d073; */
+    --extra-color: #5460e6;
     --header-maxHeight: 75pt;
     --buttons-animDuration: .30s;
 

@@ -12,6 +12,15 @@ main h6
     margin: 15pt 0 5pt;
     text-decoration: underline;
 }
+main>h1,
+main>h2,
+main>h3,
+main>h4,
+main>h5,
+main>h6
+{
+    text-align: center;
+}
 main h1::before,
 main h2::before,
 main h3::before,
@@ -72,29 +81,20 @@ main tbody tr:hover {
     box-shadow: inset 0 0 10pt rgba(0,0,0, .5);
 }
 
-main .head {
-    display: flex;
-    align-items: center;
-    padding: 2.5pt;
+/* changelog */
+.changelog .content {
+    border: 0 solid var(--extra-color);
+    border-left-width: 2.5pt;
+    padding: 5pt;
+    list-style-position: inside;
+    margin-top: 10pt;
+    border-radius: 2.5pt;
+    box-shadow: 0 .5pt 10pt var(--bg-header);
 }
-main .head img {
-    width: 25pt;
-    height: auto;
-    border-radius: 50%;
-    margin-right: 5pt;
+.changelog li {list-style-type: "- ";}
+.changelog .content h1, .changelog h2 {
+    margin-top: 5pt;
 }
-main .head h2 {
-    font-style: italic;
-    font-size: 15pt;
-}
-
-/* links */
-.content-links {
-    display: grid;
-    padding: 15pt;
-    align-items: center;
-    justify-items: center;
-
-    grid-template-columns: repeat(5, calc(75% / 5));
-    grid-gap: 7.5pt;
+.changelog .content h1::before, .changelog .content h2::before {
+    content: "";
 }

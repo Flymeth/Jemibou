@@ -21,14 +21,8 @@ async function editSRV(guild, guildContainer, event) {
         const desc = textInputVariables.list[variable]
         
         const item = document.createElement('p')
-        const span1= document.createElement('span')
-        const span2= span1.cloneNode(false)
-        span1.classList.add('variable')
-        span2.classList.add('description')
-        span1.innerText = textInputVariables.start + variable + textInputVariables.end
-        span2.innerText = desc
-        item.appendChild(span1)
-        item.appendChild(span2)
+        item.setAttribute('data-value', textInputVariables.start + variable + textInputVariables.end)
+        item.innerText = desc
         variablesElement.appendChild(item)
     }
     
@@ -134,6 +128,7 @@ async function editSRV(guild, guildContainer, event) {
         input.id = setting
         input.classList.add('form_input')
         if(baseSettings[setting].required) input.required = "true"
+        if(baseSettings[setting].variables) input.setAttribute('data-variables', "true")
         
         const value = changeType(setting, settings[setting])
         if(type === "checkbox") input.checked = value
@@ -146,7 +141,6 @@ async function editSRV(guild, guildContainer, event) {
 
         form.insertBefore(settingContainer, form.children[form.children.length])
     }
-    console.log(settings);
     setInputsTypes(settings, guildDetails)
     finishedForm(form)
     setLoading()

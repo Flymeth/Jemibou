@@ -1,4 +1,55 @@
 .textVariables {
-    display: none;
+    position: absolute;
+    top: 0;
+    background-color: var(--bg-header);
+    border: solid 1.5pt var(--extra-color);
+    color: var(--extra-color);
+    box-shadow: 0 2.5pt 5pt #f5f5f515;
+    padding: 2.5pt 5pt;
+    border-radius: 5pt;
+
+    max-height: 25vh;
+    width: 50vw;
+    min-width: 225pt;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+
+    z-index: -1;
+    opacity: 0;
+
+    transition: opacity .15s, z-index 0s .15s;
 }
-/* mettre en place ce système */
+.textVariables.show {
+    opacity: 1;
+    z-index: 1;
+    transition: opacity .15s, z-index 0s 0s;
+}
+.textVariables::-webkit-scrollbar {
+    width: 5pt;
+}
+.textVariables::-webkit-scrollbar-thumb {
+    display: initial;
+    border-radius: 0 50pt 50pt 0;
+    background-color: var(--bg-hero);
+}
+
+.textVariables>* {
+    border-collapse: collapse;
+    border: 1.5pt solid var(--bg-hero);
+    border-width: .5pt 0;
+    cursor: pointer;
+    padding: 2.5pt 5pt;
+    
+    transition: .1s;
+}
+.textVariables>*:hover {
+    background-color: var(--bg-hero);
+    color: #fff;
+}
+.textVariables>*:first-child {
+    border-top: 0;
+}
+.textVariables>*:last-child {
+    border-bottom: 0;
+}

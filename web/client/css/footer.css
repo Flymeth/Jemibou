@@ -9,16 +9,28 @@ footer > * {
     margin-bottom: 15vh;
 }
 
-.changelog .content {
-    border: 0 solid var(--extra-color);
-    border-left-width: 2.5pt;
-    padding: 5pt;
-    list-style-position: inside;
-    margin-top: 10pt;
-    border-radius: 2.5pt;
-    box-shadow: 0 .5pt 10pt var(--bg-body);
+footer .head {
+    display: flex;
+    align-items: center;
+    padding: 2.5pt;
 }
-.changelog li {list-style-type: "- ";}
-.changelog .content h1, .changelog h2 {
-    margin-top: 5pt;
+footer .head img {
+    width: 25pt;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 5pt;
+}
+footer .head h2 {
+    font-style: italic;
+    font-size: 15pt;
+}
+/* links */
+.content-links {
+    display: grid;
+    padding: 15pt;
+    align-items: center;
+    justify-items: center;
+
+    grid-template-columns: repeat(5, calc(75% / 5));
+    grid-gap: 7.5pt;
 }
