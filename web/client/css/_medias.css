@@ -4,7 +4,7 @@
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 595px) {
     header nav {
         justify-content: stretch;
     }

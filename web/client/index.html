@@ -48,7 +48,6 @@
         <nav>
             <a href="#desc">Description</a>
             <a href="#cmds">Commands list</a>
-            <a href="#me">Author</a>
             <a href="#more">More</a>
             <a href="$package.homepage;" target="Github">Github</a>
             <a href="/dashboard">Dashboard (beta)</a>
@@ -93,11 +92,6 @@
             </tbody>
         </table>
 
-        <h1 class="title">ChangeLog:</h1>
-        <div class="changelog">
-            <div class="content"></div>
-        </div>
-
         <h1 id="more">Find me on</h1>
         <div class="content-links">
             <a href="https://top.gg/bot/$client.user.id;" target="_links"><button>top.gg</button></a>
@@ -117,6 +111,11 @@
             <p>This bot is my biggest project in javascript. I learned a lot of things with it: like how to push with git, how to separate each bot's command in differents files, and more...</p>
             <p>If you want to learn more about me, i've my own website that you can reach by <a href="https://flymeth.net" target="_Flymeth">clicking here</a>!</p>
         </div> 
+
+        <div class="changelog">
+            <h1 class="title">ChangeLog:</h1>
+            <div class="content"></div>
+        </div>
     </footer>
 
     <script src="https://kit.fontawesome.com/c2bce3a9f7.js" crossorigin="anonymous"></script>
@@ -126,11 +125,31 @@
     <script src="./js/clickEvents.js"></script>
 
     <script>
+        const maxTableSize = 7
+
+        function createOverflowButton(body) {
+            const tr = document.createElement('tr')
+            tr.classList.add('clickEvent', 'viewAll')
+            tr.setAttribute('data-classTo', 'tbody')
+            tr.setAttribute('data-type', 'normal')
+
+            const td = document.createElement('td')
+            td.colSpan = 2
+            td.innerText = "..."
+
+            tr.append(td)
+            body.appendChild(tr)
+        }
+
         function setTable(commands) {
             const body = document.querySelector('table.commands > tbody')
 
             for(let cmd of commands.sort((a, b) => b.name - a.name)) {
                 if(!cmd.active || cmd.ownersOnly) continue
+
+                if(commands.indexOf(cmd) === maxTableSize) {
+                    createOverflowButton(body)
+                }
 
                 const infos = [cmd.name, cmd.description]
                 const tr = document.createElement('tr')
@@ -140,6 +159,9 @@
                     tr.appendChild(td)
                 }
                 tr.children[0].classList.add('notranslate')
+                if(commands.indexOf(cmd) >= maxTableSize) {
+                    tr.classList.add('overflow')
+                }
                 body.appendChild(tr)
             }
         }

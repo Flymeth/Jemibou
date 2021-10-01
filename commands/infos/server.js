@@ -77,7 +77,7 @@ module.exports = {
 
         const embed = vars.newEmbed()
         .setAuthor(`Informations about ${guild.name}:`, guild.iconURL() ? guild.iconURL({format: 'png', size: 1024, dynamic: true}) : "", invite?.url)
-        .setThumbnail(guild.banner)
+        .setThumbnail(guild.bannerURL({dynamic: true, size: 1024, format: 'png'}))
         .setImage(guild.iconURL({format: 'png', size: 1024, dynamic: true}))
         for(let i in informations) {
             if(!informations[i]) continue

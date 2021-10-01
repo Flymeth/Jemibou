@@ -1,8 +1,19 @@
+# 2.0.2
+> ## bugs:
+> - error on big user/role datas with the infos command
+> - error on same command when a guild has a banner
+> ## website:
+> - fixing of minor bugs
+> - commands' table improuvements
+> - changelog is now inside the footer
+
+---
+
 # 2.0.1
 > ## website:
 > - You can now view and set bot's variable into your dashboard's settings!
 > - Changed some element disposition because of feedback
-> - The gren color has been replaced by the famous discord blur color
+> - The green color has been replaced by the famous discord blur color
 
 ---
 

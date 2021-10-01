@@ -52,6 +52,10 @@ module.exports = {
         for(let info in userInformations) {
             if(!userInformations[info]) continue
             const content = userInformations[info].toString()
+            if(userInformations[info].length > 1000 && typeof userInformations[info] === 'string') {
+                const txt = userInformations[info].substr(0, 1000)
+                userInformations[user] = txt + ' [...]'
+            }
             let msg = (content.startsWith("```") ? content : "```" + content + "```")
             embed.addField(info, msg)
         }

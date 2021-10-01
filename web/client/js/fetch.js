@@ -9,6 +9,19 @@ async function getVars() {
     })
 }
 
+async function getUserDatas(token) {
+    if(!token) return false
+    if(!token.type || !token.access) return false
+
+    return fetch('/getUserDatas', {
+        methodl: "POST",
+        body: token
+    }).then(res => {
+        if(res.ok) return res.json()
+        else return false
+    })
+}
+
 async function getUser(token) {
     if(!token) return false
     const {type, access} = token

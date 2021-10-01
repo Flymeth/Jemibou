@@ -62,7 +62,7 @@ module.exports = {
                         var errorMembers = []
                         members.forEach(member => {
                             try {
-                                setTimeout(() => {
+                                setTimeout(async () => {
                                     if(type === "add") {
                                         member.roles.add(role)
                                     }else {

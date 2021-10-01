@@ -6,6 +6,9 @@ footer {
 }
 
 footer > * {
+    margin-bottom: 15pt;
+}
+footer > *:last-child {
     margin-bottom: 15vh;
 }
 
@@ -33,4 +36,23 @@ footer .head h2 {
 
     grid-template-columns: repeat(5, calc(75% / 5));
     grid-gap: 7.5pt;
+}
+
+
+/* changelog */
+.changelog .content {
+    border: 0 solid var(--extra-color);
+    border-left-width: 2.5pt;
+    padding: 5pt;
+    list-style-position: inside;
+    margin-top: 10pt;
+    border-radius: 2.5pt;
+    box-shadow: 0 .5pt 10pt var(--bg-body);
+}
+.changelog li {list-style-type: "- ";}
+.changelog .content h1, .changelog h2 {
+    margin-top: 5pt;
+}
+.changelog .content h1::before, .changelog .content h2::before {
+    content: "";
 }

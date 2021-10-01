@@ -41,6 +41,10 @@ module.exports = {
 
         for(let info in roleInformations) {
             if(!roleInformations[info]) continue
+            if(roleInformations[info].length > 1000 && typeof roleInformations[info] === 'string') {
+                const txt = roleInformations[info].substr(0, 1000)
+                roleInformations[info] = txt + ' [...]'
+            }
             embed.addField(info, roleInformations[info])
         }
         e.channel.send(embed)

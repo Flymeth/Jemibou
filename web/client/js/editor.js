@@ -130,6 +130,9 @@ async function editSRV(guild, guildContainer, event) {
         if(baseSettings[setting].required) input.required = "true"
         if(baseSettings[setting].variables) input.setAttribute('data-variables', "true")
         
+        // not google translate guild's name & their channels/roles
+        input.classList.add('notranslate')
+        
         const value = changeType(setting, settings[setting])
         if(type === "checkbox") input.checked = value
         else input.value = value

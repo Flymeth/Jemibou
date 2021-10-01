@@ -106,7 +106,7 @@
 }
 
 .unreachable> .guild {
-    filter: grayscale(1) brightness(0.4);
+    filter: grayscale(1) brightness(0.25);
     cursor: not-allowed;
 
     overflow: hidden;
@@ -116,4 +116,9 @@
     cursor: not-allowed;
 
     overflow: hidden;
+}
+
+.unreachable .guild h3 {
+    color: #fff;
+    opacity: .75;
 }
