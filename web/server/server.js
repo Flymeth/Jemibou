@@ -2,7 +2,6 @@ const https = require('http')
 const fs = require('fs')
 const serverProps = require('./configs.json')
 const {variables} = serverProps
-const {getSettings} = require('../../commands/settings')
 const stringify = require('json-stringify-safe')
 const awaitEvents = require('../../tools/awaitEvents')
 
