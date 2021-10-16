@@ -2,7 +2,9 @@ const {getSettings} = require('../settings')
 module.exports = {
     name: "list",
     description: "Settings' list",
-    needPerms: false,
+    needPerms: {
+        user: ["MANAGE_GUILD"]
+    },
     run: async (e, vars, args) => {
         let settings = vars.settings
 

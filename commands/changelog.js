@@ -27,15 +27,25 @@ module.exports = {
         if(searchVersion.toLowerCase() === "list") {
             let embed =  vars.newEmbed()
             .setTitle('List of the versions:')
+            let tooMuch = false
             for(let v of versions) {
                 let splited = v.split('\n')
                 while(splited[0] === ' ' || splited[0] === '\r' || splited[0] === '\n' || !splited[0]) {
                     splited.shift()
                 }
                 let versionNumber = splited.shift().split('# ').join('')
-                let versionInfos =  '```md\n' + splited.join('\n').split('> ').join('') + '```'
+                if(tooMuch) {
+                    embed.fields[embed.fields.length-1].value+= versionNumber + "; "
+                    if(versions.indexOf(v) === versions.length-1) embed.fields[embed.fields.length-1].value+= "```"
+                    continue
+                }
 
-                embed.addField(versionNumber, versionInfos)
+                let versionInfos =  '```md\n' + splited.join('\n').split('> ').join('') + '```'
+                embed.addField(versionNumber, versionInfos, true)
+                if(embed.fields.length >= 20) {
+                    tooMuch = true
+                    embed.addField("Other versions:", "```")
+                }
             }
             e.channel.send(embed)
         }else {

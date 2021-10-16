@@ -1,7 +1,10 @@
 let user;
+let guilds;
 async function login(token, guild) {
     console.log("LOGIN YOU WITH TOKEN " + token.access)
-    user = await getUserDatas(token)
+    const infos = await getAccount(token)
+    user = infos?.user
+    guilds = infos?.guilds
     if(!user) return register()
 
     const dashboard = await getTemplate('dashboard')

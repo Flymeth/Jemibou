@@ -4,6 +4,8 @@ module.exports = {
     active: true,
 
     value: (vars, url, chuncks) => {
-        return vars
+        const newVars = {...vars}
+        if(url.searchParams.get('users') === null) delete newVars.client.users
+        return newVars
     }
 }

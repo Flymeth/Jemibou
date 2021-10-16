@@ -2,7 +2,7 @@ async function showGuilds(guildID) {
     setLoading(mainContent)
 
     const temp = await getTemplate('servers')
-    const {guilds, guild_card} = await getGuildsDatas(tokens)
+    const guild_card = await getTemplate('guild_card')
     if(!user) return register()
 
     setLoading()

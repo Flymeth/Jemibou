@@ -1,3 +1,17 @@
+# 2.1.0
+> ## commands:
+> - added `search`: search directly on discord pages of google, wikipedia or github! `help search` for more informations
+> ## bugs:
+> - `changelog list` command: too many version for an embed
+> - `settings list` & `settings get` now require MANAGE_GUILD permission to use it
+> ## website:
+> - you can now access to your dashboard directly from the main domain! `http://jemibou.tk`
+> - fixed minor bugs and improuving performances
+> ## more:
+> - updated `readme.md`
+
+---
+
 # 2.0.2
 > ## bugs:
 > - error on big user/role datas with the infos command

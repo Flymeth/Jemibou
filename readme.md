@@ -1,25 +1,47 @@
 # JEMIBOU
-A cool discord bot for moderation!
+> ## This, is Jemibou:
+> A discord bot that will help you to many, many things!
 
-> - prefix: `.` (changeable)
+> ## Some commands:
+> - `poll`: Create a poll up to 9 choises
+> - `randomUser`: Get a random user from your guild
+> - `translate`: translate text from any languages, to any languages
+> - `roletoall`: add/remove a specific role to every members of your guild
+> - `game`: play some cool games with the bot
+> - And more: `ban`,` kick`, `clear`,` seePerms`, ...
 
-## some commands
-> - randomUser (get a guild random member)
-> - roletoall (add/remove a role to every guild's members)
+> ## Jemibou has also a dashboard
+> Because yes, Jemibou is 100% customisable. Including:
+> - `prefix`, `joinMessage`, `joinAutoRoles`, ...
+> 
+> You can get your guild's dashboard by using the `dashboard` command.
+> 
+> This is what your dashboard will looks like:
+> > ### Your guild's dashboard
+> > ![Jemibou's guild dashboard](./screenshots/dashboard1.png)
+> 
+> > ### Settings editors
+> > ![Jemibou's guild settings](./screenshots/dashboard2.png)
+> 
+> > ### Bot's variables
+> > ![Bot's variables on joinMessageDM](./screenshots/dashboard3.png)
 
-## settings
-> The settings command isn't like the others bots:
-> More informations with `.settings help`
+> ## Find Jemibou
+> If you want to have more informations about this bot, you can redirect yourself to this websites:
+> - [Jemibou's website](http://jemibou.tk)
+> - [Jemibou's discord](https://discord.gg/CPKfxVGTCe)
+> - [Top.gg](https://top.gg/bot/859139199172083713)
+> - [Rovel discord list](https://discord.rovelstars.com/bots/859139199172083713)
+> - [Discord bot list](https://discordbotlist.com/bots/jemibou)
+> - [Discord bots](https://discord.bots.gg/bots/859139199172083713)
 
-## mention
-> If you mention the bot, it'll respond with his prefix.
+> ## Me
+> I'm Flymeth: a french developper who loves coding using html, css, javascript and nodejs. I learnt nodejs recently and i wanted to create a big project to train me (i think i've success).
+> 
+> Jemibou is my best project because i using my 3 mains liking languages!
+> 
+> If you want to know more about me, you can access to my own website at this link: https://flymeth.net
 
-[VOTE FOR THE BOT](https://top.gg/bot/859139199172083713)
-
-# Flymeth
-Hi! I'm Flymeth, a little developper of 16yo. I love programmation & html code.
-You can visit my website to learn more about me by clicking [here](https://flymeth.net)
-
-Please note that this bot is in early access. In future i'll add more and more commands/options. You can vote for this bot if you want or share it if you want too.
-
-I'll also add a website for this bot, but it's not the priority.
+<style>
+    h1 {text-align: center}
+</style>

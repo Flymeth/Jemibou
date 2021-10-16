@@ -24,14 +24,14 @@ module.exports = {
         }
         args = newArgs
 
-        const pool = args.shift()
-        if(!pool) return e.reply("You need to indicate a pool question inside some quotes!")
-        if(!args || args.length < 2 || args.length > 9) return e.reply("Please indicate between 2 and 9 options for the pool!")
+        const poll = args.shift()
+        if(!poll) return e.reply("You need to indicate a poll question inside some quotes!")
+        if(!args || args.length < 2 || args.length > 9) return e.reply("Please indicate between 2 and 9 options for the poll!")
 
         const embed = vars.newEmbed()
         .setAuthor("New poll by " + e.author.username + ":", e.author.avatarURL({size: 1024, dynamic: true}))
-        .setDescription(pool)
-        .setFooter("React with the reactions bellow to participate to the pool!")
+        .setDescription(poll)
+        .setFooter("React with the reactions bellow to participate to the poll!")
 
         const emojiArray = [
             "1️⃣",

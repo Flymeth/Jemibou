@@ -4,7 +4,7 @@ module.exports = {
     description: "Get the settings' channel (if it exists)",
     needPerms: {
         bot: [],
-        user: []
+        user: ["MANAGE_GUILD"]
     },
     run: async (e, vars, args) => {
         let settings = await getSettings(e.guild.id, vars, true)
