@@ -1,3 +1,15 @@
+# 2.1.1
+> ## commands:
+> - fixed some commands' images
+> ## bugs:
+> - `settings list` command: permissions errors
+> ## website:
+> - servers' icons error when return to the "server list" page
+> ## more:
+> - fixed image errors on `readme.md`
+
+---
+
 # 2.1.0
 > ## commands:
 > - added `search`: search directly on discord pages of google, wikipedia or github! `help search` for more informations

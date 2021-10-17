@@ -21,7 +21,7 @@ async function showGuilds(guildID) {
     for(let guild of guilds) {
         const reachable = client.guilds.find(g => g === guild.id) ? true : false
 
-        guild.icon= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=256`
+        if(!guild.icon?.startsWith('http')) guild.icon= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=256`
 
         if(reachable) {
             guild.editLink = window.location.protocol + '//' + window.location.hostname + window.location.pathname + '?guild=' + guild.id

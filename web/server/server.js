@@ -213,8 +213,12 @@ module.exports = function setupServer(vars) {
                 }
 
                 let accepts = req.headers.accept?.split(",").find(a => a.includes(path.split('.').pop()))
+                
+                if(!accepts) accepts = "*/*; charset=UTF-8"
+                else if(accepts.endsWith('apng')) accepts = accepts.replace('apng', 'png')
+                else accepts+= "; charset=UTF-8"
                 res.writeHead(200, {
-                    "Content-Type": (accepts || "*/*") + "; charset=UTF-8"
+                    "Content-Type": accepts,
                 })
 
                 res.write(data)

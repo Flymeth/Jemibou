@@ -11,18 +11,18 @@
     <link rel="stylesheet" href="./css/__style.css">
     <meta name="description" content="$package.description;">
 
-    <meta property="og:title" content="JEMIBOU">
-    <meta property="og:type" content="website">
-    <meta property="theme-color" content="var(--extra-color)">
-    <meta property="og:description" content="$package.description;">
+    <meta name="og:title" content="JEMIBOU">
+    <meta name="og:type" content="website">
+    <meta name="theme-color" content="var(--extra-color)">
+    <meta name="og:description" content="$package.description;">
 
-    <meta property="og:image" content="./assets/logo.png">
-    <meta property="og:image:width" content="1024">
-    <meta property="og:image:height" content="1024">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:alt" content="Logo Jemibou">
+    <meta name="og:image" content="assets/logo.png">
+    <meta name="og:image:width" content="1024">
+    <meta name="og:image:height" content="1024">
+    <meta name="og:image:type" content="image/png">
+    <meta name="og:image:alt" content="Logo Jemibou">
 
-    <meta property="og:site_name" content="jemibou.tk">
+    <meta name="og:site_name" content="jemibou.tk">
 </head>
 <body>
 
@@ -49,7 +49,7 @@
             <a href="#desc">Description</a>
             <a href="#cmds">Commands list</a>
             <a href="#more">More</a>
-            <a href="$package.homepage;" target="Github">Github</a>
+            <a href="https://github.com/Flymeth/jemibou" target="Github">Github</a>
             <a href="/dashboard">Dashboard (beta)</a>
         </nav>
     </header>
@@ -166,6 +166,7 @@
             }
         }
         const commands = $commands;
+        console.log(commands);
         setTable(commands)
         
         let uptime = $client.uptime;

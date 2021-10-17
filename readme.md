@@ -18,13 +18,13 @@
 > 
 > This is what your dashboard will looks like:
 > > ### Your guild's dashboard
-> > ![Jemibou's guild dashboard](screenshots/dashboard1.png)
+> > ![Jemibou's guild dashboard](https://github.com/Flymeth/Jemibou/blob/main/screenshots/dashboard1.PNG?raw=true)
 > 
 > > ### Settings editors
-> > ![Jemibou's guild settings](screenshots/dashboard2.png)
+> > ![Jemibou's guild settings](https://github.com/Flymeth/Jemibou/blob/main/screenshots/dashboard2.PNG?raw=true)
 > 
 > > ### Bot's variables
-> > ![Bot's variables on joinMessageDM](screenshots/dashboard3.png)
+> > ![Bot's variables on joinMessageDM](https://github.com/Flymeth/Jemibou/blob/main/screenshots/dashboard3.PNG?raw=true)
 
 > ## Find Jemibou
 > If you want to have more informations about this bot, you can redirect yourself to this websites:

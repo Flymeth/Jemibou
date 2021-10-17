@@ -3,7 +3,8 @@ module.exports = {
     name: "list",
     description: "Settings' list",
     needPerms: {
-        user: ["MANAGE_GUILD"]
+        user: ["MANAGE_GUILD"],
+        bot: []
     },
     run: async (e, vars, args) => {
         let settings = vars.settings
