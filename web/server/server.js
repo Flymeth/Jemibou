@@ -219,6 +219,8 @@ module.exports = function setupServer(vars) {
                 else accepts+= "; charset=UTF-8"
                 res.writeHead(200, {
                     "Content-Type": accepts,
+                    "Type": accepts,
+                    "Pragma": "public"
                 })
 
                 res.write(data)
@@ -228,6 +230,6 @@ module.exports = function setupServer(vars) {
         })
     }).listen(process.env.PORT || serverProps.port).on('listening', () => {
         console.log(`server listening on port ${srv.address().port} !`);
-        console.info('go to: %clocalhost:'+srv.address().port, 'color: cyan;')
+        console.info('go to: %chttp://localhost:'+srv.address().port, 'color: cyan;')
     })
 }
