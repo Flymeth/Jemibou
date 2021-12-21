@@ -1,3 +1,11 @@
+# 2.2.0
+> ## bugs: 
+> - Fixed internal server error when reading a non-existing changelog version
+> ## website:
+> - New presentation video on the main page
+
+---
+
 # 2.1.1
 > ## commands:
 > - fixed some commands' images
@@ -6,7 +14,7 @@
 > ## website:
 > - servers' icons error when return to the "server list" page
 > ## more:
-> - fixed image errors on `readme.md`
+> - fixed images errors on `readme.md`
 
 ---
 

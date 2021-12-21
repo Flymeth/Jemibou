@@ -1,6 +1,6 @@
 {
   "name": "jemibou",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Jemibou is a cool discord bot that has a lot of functionality like moderations commands, fun commands and more! Get access to his settings by a functional web dashboard!",
   "main": "main.js",
   "scripts": {
