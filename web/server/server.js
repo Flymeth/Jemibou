@@ -179,7 +179,7 @@ module.exports = function setupServer(vars) {
                     if(args) {
                         var infos = {...vars}
 
-                        infos.changelog = fs.readFileSync('./changelog.md').toString().split('---').find(txt => txt.includes(vars.package.version)).split('`').join(Infinity)
+                        infos.changelog = fs.readFileSync('./changelog.md')?.toString().split('---').find(txt => txt.includes(vars.package.version))?.split('`').join(Infinity)
                         
                         for(let v of args) {
                             let path = [...v.path]
